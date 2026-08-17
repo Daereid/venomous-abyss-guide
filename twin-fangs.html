@@ -263,8 +263,8 @@
     <div class="callout danger">
       <div class="mark">§1</div>
       <div>
-        <p><b>Eternal Venom — jedová ekonomika.</b> Permanentní stackující Nature DoT, který sám nikdy nevyprchá. Jediný způsob, jak stack sundat, je dostat zásah od Ithrazova Ravenous Feast (každý zásah sundá 1 stack). Cíl fightu je tedy: vyhýbat se zbytečným stackům a pak vědomě "sníst" zásah, když je stack vysoký.</p>
-        <p class="fine">Zdroje se rozchází v přesné smrtící hranici — jeden uvádí 10 stacků = smrt, Warcraft Wiki uvádí 9 stacků = masivní damage + 8s stun. Berte obě čísla jako orientační.</p>
+        <p><b>Eternal Venom — jedová ekonomika.</b> Permanentní stackující Nature DoT, který sám nikdy nevyprchá — při <b>10 stacích zemřete</b> (potvrzeno Method.gg). Jediný způsob, jak stack sundat, je dostat zásah od Ithrazova Ravenous Feast (každý zasažený hráč ztrácí max. 1 stack, bez ohledu na počet explozí, které ho zasáhnou). Cíl fightu je tedy: vyhýbat se zbytečným stackům a pak vědomě "sníst" zásah, když je stack vysoký.</p>
+        <p class="fine">Warcraft Wiki dříve uváděla odlišné číslo (9 stacků + 8s stun) — Method.gg tuto hodnotu nezmiňuje a jeho popis je podrobnější, takže bereme 10 stacků jako platné číslo.</p>
       </div>
     </div>
   </section>
@@ -284,19 +284,27 @@
         <div class="ability-list">
           <div class="ability">
             <div class="ability-name">Caustic Deluge <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Saturuje tanka, jedové kapky poté explodují a aplikují Eternal Venom na okolní hráče.</div>
+            <div class="ability-desc">5s těžký ticking damage na tanka, po dopadu zanechá Caustic Globule. Aplikuje stackující Envenomed (+10 % damage z Caustic Deluge na stack, 90 s) — kvůli dlouhé době trvání vynucuje tank swap.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Caustic Globule <span class="ability-tag">Soak</span></div>
+            <div class="ability-desc">Po 10 s bez soaku exploduje a aplikuje Eternal Venom na celý raid. Nasoaknutá — efekt dostane jen soakující hráč.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Venomous Emergence</div>
-            <div class="ability-desc">Neuhýbatelný raid stack + spawn 3 hadích adds doprostřed. Uhýbejte jejich Corrosive Spit liniím a zabijte je rychle.</div>
-          </div>
-          <div class="ability">
-            <div class="ability-name">Vile Flood <span class="ability-tag">Movement</span></div>
-            <div class="ability-desc">14s frontální kanál toxinu. Kdo v něm zůstane, dostává těžký ticking damage a rychle nastackuje Eternal Venom až k smrti. Okamžitě odejděte.</div>
+            <div class="ability-desc">Neuhýbatelný raid-wide stack Eternal Venom + spawn 3 "Spawns of Vexhul" doprostřed, kteří se fixují na hráče a používají Corrosive Spit (frontální linie s Eternal Venom). Zabijte je rychle.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Stir the Depths</div>
-            <div class="ability-desc">Vlny po celé plošině — Nature damage + venom stacky.</div>
+            <div class="ability-desc">6s raid-wide damage — zelené vlny po celé plošině. Kontakt s vlnou = damage + stack Eternal Venom.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Concentrated Spittle <span class="ability-tag">Range</span></div>
+            <div class="ability-desc">Spustí se, pokud tank opustí dosah — nekiťte Vexhula pryč.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Vile Flood <span class="ability-tag">Submerge</span></div>
+            <div class="ability-desc">14s frontální kanál toxinu během Submerge fáze. Kdo v něm zůstane, dostává těžký ticking damage a rychle nastackuje Eternal Venom až k smrti. Okamžitě odejděte.</div>
           </div>
         </div>
       </div>
@@ -310,19 +318,23 @@
         <div class="ability-list">
           <div class="ability">
             <div class="ability-name">Ravenous Feast <span class="ability-tag">Soak</span></div>
-            <div class="ability-desc">3 explozivní zásahy, každý pro jednu soak skupinu. Soak sundá 1 stack Eternal Venom, ale nikdo by neměl soaknout dvakrát, pokud je již "Feasted".</div>
+            <div class="ability-desc">3 rychlé rány rozdělující těžký physical damage. Každý zasažený hráč ztrácí max. 1 stack Eternal Venom (bez ohledu na počet explozí). Zasažení dostanou Feasted (+800 % damage z dalšího Ravenous Feast na 8 s) — nikdo nesmí soaknout dvakrát. Doporučeno: 3 skupiny 7+ hráčů, nebo 2 skupiny + imunity na třetí ránu.</div>
           </div>
           <div class="ability">
-            <div class="ability-name">Stone Breaker</div>
-            <div class="ability-desc">Praští do plošiny. Pokud nezasáhne nikoho, damage jde na celý raid — musí to někdo soaknout.</div>
+            <div class="ability-name">Stone Breaker <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Řev odstrčí celý raid, tank musí okamžitě naběhnout zpět. Několik ran (4yd okruh každá) — nesoaknutá rána dá armor-ignoring raid damage + knockback. Stackující debuff (+33 % damage ze Stone Breaker na stack, 90 s) vynucuje střídavé tank soaky.</div>
           </div>
           <div class="ability">
-            <div class="ability-name">Coiling Ichor <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Shadow damage debuff, který se postupně zpřísňuje/zesiluje.</div>
+            <div class="ability-name">Coiling Ichor</div>
+            <div class="ability-desc">Červené kruhy kolem postižených hráčů — zmenšují se a dávají rostoucí damage. Po vypršení zanechají Congealed Gore louži (50 % slow, 2 min).</div>
           </div>
           <div class="ability">
-            <div class="ability-name">Sanguine Storm <span class="ability-tag">Heroic+</span></div>
-            <div class="ability-desc">Vystřeluje gore globule, aktivní od Heroic výš.</div>
+            <div class="ability-name">Clotted Bolt <span class="ability-tag">Range</span></div>
+            <div class="ability-desc">Spustí se, pokud tank opustí dosah — obdoba Vexhulovy Concentrated Spittle.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Sanguine Storm <span class="ability-tag">Heroic+ · Submerge</span></div>
+            <div class="ability-desc">18s déšť gore globulí souběžně s Vile Flood během Submerge fáze. Dopad: damage v 4yd okruhu + krátká zpomalující louže.</div>
           </div>
         </div>
       </div>
@@ -435,7 +447,7 @@
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Přímé fetche Wowheadu a dedikované stránky Icy Veins se nepodařilo strojově stáhnout (JS-rendered) — informace vychází z cachovaných výsledků vyhledávání a z Warcraft Wiki, takže čísla (yardy, přesný smrtící stack) berte s rezervou a zkontrolujte přímo na Wowheadu před pullem.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Většina čísel na této stránce je teď potvrzená Method.gg guidem (10 stacků Eternal Venom = smrt, přesné timery a procenta u Caustic Deluge/Ravenous Feast/Stone Breaker). Dedikovaná stránka Icy Veins ani Wowhead se nepodařily strojově stáhnout (JS-rendered) — před pullem doporučujeme zkontrolovat přímo.
     </div>
   </section>
 

@@ -511,15 +511,22 @@
     <div class="callout">
       <div class="mark">§1</div>
       <div>
-        <p><b>Golemové nesmí zůstat blízko sebe.</b> Pokud jsou od sebe méně než ~25–40 yardů, získávají <i>Ula'tek's Dominance</i> — 99% snížení utrpěného damage. Rozdělte raid na dvě přibližně stejně silné DPS skupiny, každou k jednomu golemovi, a odtáhněte je na opačné konce místnosti.</p>
-        <p class="fine">Zdroje se v přesné vzdálenosti rozchází (Icy Veins uvádí 40 yardů, ExpCarry 25) — bezpečná praxe je dostat je co nejdál od sebe, ideálně do protilehlých koutů arény.</p>
+        <p><b>Golemové nesmí zůstat blízko sebe.</b> Pokud jsou od sebe méně než 40 yardů, získávají <i>Ula'tek's Dominance</i> — 99% snížení utrpěného damage. Rozdělte raid na dvě přibližně stejně silné skupiny, každou k jednomu golemovi, a odtáhněte je na opačné konce místnosti.</p>
+        <p class="fine">Vzdálenost 40 yardů nezávisle potvrzují Icy Veins i Method.gg.</p>
       </div>
     </div>
 
     <div class="callout">
       <div class="mark">§2</div>
       <div>
-        <p><b>Energy a Vitriolic Stasis.</b> Oba golemové nabíjí energii; při 100 energy vstupují na ~30 sekund do <i>Vitriolic Stasis</i> — téměř neporazitelní, slabší golem si doléčí HP na úroveň silnějšího. Cíl je proto udržovat DPS na obě strany <b>vyrovnaný</b>, aby žádný golem nebyl výrazně napřed a stasis vás nezpomalila.</p>
+        <p><b>Energy a Vitriolic Stasis.</b> Oba golemové nabíjí energii; při 100 energy vstupují na 30 sekund do <i>Vitriolic Stasis</i> — 99% odolní vůči damage, slabší golem si doléčí HP na úroveň silnějšího (nevyrovnaný damage se tak fakticky vrátí). Cíl je proto udržovat DPS na obě strany <b>vyrovnaný</b>, aby žádný golem nebyl výrazně napřed a stasis vás nezpomalila.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="mark">§3</div>
+      <div>
+        <p><b>Mark of Acid / Mark of Blood.</b> Hráči do 40 yardů od golema dostávají každých 5 sekund stack tohoto markeru (trvá 40 s). Po každé intermisi proto strany nemění jen tank, ale celá jeho skupina — tím stack vyprší a nenabaluje se donekonečna.</p>
       </div>
     </div>
   </section>
@@ -539,19 +546,19 @@
         <div class="ability-list">
           <div class="ability">
             <div class="ability-name">Toxic Droplets <span class="ability-tag">Pohyb</span></div>
-            <div class="ability-desc">Rozstříkne malé kapky jedu po zemi. Musíte na ně došlápnout a zničit je dřív, než se za ~16 sekund promění v <i>Noxious Blast</i>. Na Heroic zničené kapky vypustí Living Venom, který putuje zpět k bossovi — je potřeba přeskupení.</div>
+            <div class="ability-desc">Rozstříkne malé kapky jedu po zemi. Musíte na ně došlápnout a zničit je dřív, než se za 16 sekund promění v <i>Noxious Blast</i> (těžký raid-wide damage).</div>
           </div>
           <div class="ability">
             <div class="ability-name">Living Venom <span class="ability-tag">Dodge</span></div>
-            <div class="ability-desc">Vystřelené projektily jedu, které se po ~4 sekundách vrací zpět. Vyhýbejte se dráze letu, hlavně při návratu.</div>
+            <div class="ability-desc">Golem vystřelí jedový sliz, který se po 4 sekundách vrací zpět a tvrdě zasáhne, koho potká — tam i při návratu. Na Heroic je potřeba uhýbat oběma směry.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Venom Coagulation <span class="ability-tag">Priority kill</span></div>
-            <div class="ability-desc">Přisluhující sliz, který přes <i>Contaminate</i> uděluje raid-wide damage celé skupině. Zabijte ho co nejdřív po spawnu.</div>
+            <div class="ability-desc">Přisluhující sliz, který uděluje raid-wide damage každé 3 sekundy, dokud nezemře. Zabijte ho co nejdřív po spawnu.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Empowering Slam <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Melee útok na tanka, který sílí o cca 15 % s každým dalším zásahem stejného cíle. Jak golem stoupá k 100 energy, damage roste — použijte defenzivní cooldowny a zvažte tank swap.</div>
+            <div class="ability-desc">Melee útok na tanka, který sílí o 15 % s každým dalším zásahem stejného cíle. Jak golem stoupá k 100 energy, damage roste — použijte defenzivní cooldowny a zvažte tank swap.</div>
           </div>
         </div>
       </div>
@@ -565,15 +572,15 @@
         <div class="ability-list">
           <div class="ability">
             <div class="ability-name">Blighted Blood <span class="ability-tag">Dispel</span></div>
-            <div class="ability-desc">Nakažlivý debuff s periodickým shadow damage. Musí být dispellnut okamžitě — pokud vyprší sám, po sobě zanechá jedovatou louži na zemi (na Heroic ještě nebezpečnější).</div>
+            <div class="ability-desc">Nakažlivý dispellovatelný shadow DoT. Ať vyprší, nebo je dispelnut, vždy po sobě zanechá <i>Blood Venom</i> louži na zemi — čím víc stacků měl postižený hráč, tím větší louže. Na Heroic proto nejde jen rychle dispelovat, ale i pozicovat, kde se louže objeví.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Unstable Miasma <span class="ability-tag">Soak</span></div>
-            <div class="ability-desc">Označený hráč po ~8 sekundách exploduje a šíří damage na okolí. Soak by měla řešit určená skupina hráčů stojící u sebe, mimo zbytek raidu.</div>
+            <div class="ability-desc">Označený hráč po 8 sekundách exploduje a rozdělí těžký shadow damage mezi všechny do 8 yardů — soak řešte určenou skupinou stojící u sebe, mimo zbytek raidu. Soakující hráči dostanou stack <i>Clinging Murk</i>.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Bloodvenom Injection <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Stackující shadow damage-over-time na tanka. Podobně jako u Breath golema řešte defenzivami a tank swapem po intermisi.</div>
+            <div class="ability-desc">Těžký physical zásah + stackující shadow DoT (40 s na aplikaci); po vypršení zanechá velkou jedovou louži. Řešte defenzivami a tank swapem po intermisi jako u Breath golema.</div>
           </div>
         </div>
       </div>
@@ -605,7 +612,7 @@
     <div class="callout" style="margin-top:22px;">
       <div class="mark">!</div>
       <div>
-        <p><b>Co se stane při chybě:</b> Na Normal/Heroic srážka s kombinací nad 4 na Normal jen odhodí hráče zpět; na <b>Heroic</b> už kombinace nad 4 hráče přímo zabíjí. Na <b>Mythic</b> přibývá <i>Shifting Protovenom</i> — postižení hráči se musí spárovat jen mezi sebou; srazíte-li se s nepostiženým hráčem, spustí se <i>Protovenom Eruption</i> s knockbackem a damage v okruhu 10 yardů.</p>
+        <p><b>Co se stane při chybě:</b> Helical Toxins DoT trvá 28 sekund. Špatný pár (součet ≠ 4) způsobí <i>Cultivated Burst</i> — na Normal jen odhodí hráče zpět, na <b>Heroic</b> už přímo zabíjí a nechá po sobě velkou louži. Na <b>Mythic</b> přibývá <i>Shifting Protovenom</i> — postižení hráči se musí spárovat jen mezi sebou; srazíte-li se s nepostiženým hráčem, spustí se <i>Protovenom Eruption</i> s knockbackem a damage v okruhu 10 yardů.</p>
       </div>
     </div>
   </section>
@@ -646,7 +653,7 @@
         <div class="tl-time">Repeat</div>
         <div class="tl-body">
           <h4>Tank swap a další main phase</h4>
-          <p>Po každé intermisi proveďte tank swap na obou golemech, aby stackující debuffy (Empowering Slam, Bloodvenom Injection) měly čas odeznít. Cyklus se opakuje až do zabití obou golemů — snažte se je srazit na nula HP zhruba ve stejnou dobu.</p>
+          <p>Po každé intermisi vymění tank i celá jeho skupina stranu (golema), aby stackující debuffy (Empowering Slam, Bloodvenom Injection, Mark of Acid/Blood) měly čas odeznít. Cyklus se opakuje až do zabití obou golemů — snažte se je srazit na nula HP zhruba ve stejnou dobu.</p>
         </div>
       </div>
     </div>
@@ -660,8 +667,8 @@
         <div class="role-icon">Tank</div>
         <h3>Tankování</h3>
         <ul>
-          <li>Udržujte golemy min. 25–40 yardů od sebe po celý fight.</li>
-          <li>Swapujte se po každé intermisi, ať stacky Empowering Slam / Bloodvenom Injection expirují.</li>
+          <li>Udržujte golemy alespoň 40 yardů od sebe po celý fight.</li>
+          <li>Po každé intermisi vyměňte s celou skupinou stranu, ať stacky Empowering Slam / Bloodvenom Injection i Mark of Acid/Blood expirují.</li>
           <li>Před koncem hlavní fáze (vysoký stack) použijte defenzivní cooldown.</li>
           <li>Snažte se udržet HP obou golemů vyrovnané před Vitriolic Stasis.</li>
         </ul>
@@ -682,7 +689,7 @@
         <ul>
           <li>Držte poměr DPS mezi oběma golemy vyrovnaný — nevytahujte jednoho příliš napřed.</li>
           <li>Venom Coagulation zabijte prioritně, ať nespustí Contaminate na celý raid.</li>
-          <li>Šlapejte na Toxic Droplets včas, na Heroic sledujte i vracející se Living Venom.</li>
+          <li>Šlapejte na Toxic Droplets včas (16s do Noxious Blastu) a uhýbejte Living Venomu oběma směry letu.</li>
           <li>V intermisi si předem domluvte pevné dvojice (1↔3, 2↔2), obzvlášť na Mythic.</li>
         </ul>
       </div>
@@ -704,7 +711,7 @@
           </tr>
           <tr>
             <td>Heroic</td>
-            <td>Přísnější positioning, nebezpečnější jedové efekty (zničené Toxic Droplets vypustí Living Venom), přísnější dispel management. Chyba v Helical Toxins (kombinace nad 4) už hráče <b>zabíjí</b>.</td>
+            <td>Living Venom je potřeba uhýbat oběma směry (tam i zpět). Blood Venom louže po Blighted Blood vyžaduje chytré pozicování dispelu/vypršení, ne jen rychlý dispel. Chyba v Helical Toxins (kombinace nad 4, tzv. Cultivated Burst) už hráče <b>zabíjí</b> a nechá po sobě louži.</td>
           </tr>
           <tr>
             <td>Mythic</td>
@@ -715,7 +722,7 @@
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Přesná čísla (vzdálenosti, timery, damage) se mezi komunitními guide zdroji drobně liší a Blizzard je může ještě doladit hotfixy. Před pullem doporučuji zkontrolovat aktuální verzi guide na Wowheadu.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Čísla na této stránce jsou nyní křížově ověřená mezi Icy Veins a Method.gg (40 yardů separace, 16s Toxic Droplets, 8s/8yd Unstable Miasma, 40s Bloodvenom Injection). Blizzard je přesto může ještě doladit hotfixy — před pullem doporučujeme zkontrolovat aktuální verzi guide.
     </div>
   </section>
 
@@ -804,6 +811,7 @@
     <ul>
       <li><a href="https://www.wowhead.com/guide/midnight/raids/venomous-abyss-entombed-sentinels-boss-strategy-abilities" target="_blank" rel="noopener">Wowhead — Entombed Sentinels Boss Guide</a></li>
       <li><a href="https://www.icy-veins.com/wow/entombed-sentinels-raid-guide" target="_blank" rel="noopener">Icy Veins — Entombed Sentinels Raid Guide</a></li>
+      <li><a href="https://www.method.gg/guides/the-venomous-abyss/entombed-sentinels-heroic" target="_blank" rel="noopener">Method.gg — Entombed Sentinels Heroic Guide</a></li>
       <li><a href="https://warcraft.wiki.gg/wiki/Entombed_Sentinels" target="_blank" rel="noopener">Warcraft Wiki — Entombed Sentinels</a></li>
       <li><a href="https://expcarry.com/entombed-sentinels-boss-guide" target="_blank" rel="noopener">ExpCarry — Entombed Sentinels Boss Guide</a></li>
       <li><a href="https://www.wowhead.com/guide/midnight/raids/the-venomous-abyss-overview-location-rewards-bosses" target="_blank" rel="noopener">Wowhead — The Venomous Abyss Raid Overview</a></li>

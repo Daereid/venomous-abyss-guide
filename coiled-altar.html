@@ -304,7 +304,7 @@
           </div>
           <div class="ability">
             <div class="ability-name">Guillotine</div>
-            <div class="ability-desc">Vržená sekera musí zasáhnout ≥5 hráčů. Na Heroic přidává stackující damage-taken debuff.</div>
+            <div class="ability-desc">Označí kruhy na zemi — v každém musí stát a soaknout minimálně 5 hráčů (debuff "Guillotined"), poté z kruhu odejděte. Na Heroic je potřeba soaknout dva oddělené kruhy zároveň.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Axegrinder</div>
@@ -352,7 +352,7 @@
         <div class="ability-list">
           <div class="ability">
             <div class="ability-name">Intermise — soak fragmentů</div>
-            <div class="ability-desc">Okno amplifikace damage; raid musí zachytit/soaknout essence fragmenty. Spirit Shield chrání adds, dokud je nenaruší Gloombomb.</div>
+            <div class="ability-desc">Soulbinding dá bossovi +100 % utrpěného damage — hlavní okno na burst. Raid soakuje Fragmenty Malacrasse (každý soak přidá +20 % damage stack přes Spirit Erasure). Na Mythic navíc chrání Spirit Shield, který naruší jen Gloombomb.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Coiled Union <span class="ability-tag">P3</span></div>
@@ -371,7 +371,7 @@
         <div class="tl-time">Fáze 1</div>
         <div class="tl-body">
           <h4>Zul'jan</h4>
-          <p>Sbírejte venom orby a naveďte na ně Sever. Řešte Guillotine (5+ hráčů) a Axegrindery.</p>
+          <p>Sbírejte venom orby a naveďte na ně Sever. Soakněte kruhy Guillotine (5+ hráčů na kruh) a vyhýbejte se Axegrinderům.</p>
         </div>
       </div>
       <div class="tl-step">
@@ -447,14 +447,14 @@
         <thead><tr><th>Obtížnost</th><th>Co se mění</th></tr></thead>
         <tbody>
           <tr><td>Normal</td><td>Základní kit napříč všemi třemi fázemi.</td></tr>
-          <tr><td>Heroic</td><td>Guillotine aplikuje trvalý stackující damage-taken debuff, Venomfang se stává stackujícím DoT.</td></tr>
-          <tr><td>Mythic</td><td>Přidává Virulent Cyst (nekonečně spawnuje další orby) a Virulent Mutation orby (kontinuální raid damage), Tainted Blood prodlužuje cooldown sběračů venomu, Axegrindery nikdy nedespawnou, Unnerving Fixation manifestace vidí jen postižení hráči, Malevolent Resonance poškozuje při kontaktu s duchem.</td></tr>
+          <tr><td>Heroic</td><td>Guillotine vyžaduje dva oddělené 5-hráčové soak kruhy zároveň, Unnerving Fixation manifestace znovu nasadí mind control, pokud dojdou k cíli.</td></tr>
+          <tr><td>Mythic</td><td>Guillotined se stává trvalým debuffem. Přidává Virulent Cyst (mutovaný orb spawnující další venom každých 6 s) a Virulent Mutation orby (kontinuální Nature damage; kdo je sebere, poškodí okolí a spustí explozi), Tainted Blood (+200 % utrpěného damage z následného Volatile Venom), Spirit Shield chránící adds v intermisi (naruší jen Gloombomb), Axegrindery nikdy nedespawnou, Unnerving Fixation manifestace vidí jen postižení hráči, Malevolent Resonance poškozuje při kontaktu s duchem.</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Zdroje se lehce rozchází v přesném počtu fází (Icy Veins implikuje 4 bloky, Warcraft Wiki mluví o "třech stádiích" a slučuje intermisi do fáze) a v tom, zda Spirit Shield/Malevolent Resonance platí už na Heroic nebo jen na Mythic. Před pullem doporučujeme zkontrolovat aktuální verzi guide.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Icy Veins potvrzuje strukturu 4 bloků (Zul'jan, Malacrass, intermise, spojená fáze); Warcraft Wiki mluví o "třech stádiích" a slučuje intermisi do fáze — jde jen o odlišné pojmenování stejné struktury. Spirit Shield a Malevolent Resonance jsou dle Icy Veins potvrzeně Mythic-exclusive. Název "Twinfang Toxin" (debuff z Fangs of the Coiled Altar) se nepodařilo dohledat v Icy Veins ani Method.gg — ověřte prosím přímo na Wowheadu.
     </div>
   </section>
 
@@ -478,14 +478,14 @@
 
       <div class="quiz-q">
         <div class="quiz-q-num">Otázka 2</div>
-        <div class="quiz-q-title">Co se stane, když Guillotine nezasáhne alespoň 5 hráčů?</div>
+        <div class="quiz-q-title">Co se stane, když v kruhu Guillotine nestojí alespoň 5 hráčů?</div>
         <div class="opt-list">
           <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Nic, mechanika se ignoruje</span></label>
-          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Mechanika není splněna — je nutné se přeskupit tak, aby zasáhla dost hráčů</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Mechanika není splněna — je nutné se přeskupit tak, aby v kruhu stálo dost hráčů</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Zul'jan se okamžitě uzdraví</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Spustí se Fáze 3</span></label>
         </div>
-        <div class="quiz-explain">Správně: B — sekera musí zasáhnout alespoň 5 hráčů, jinak mechanika neproběhne správně.</div>
+        <div class="quiz-explain">Správně: B — v kruhu musí stát a soaknout minimálně 5 hráčů (debuff "Guillotined"), jinak mechanika neproběhne správně.</div>
       </div>
 
       <div class="quiz-q">
@@ -528,12 +528,12 @@
         <div class="quiz-q-num">Otázka 6</div>
         <div class="quiz-q-title">Co přidává Mythic obtížnost navíc?</div>
         <div class="opt-list">
-          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Guillotine stackující debuff</span></label>
-          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">B</span><span class="opt-text">Virulent Cyst — nekonečně spawnující orby</span></label>
-          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">C</span><span class="opt-text">Stackující Venomfang DoT</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Dva oddělené soak kruhy pro Guillotine</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">B</span><span class="opt-text">Virulent Cyst — mutovaný orb spawnující venom každých 6 s</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">C</span><span class="opt-text">Základní verze Venomfang DoT</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">D</span><span class="opt-text">Axegrinder hazard</span></label>
         </div>
-        <div class="quiz-explain">Správně: B — zbylé možnosti jsou Heroic-exclusive nebo přítomné od Normal.</div>
+        <div class="quiz-explain">Správně: B — A je Heroic mechanika, C existuje od Normal, D existuje od začátku (na Mythic jen nikdy nedespawnuje).</div>
       </div>
     </div>
   </section>

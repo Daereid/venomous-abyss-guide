@@ -222,7 +222,7 @@
   <div class="hero-inner">
     <div class="crumb">The Venomous Abyss <b>→</b> Boss 1 <b>→</b> Nek'zali the Soulcoiler</div>
     <h1 class="title">Nek'zali the Soulcoiler</h1>
-    <p class="subtitle">Kompletní strategie na úvodního bosse raidu — rituál u Soulcoil Well, Vaults of Atal'Utek. Sestaveno z ExpCarry a Icy Veins guidů k patchi 12.1.</p>
+    <p class="subtitle">Kompletní strategie na úvodního bosse raidu — rituál u Soulcoil Well, Vaults of Atal'Utek. Sestaveno z Icy Veins a Method.gg guidů k patchi 12.1.</p>
     <div class="meta-row">
       <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
       <div class="meta-chip">Raid <b>The Venomous Abyss</b> · Midnight Season 2</div>
@@ -291,16 +291,16 @@
             <div class="ability-desc">Boss teleportuje do centra, aplikuje stackující raid debuff, spawnuje pohybující se hazardy a dává bossovi ~25 Energy.</div>
           </div>
           <div class="ability">
-            <div class="ability-name">Soulcoiled <span class="ability-tag">Movement</span></div>
-            <div class="ability-desc">Nutí postižené hráče směrem k Well — dosažení Well znamená smrt.</div>
+            <div class="ability-name">Essence Rend <span class="ability-tag">Trap</span></div>
+            <div class="ability-desc">Zachytí několik hráčů na 5 sekund a po uvolnění jim dá 15s DoT. Pokud efekt vyprší (nebo je dispelnut) příliš brzy, zanechá po sobě trvalou louži Latent Cultist. Počkejte, až postižení hráči dosáhnou okraje arény, než dispelujete.</div>
           </div>
           <div class="ability">
-            <div class="ability-name">Essence Rend <span class="ability-tag">Dispel</span></div>
-            <div class="ability-desc">Přitáhne hráče k bossovi a aplikuje dispellovatelný healing-absorb. Přesuňte se na okraj arény, než dispelujete.</div>
+            <div class="ability-name">Latent Cultist <span class="ability-tag">Ground zone</span></div>
+            <div class="ability-desc">Trvalá jedová louha po Essence Rend — exploze v okruhu 6 yardů, poté zpomalující louže (−40 % rychlosti). Není to pohybující se add, ale statická zóna, které je potřeba se vyhýbat.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Anguished Echoes</div>
-            <div class="ability-desc">Náhodné bombardování arény s knockbackem.</div>
+            <div class="ability-desc">Náhodné uhýbatelné kruhy bombardující arénu, spouští je Soulcoil Ignition.</div>
           </div>
         </div>
       </div>
@@ -313,20 +313,16 @@
         </div>
         <div class="ability-list">
           <div class="ability">
-            <div class="ability-name">Raised Amani <span class="ability-tag">Priority</span></div>
-            <div class="ability-desc">Chráněni magic-absorb štítem (Gravebound Advance) — ranged by ho měli rozbít. Smrt spustí Corpse Blight burst.</div>
-          </div>
-          <div class="ability">
-            <div class="ability-name">Latent Cultists</div>
-            <div class="ability-desc">Vzniknou z Essence Rend, obíhají kolem Well a poškozují okolní hráče.</div>
+            <div class="ability-name">Restless Amani <span class="ability-tag">Priority</span></div>
+            <div class="ability-desc">Chráněni magic-absorb štítem Gravebound Advance (25 % HP) — ranged by ho měl rozbít dřív, než dorazí k Well. Na Heroic zanechávají po smrti Vessel of Awakening mrtvolu a aplikují Corpse Blight.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Possession Barrage <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Vystřelí duchy na aktuálního tanka — přesuňte se do prázdného místa, jinak duchové po dopadu spawnou adds.</div>
+            <div class="ability-desc">Vystřelí 4 duchy na aktuálního tanka — damage roste s uraženou vzdáleností, tank by měl být ~30+ yardů od bosse. Duchové po dopadu spawnou další Restless Amani. Na Heroic navíc aplikuje Hollowing Strikes.</div>
           </div>
           <div class="ability">
-            <div class="ability-name">Sever / Hollowed <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Melee útok stackující Hollowed (DoT + snížený healing). Swapujte kolem 5–6 stacků.</div>
+            <div class="ability-name">Hollowing Strikes <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Každý melee zásah stackuje debuff snižující přijaté healing/absorby o 5 % za stack a dává shadow damage. Swapujte kolem 5–6 stacků (~25–30 % redukce).</div>
           </div>
         </div>
       </div>
@@ -341,12 +337,16 @@
         </div>
         <div class="ability-list">
           <div class="ability">
+            <div class="ability-name">Grasping Depths</div>
+            <div class="ability-desc">Táhne celý raid směrem k Well a přivolá Drowned Echo (musí padnout, jinak trvá damage). 3 rotující týmy po 4 DPS + 1 healerovi postupně vstupují do Well.</div>
+          </div>
+          <div class="ability">
             <div class="ability-name">Immortal Coil <span class="ability-tag">Realm shift</span></div>
-            <div class="ability-desc">Grasping Depths vtáhne rotující tým (~4 DPS + 1 healer) do samostatné reality proti Drowned Echo.</div>
+            <div class="ability-desc">Hráči vtažení do Well jsou přesunuti do samostatné reality až na 1 minutu.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Soul Exhaustion</div>
-            <div class="ability-desc">Debuff po návratu z Immortal Coil — zvyšuje zranitelnost na damage z Well.</div>
+            <div class="ability-desc">Debuff po návratu z Immortal Coil — brání dalšímu vstupu do Well po dobu 1 minuty.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Invoke (Mythic)</div>
@@ -430,14 +430,14 @@
         <thead><tr><th>Obtížnost</th><th>Co se mění</th></tr></thead>
         <tbody>
           <tr><td>Normal</td><td>Základní verze všech mechanik, velkorysé prahy.</td></tr>
-          <tr><td>Heroic</td><td>Přidává Ritual Burn (rostoucí stack damage Soulcoil Rite), Vessels of Awakening (znovu-oživitelné mrtvoly), Hollowed navíc i z Possession Barrage, Cremation explodující mrtvoly — celkově vyšší add pressure.</td></tr>
+          <tr><td>Heroic</td><td>Ritual Burn — 60s stackující debuff, +15 % damage taken z dalšího Soulcoil Rite za stack. Vessel of Awakening — mrtvoly Restless Amani z P1 ožívají v intermisi jako posílené adds. Possession Barrage navíc aplikuje Hollowing Strikes. Slithering Flame na nesoaknuté hráče u Hungering Pyre spustí po vypršení Cremation (spálí mrtvoly v okruhu 4 yardů).</td></tr>
           <tr><td>Mythic</td><td>Přidává plnou odbočku Immortal Coil / Drowned Echo v intermisi, Soul Exhaustion, upgradovaný silencující Invoke a těsnější exekuční okna po celý fight.</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Přesná čísla (Energy hodnoty, stack prahy) pocházejí primárně z Icy Veins a nejsou nezávisle ověřená druhým zdrojem — ExpCarry popisuje stejnou strukturu, ale bez konkrétních čísel. Před pullem doporučujeme zkontrolovat aktuální verzi guide.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Čísla na této stránce jsou nyní křížově ověřená mezi Icy Veins a Method.gg. Neověřeno zůstává: přesné jméno debuffu "Soulcoiled" (ze staršího ExpCarry zdroje, Icy Veins/Method.gg ho výslovně nezmiňují pod tímto jménem) a jestli Corpse Blight burst platí i na Normal, nebo je čistě Heroic+ (Icy Veins ho uvádí jen u Heroic). Před pullem doporučujeme zkontrolovat aktuální verzi guide.
     </div>
   </section>
 
@@ -505,7 +505,6 @@
           <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">D</span><span class="opt-text">Energy se už nikdy nenaplní</span></label>
         </div>
         <div class="quiz-explain">Správně: A — proto je P2 ideální místo na Bloodlust/Heroism.</div>
-        <script></script>
       </div>
 
       <div class="quiz-q">
@@ -525,9 +524,9 @@
   <footer id="zdroje">
     <h4>Zdroje</h4>
     <ul>
-      <li><a href="https://expcarry.com/wow-nekzali-soulcoiler-boss-guide" target="_blank" rel="noopener">ExpCarry — Nek'zali the Soulcoiler Boss Guide</a></li>
       <li><a href="https://www.icy-veins.com/wow/nekzali-raid-guide" target="_blank" rel="noopener">Icy Veins — Nek'zali Raid Guide</a></li>
-      <li><a href="https://www.icy-veins.com/wow/venomous-abyss-raid-guide" target="_blank" rel="noopener">Icy Veins — The Venomous Abyss Raid Overview</a></li>
+      <li><a href="https://www.method.gg/guides/the-venomous-abyss/nekzali-the-soulcoiler-heroic" target="_blank" rel="noopener">Method.gg — Nek'zali the Soulcoiler Heroic Guide</a></li>
+      <li><a href="https://expcarry.com/wow-nekzali-soulcoiler-boss-guide" target="_blank" rel="noopener">ExpCarry — Nek'zali the Soulcoiler Boss Guide</a></li>
     </ul>
   </footer>
 </div>

@@ -229,7 +229,7 @@
   <div class="hero-inner">
     <div class="crumb">The Venomous Abyss <b>→</b> Boss 4 <b>→</b> Vashnik the Malignant</div>
     <h1 class="title">Vashnik the Malignant</h1>
-    <p class="subtitle">Kompletní strategie na alchymistu jedu v Chamber of Virulence — Vaults of Atal'Utek. Sestaveno z Icy Veins, ExpCarry a Warcraft Wiki guidů k patchi 12.1.</p>
+    <p class="subtitle">Kompletní strategie na alchymistu jedu v Chamber of Virulence — Vaults of Atal'Utek. Sestaveno z Icy Veins, Method.gg, ExpCarry a Warcraft Wiki guidů k patchi 12.1.</p>
     <div class="meta-row">
       <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
       <div class="meta-chip">Raid <b>The Venomous Abyss</b> · Midnight Season 2</div>
@@ -275,8 +275,8 @@
     <div class="callout danger">
       <div class="mark">§1</div>
       <div>
-        <p><b>Imbibe a rotace fontán.</b> Zhruba každých 90 sekund (při 100 Energy) se Vashnik napije ze dvou nejbližších fontán — získá +100 % damage daného typu jedu a +50 % max HP pro adds toho typu (stackuje, trvá 1,5 min). Tank musí bosse vodit tak, aby žádná fontána nebyla použita víc než dvakrát v řadě (např. Krev+Stín → Stín+Oheň → Oheň+Krev).</p>
-        <p class="fine">Přesná čísla (90 s, 100 Energy) uvádí jen ExpCarry/Icy Veins parafrázovaně, berte jako orientační — raid je čerstvý a Blizzard může hodnoty doladit hotfixy.</p>
+        <p><b>Imbibe a rotace fontán.</b> Zhruba každých 90 sekund (při 100 Energy) se Vashnik napije ze dvou nejbližších fontán — získá +100 % damage daného typu jedu a +50 % max HP pro adds toho typu (stackuje, trvá 1,5 min) a navíc trvalý stack <i>Toxic Vapor</i> (soft enrage — s každým dalším napitím se fight zrychluje). Tank musí bosse vodit tak, aby žádná fontána nebyla použita víc než dvakrát v řadě (např. Krev+Stín → Stín+Oheň → Oheň+Krev).</p>
+        <p class="fine">Timing Imbibe (90 s / 100 Energy) i pořadí rotace fontán teď potvrzují nezávisle Icy Veins i Method.gg. Směr tankovací rotace (Icy Veins uvádí „proti směru hodinových ručiček") zatím potvrzuje jen jeden zdroj.</p>
       </div>
     </div>
   </section>
@@ -300,7 +300,7 @@
           </div>
           <div class="ability">
             <div class="ability-name">Dripping Fangs <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Těžký physical hit + Nature DoT, stackující debuff zvyšující physical damage taken. Vyžaduje tank swap na stack.</div>
+            <div class="ability-desc">Těžký physical hit, po kterém tank na 32 sekund dostane +100 % physical damage taken. Swapujte hned na 1. stack, ať do stejného debuffu nepřijde další zásah.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Plague Froth</div>
@@ -320,6 +320,10 @@
           <div class="desc">Adds spawnující z aktuálně empowerovaných fontán.</div>
         </div>
         <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Hardened Venom <span class="ability-tag">60s timer</span></div>
+            <div class="ability-desc">Jed, který přežije 60 sekund od spawnu, získá CC immunitu a +50 % rychlosti pohybu — zabíjejte adds hned po spawnu, ne až budou blízko Cavity.</div>
+          </div>
           <div class="ability">
             <div class="ability-name">Burning Venoms <span class="ability-tag">Top priority</span></div>
             <div class="ability-desc">Z Fountain of Flame. Konstantní raid damage, dokud žijí. Smrt spustí Caustic Surge (raid damage) — nezabíjejte dva najednou (na Heroic nebezpečné stacky DoT).</div>
@@ -390,7 +394,7 @@
         <ul>
           <li>Držte bosse mezi fontánami, které chcete empowerovat jako další.</li>
           <li>Rotujte fontány tak, aby žádná nebyla použita víc než 2× v řadě.</li>
-          <li>Swapujte čistě na stacky Dripping Fangs, defenzivy při překrytí s infekcí.</li>
+          <li>Swapujte hned na 1. stack Dripping Fangs, defenzivy při překrytí s infekcí.</li>
         </ul>
       </div>
       <div class="role-card">
@@ -429,7 +433,7 @@
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Přesný timing Imbibe (90 s / 100 Energy) a směr rotace tanka (jeden zdroj uvádí "proti směru hodinových ručiček") nejsou nezávisle potvrzené více zdroji. Před pullem doporučujeme zkontrolovat aktuální verzi guide.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Timing Imbibe (90 s / 100 Energy), pořadí rotace fontán a Dripping Fangs (+100 % physical damage taken, 32 s) jsou teď potvrzené shodně Icy Veins i Method.gg. Směr tankovací rotace („proti směru hodinových ručiček") a to, zda je Malignant Catalyst opravdu jen Heroic+ (ne i Normal), potvrzuje zatím jen jeden zdroj — před pullem doporučujeme zkontrolovat aktuální verzi guide.
     </div>
   </section>
 
@@ -517,6 +521,7 @@
     <h4>Zdroje</h4>
     <ul>
       <li><a href="https://www.icy-veins.com/wow/vashnik-raid-guide" target="_blank" rel="noopener">Icy Veins — Vashnik Raid Guide</a></li>
+      <li><a href="https://www.method.gg/guides/the-venomous-abyss/vashnik-the-malignant-heroic" target="_blank" rel="noopener">Method.gg — Vashnik the Malignant Heroic Guide</a></li>
       <li><a href="https://expcarry.com/vashnik-malignant-boss-guide" target="_blank" rel="noopener">ExpCarry — Vashnik the Malignant Boss Guide</a></li>
       <li><a href="https://warcraft.wiki.gg/wiki/Vashnik_the_Malignant" target="_blank" rel="noopener">Warcraft Wiki — Vashnik the Malignant</a></li>
       <li><a href="https://www.wowhead.com/guide/midnight/raids/venomous-abyss-vashnik-the-malignant-boss-strategy-abilities" target="_blank" rel="noopener">Wowhead — Vashnik the Malignant Boss Guide (doporučeno zkontrolovat přímo)</a></li>

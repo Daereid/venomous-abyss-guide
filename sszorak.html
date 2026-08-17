@@ -233,7 +233,7 @@
   <div class="hero-inner">
     <div class="crumb">The Venomous Abyss <b>→</b> Boss 5 <b>→</b> Sszorak</div>
     <h1 class="title">Sszorak</h1>
-    <p class="subtitle">Kompletní strategie na hadího predátora Altaru šesti větrů — Vaults of Atal'Utek, Coiled Isle. Sestaveno z Icy Veins a Warcraft Wiki guidů k patchi 12.1.</p>
+    <p class="subtitle">Kompletní strategie na hadího predátora Altaru šesti větrů — Vaults of Atal'Utek, Coiled Isle. Sestaveno a ověřeno z Icy Veins a Method.gg guidů k patchi 12.1.</p>
     <div class="meta-row">
       <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
       <div class="meta-chip">Raid <b>The Venomous Abyss</b> · Midnight Season 2</div>
@@ -306,23 +306,23 @@
         <div class="ability-list">
           <div class="ability">
             <div class="ability-name">Ravage <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Musí být natočen mimo raid. Stacky zvyšují damage dalšího Ravage o 300 % — swapujte tanka po prvním zásahu.</div>
+            <div class="ability-desc">Musí být natočen mimo raid. Debuff zvyšuje damage dalšího Ravage o 400 % po dobu 25 s — swapujte tanka mezi oběma casty.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Mutilate <span class="ability-tag">Soak</span></div>
-            <div class="ability-desc">Vyžaduje soak skupinou, nebo solo-soak Blood DK s defenzivami.</div>
+            <div class="ability-desc">Frontální kužel, jehož damage se rovnoměrně rozdělí mezi zasažené — musí v něm být alespoň 5 hráčů, jinak je damage smrtící. Lze i solo-soaknout Blood DK (Vampiric Blood/Anti-Magic Shell). Na Heroic je potřeba dvou střídajících se soak skupin.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Tempest <span class="ability-tag">Dodge</span></div>
-            <div class="ability-desc">Uhýbatelné tornádo.</div>
+            <div class="ability-desc">Pohybující se tornáda po plošině — uhýbejte jim, zásah navíc aplikuje stackující 30% slow.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Corroding Venom <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Stackující debuff zvyšující utrpěný physical damage. Swapujte kolem 6 stacků.</div>
+            <div class="ability-desc">Stackující debuff (+3 % utrpěného physical damage za stack dle Method.gg). Swapujte kolem 6 stacků.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Mutilated Gash</div>
-            <div class="ability-desc">Přetrvávající toxická rána (DoT) z Mutilate.</div>
+            <div class="ability-desc">Debuff z Mutilate, který zvyšuje damage dalšího Mutilate o 500 % — proto se soak skupiny musí střídat.</div>
           </div>
         </div>
       </div>
@@ -336,11 +336,11 @@
         <div class="ability-list">
           <div class="ability">
             <div class="ability-name">Venomous Surge <span class="ability-tag">Placement</span></div>
-            <div class="ability-desc">Postižení hráči položí Viscous Cyst na určené místo naproti vichrovému tunelu. Cysta při vypršení uděluje raid-wide Nature damage, klesající se vzdáleností.</div>
+            <div class="ability-desc">Postižení hráči dostanou 10s jedový DoT a musí se postavit na určené místo naproti vichrovému tunelu — tam po sobě zanechají Viscous Cyst. Efekt při vypršení uděluje damage klesající se vzdáleností od ostatních.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Raging Crosswinds <span class="ability-tag">Knockback</span></div>
-            <div class="ability-desc">DoT následovaný směrovým odfukem. Spárujte se s hráčem s opačným směrem větru, abyste se vzájemně vyrušili bezpečně.</div>
+            <div class="ability-desc">Označení hráči jsou po prodlevě vystřeleni do vzduchu ve směru větru. Spárujte se s hráčem s opačným směrem, abyste se vzájemně vyrušili bezpečně (na Mythic přibývají všechny 4 světové strany).</div>
           </div>
           <div class="ability">
             <div class="ability-name">Howling Maelstrom <span class="ability-tag">~2 min</span></div>
@@ -348,7 +348,11 @@
           </div>
           <div class="ability">
             <div class="ability-name">Caustic Claws <span class="ability-tag">Heroic+</span></div>
-            <div class="ability-desc">Zanechává jedovaté louže na zemi, vyžaduje pečlivý positioning.</div>
+            <div class="ability-desc">Hodí jed do okolí hráčů (do ~6 yardů) a zanechá louže Caustic Residue — stání v nich dává +30 % utrpěného damage.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Ula'tek's Presence <span class="ability-tag">Konstantní</span></div>
+            <div class="ability-desc">Nature damage tikající na celý raid každé 2 sekundy po celou dobu fightu, nezávisle na ostatních mechanikách.</div>
           </div>
         </div>
       </div>
@@ -376,7 +380,7 @@
           </div>
           <div class="ability">
             <div class="ability-name">Virulence <span class="ability-tag">Spread</span></div>
-            <div class="ability-desc">Viditelný beam/spread debuff — postižení hráči se musí rozestoupit, aby nedošlo k řetězové infekci.</div>
+            <div class="ability-desc">5s viditelný beam/spread debuff — postižení hráči se musí rozestoupit, aby nedošlo k řetězové infekci nebo prodloužení efektu.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Raging Crosswinds (Mythic)</div>
@@ -451,6 +455,7 @@
           <li>Šetřete cooldowny na Dig In okno (+30 % damage taken).</li>
           <li>Uhýbejte Tempestu, na Heroic+ řešte Caustic Claws louže.</li>
           <li>Na Mythic pomozte se stackem na Serpent's Fury a rozestupte se u Virulence.</li>
+          <li>Doporučené složení dle Method.gg: 2 tankové / 4 healeři / 14 DPS (pátý healer volitelný kvůli vysokému raid damage).</li>
         </ul>
       </div>
     </div>
@@ -471,7 +476,7 @@
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Přesná čísla se mezi zdroji mohou lišit (např. přesné % u Unbound Ferocity vychází jen z jednoho zdroje) a Blizzard mechaniky může ještě doladit hotfixy. Wowheadova dedikovaná guide stránka existuje, ale v době psaní se nedala strojově stáhnout — doporučuji ji zkontrolovat přímo.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Čísla u Ravage (+400 %), Mutilate/Mutilated Gash (+500 %), Corroding Venom (+3 %/stack), Caustic Residue (+30 %) a Dig In (+30 %, 25 s) jsou křížově ověřená přes Icy Veins a Method.gg. Výjimkou je procento u Mythic-exclusive Unbound Ferocity (~500 %) — to pochází jen z Warcraft Wiki a nepodařilo se ho potvrdit ani jedním z těchto dvou zdrojů, takže ho berte jako neověřené. Blizzard mechaniky navíc může ještě doladit hotfixy. Wowheadova dedikovaná guide stránka existuje, ale v době psaní se nedala strojově stáhnout — doporučuji ji zkontrolovat přímo.
     </div>
   </section>
 
@@ -514,7 +519,7 @@
           <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">C</span><span class="opt-text">Utíkat od bosse</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">D</span><span class="opt-text">Nechat ho dopadnout na celý raid</span></label>
         </div>
-        <div class="quiz-explain">Správně: A — další zásah stejného tanka by dostal +300 % damage.</div>
+        <div class="quiz-explain">Správně: A — debuff dává dalšímu Ravage +400 % damage po dobu 25 s.</div>
       </div>
 
       <div class="quiz-q">
@@ -559,6 +564,7 @@
     <h4>Zdroje</h4>
     <ul>
       <li><a href="https://www.icy-veins.com/wow/sszorak-raid-guide" target="_blank" rel="noopener">Icy Veins — Sszorak Raid Guide</a></li>
+      <li><a href="https://www.method.gg/guides/the-venomous-abyss/sszorak-heroic" target="_blank" rel="noopener">Method.gg — Sszorak Heroic Guide</a></li>
       <li><a href="https://warcraft.wiki.gg/wiki/Sszorak" target="_blank" rel="noopener">Warcraft Wiki — Sszorak</a></li>
       <li><a href="https://www.wowhead.com/guide/midnight/raids/venomous-abyss-sszorak-boss-strategy-abilities" target="_blank" rel="noopener">Wowhead — Sszorak Boss Guide (doporučeno zkontrolovat přímo)</a></li>
     </ul>

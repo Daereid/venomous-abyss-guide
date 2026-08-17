@@ -318,11 +318,11 @@
           </div>
           <div class="ability">
             <div class="ability-name">Rage of the Shackled</div>
-            <div class="ability-desc">Opakující se raid damage; odhaluje Venomous Heart (+200 % damage okno, 20 s).</div>
+            <div class="ability-desc">Opakující se raid damage; odhaluje Venomous Heart, které bere podstatně zvýšený damage — burst okno pro cooldowny (přesné % se mezi zdroji liší, viz poznámka níže).</div>
           </div>
           <div class="ability">
             <div class="ability-name">Blightscale Vipers</div>
-            <div class="ability-desc">Z vylíhnutých vajec — Acidic Burst + přetrvávající Putrid Membrane debuff.</div>
+            <div class="ability-desc">Z vylíhnutých vajec — Acidic Burst (náhodný damage), Petrifying Sting (stun + healing absorb, na Heroic+ vyžaduje rozestup) a přetrvávající Putrid Membrane debuff.</div>
           </div>
         </div>
       </div>
@@ -344,7 +344,11 @@
           </div>
           <div class="ability">
             <div class="ability-name">Doomscale Wardens</div>
-            <div class="ability-desc">Writhing Gestation mění okolní potomky na Clutches; Warden's Protection blokuje interakci s vejci.</div>
+            <div class="ability-desc">Writhing Gestation mění okolní potomky na Clutches. Sesílají také přerušitelný <i>Malice</i> (raid-wide damage) — přerušte ho.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Shrieking Blightscales <span class="ability-tag">Interrupt</span></div>
+            <div class="ability-desc">Vicious Echoes — přerušitelný křik. Zabijte/přerušte je, ať neeskaluje raid-wide damage.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Grasping Fangs</div>
@@ -393,8 +397,8 @@
             <div class="ability-desc">+200 % damage taken na 20 s po skončení skořápky.</div>
           </div>
           <div class="ability">
-            <div class="ability-name">Revenge</div>
-            <div class="ability-desc">Přeživší Weakened Doomscale získává +100 % haste/damage, když jeho pár zemře.</div>
+            <div class="ability-name">Doomscale Revenge</div>
+            <div class="ability-desc">Přeživší Weakened Doomscale získává +100 % haste/damage, když jeho pár zemře (potvrzeno více zdroji).</div>
           </div>
           <div class="ability">
             <div class="ability-name">Toxic Incubation</div>
@@ -467,9 +471,9 @@
         <div class="role-icon">DPS</div>
         <h3>Damage</h3>
         <ul>
-          <li>Priorita adds před bossem — Vipers/Clutches/Wardens dřív, než napáchají další škody.</li>
-          <li>Přerušujte Anguished Cry, vybuchujte Venomous Heart okno.</li>
-          <li>Zabíjejte Rawlings/Shriekery dřív, než eskaluje Boiling Venom.</li>
+          <li>Priorita adds: sesílající/nebezpečné adds → Doomscale Wardens → plně vylíhnutí Vipers → slabší adds → boss.</li>
+          <li>Přerušujte Anguished Cry i Vicious Echoes (Shrieking Blightscales), vybuchujte Venomous Heart okno.</li>
+          <li>Nenechte Shrieking Blightscales žít dlouho — jejich křik eskaluje raid damage (Boiling Venom, přesný mechanismus nepotvrzen).</li>
         </ul>
       </div>
     </div>
@@ -484,13 +488,13 @@
         <tbody>
           <tr><td>Normal</td><td>Naučte se smyčku vlna-dodge/egg-control/melee-uptime/Spectral-Coil-soak. Hlavní příčina wipů: nekontrolované vylíhnutí Viperů nebo zmeškané soaky.</td></tr>
           <tr><td>Heroic</td><td>Přidává Soul Constrictor (soakeři nemůžou soaknout další Coil — vynucuje rotaci skupiny), Petrifying Sting (Viperové dávají healing absorb), Poisonous Bite, Mass Gestation a Blight Vein zasahující celý raid.</td></tr>
-          <tr><td>Mythic</td><td>Přidává Hardened Blightscale Spawn (nehybná vejce se skořápkou), Noxious Shell (egg lanes), Rancid Yolk, Toxic Womb/Blightscale Wretch add s Fester Burst, Toxic Incubation, Revenge, Boiling Venom a Mythic-only twist na Serpent's Bite.</td></tr>
+          <tr><td>Mythic</td><td>Přidává Hardened Blightscale Spawn (nehybná vejce se skořápkou), Noxious Shell (egg lanes), Rancid Yolk, Toxic Womb add vyžadující zachycení jedu (Toxic Incubation), Doomscale Revenge a Mythic-only twist, kdy vypršelý Volatile Purge navíc spustí přídavné Caustic Waves.</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Icy Veins v době psaní ještě neměl dedikovaný guide na Ula'Tek ("boss nebyl dostupný pro PTR testing"), takže tento report vychází primárně z ExpCarry, křížově ověřeno strukturou proti Warcraft Wiki. Přesná čísla (procenta, yardy, sekundy) berte jako jednodrocí a před pullem zkontrolujte aktuální verzi guide.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Icy Veins k datu poslední kontroly stále nemá vlastní obsah k Ula'tek (jen placeholder "boss nebyl dostupný pro PTR testing") a Method.gg pro tohoto bosse zatím nemá vydaný guide. Tento report proto kombinuje ExpCarry, Warcraft Wiki a dva doplňkové zdroje (BoostRoom, FrostyBoost). Zdroje se rozchází v několika detailech — viz poznámky u jednotlivých mechanik a zkontrolujte prosím ručně: přesné % u Venomous Heart burst okna, zda se přesný název debuffu z "Serpent's Bite" jmenuje "Surging Fang", zda Mass Gestation patří na Heroic nebo Mythic, a jestli je "The Shattering" jediné intermezzo nebo existují dvě (jeden zdroj to tvrdí, žádný jiný to nepotvrzuje).
     </div>
   </section>
 
@@ -500,7 +504,7 @@
     <div class="callout loot">
       <div class="mark">★</div>
       <div>
-        <p><b>Primeval Skyfriend</b> — mount padající z Ula'tek pouze na <b>Mythic</b> obtížnosti. Item level dle jednoho zdroje (nepotvrzeno přímým fetchem loot tabulky): Normal 302 / Heroic 315 / Mythic 344.</p>
+        <p><b>Primeval Skyfriend</b> — mount padající z Ula'tek pouze na <b>Mythic</b> obtížnosti (potvrzeno více nezávislými zdroji). Item level: Normal 302 / Heroic 315 / Mythic 344. Za zabití na Heroic+ získáte achievement <i>Ahead of the Curve: Ula'tek</i>, na Mythic <i>Cutting Edge: Ula'tek</i>; achievement <i>No Egg Scramble</i> uděluje pet Ula'took.</p>
       </div>
     </div>
   </section>
@@ -590,7 +594,9 @@
     <ul>
       <li><a href="https://expcarry.com/ula-tek-boss-guide" target="_blank" rel="noopener">ExpCarry — Ula'Tek Boss Guide</a></li>
       <li><a href="https://warcraft.wiki.gg/wiki/Ula%27tek" target="_blank" rel="noopener">Warcraft Wiki — Ula'tek</a></li>
-      <li><a href="https://www.icy-veins.com/wow/ulatek-raid-guide" target="_blank" rel="noopener">Icy Veins — Ula'tek Raid Guide (v době psaní bez obsahu, zkontrolujte aktuální stav)</a></li>
+      <li><a href="https://www.icy-veins.com/wow/ulatek-raid-guide" target="_blank" rel="noopener">Icy Veins — Ula'tek Raid Guide (stále bez obsahu k datu kontroly, zkontrolujte aktuální stav)</a></li>
+      <li><a href="https://boostroom.com/blog/ulatek-boss-guide-how-to-prepare-for-the-final-venomous-abyss-encounter" target="_blank" rel="noopener">BoostRoom — Ula'tek Boss Guide</a></li>
+      <li><a href="https://frostyboost.com/blog/venomous-abyss-raid-guide" target="_blank" rel="noopener">FrostyBoost — Venomous Abyss Raid Guide</a></li>
     </ul>
   </footer>
 </div>
