@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Twin Fangs</title>
+<style>
+  h1, h2, h3, h4, p, ul, ol, blockquote, figure { margin: 0; }
+
+  :root {
+    --bg: #eae3d0;
+    --bg-panel: #f5efde;
+    --bg-raised: #ffffff;
+    --ink: #201d18;
+    --ink-soft: #5b5546;
+    --ink-faint: #8a8271;
+    --line: #cdc3a6;
+    --line-strong: #b3a884;
+    --venom: #4a7a2e;
+    --venom-glow: #6f9a3f;
+    --venom-bg: #e3ecd3;
+    --accent-a: #6e7a1f;
+    --accent-a-bg: #e9edcf;
+    --accent-b: #8c2f3a;
+    --accent-b-bg: #f2e0e0;
+    --mythic: #6b3fa0;
+    --mythic-bg: #ece1f5;
+    --warn-bg: #f6e6c8;
+    --warn-ink: #6b4c14;
+    --danger: #8c2f3a;
+    --danger-bg: #f2e0e0;
+    --shadow: rgba(40, 34, 20, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12140f;
+      --bg-panel: #1a1e14;
+      --bg-raised: #20261a;
+      --ink: #e9e5d5;
+      --ink-soft: #b1a891;
+      --ink-faint: #7d7663;
+      --line: #35392c;
+      --line-strong: #454b38;
+      --venom: #9ecf5f;
+      --venom-glow: #b7e07d;
+      --venom-bg: #253320;
+      --accent-a: #c4d95f;
+      --accent-a-bg: #2a3312;
+      --accent-b: #e07d84;
+      --accent-b-bg: #35201f;
+      --mythic: #b98fe0;
+      --mythic-bg: #281c35;
+      --warn-bg: #33290f;
+      --warn-ink: #e0bb6f;
+      --danger: #e07d84;
+      --danger-bg: #35201f;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12140f;
+    --bg-panel: #1a1e14;
+    --bg-raised: #20261a;
+    --ink: #e9e5d5;
+    --ink-soft: #b1a891;
+    --ink-faint: #7d7663;
+    --line: #35392c;
+    --line-strong: #454b38;
+    --venom: #9ecf5f;
+    --venom-glow: #b7e07d;
+    --venom-bg: #253320;
+    --accent-a: #c4d95f;
+    --accent-a-bg: #2a3312;
+    --accent-b: #e07d84;
+    --accent-b-bg: #35201f;
+    --mythic: #b98fe0;
+    --mythic-bg: #281c35;
+    --warn-bg: #33290f;
+    --warn-ink: #e0bb6f;
+    --danger: #e07d84;
+    --danger-bg: #35201f;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: Rockwell, "Sitka Text", "Iowan Old Style", Georgia, "Times New Roman", serif; text-wrap: balance; margin: 0; color: var(--ink); }
+  a { color: var(--venom); text-decoration-color: var(--line-strong); }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 96px; }
+  header.hero { border-bottom: 1px solid var(--line); padding: 40px 24px 28px; background: var(--bg-panel); }
+  .hero-inner { max-width: 920px; margin: 0 auto; }
+  .crumb { font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px; }
+  .crumb b { color: var(--accent-b); }
+  h1.title { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; }
+  .subtitle { margin-top: 8px; color: var(--ink-soft); font-size: 1.05rem; max-width: 62ch; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .meta-chip { border: 1px solid var(--line-strong); padding: 5px 12px; font-size: 0.75rem; letter-spacing: 0.03em; color: var(--ink-soft); background: var(--bg-raised); }
+  .meta-chip b { color: var(--ink); font-family: inherit; }
+
+  nav.jump { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  nav.jump .row { max-width: 920px; margin: 0 auto; display: flex; gap: 2px; padding: 0 24px; }
+  nav.jump a { flex: none; padding: 12px 14px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; }
+  nav.jump a:hover, nav.jump a:focus-visible { color: var(--ink); border-bottom-color: var(--venom-glow); }
+
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 52px; }
+  section:last-of-type { border-bottom: none; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+  h2.section-title { font-size: 1.6rem; margin-bottom: 6px; }
+  .section-lede { color: var(--ink-soft); max-width: 68ch; margin-top: 8px; }
+
+  .callout { margin-top: 22px; border: 1px solid var(--line-strong); background: var(--bg-panel); padding: 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+  .callout .mark { font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 1.3rem; color: var(--venom); }
+  .callout p { margin: 0; color: var(--ink); }
+  .callout .fine { color: var(--ink-faint); font-size: 0.85rem; margin-top: 6px; }
+  .callout.danger { border-color: var(--danger); background: var(--danger-bg); }
+  .callout.danger .mark { color: var(--danger); }
+
+  .groups { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+  @media (max-width: 720px) { .groups { grid-template-columns: 1fr; } }
+  .group-card { border: 1px solid var(--line-strong); background: var(--bg-raised); }
+  .group-head { padding: 16px 18px; border-bottom: 1px solid var(--line); }
+  .group-card.a .group-head { background: var(--accent-a-bg); }
+  .group-card.b .group-head { background: var(--accent-b-bg); }
+  .group-tag { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .group-card.a .group-tag { color: var(--accent-a); }
+  .group-card.b .group-tag { color: var(--accent-b); }
+  .group-head h3 { font-size: 1.25rem; margin-top: 4px; }
+  .group-head .desc { color: var(--ink-soft); font-size: 0.88rem; margin-top: 6px; }
+
+  .ability-list { padding: 6px 0; }
+  .ability { padding: 12px 18px; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+  .ability:last-child { border-bottom: none; }
+  .ability-name { font-weight: 600; font-size: 0.95rem; }
+  .group-card.a .ability-name { color: var(--accent-a); }
+  .group-card.b .ability-name { color: var(--accent-b); }
+  .ability-tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--line); padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
+  .ability-desc { color: var(--ink-soft); font-size: 0.87rem; }
+
+  .timeline { margin-top: 28px; display: flex; flex-direction: column; }
+  .tl-step { display: grid; grid-template-columns: 130px 1fr; gap: 18px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .tl-step:first-child { border-top: none; }
+  .tl-time { font-family: "SF Mono", Consolas, monospace; font-size: 0.8rem; color: var(--venom); padding-top: 2px; }
+  .tl-body h4 { font-family: inherit; font-size: 1rem; margin: 0 0 4px; color: var(--ink); }
+  .tl-body p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+  @media (max-width: 780px) { .roles { grid-template-columns: 1fr; } }
+  .role-card { border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 18px; }
+  .role-card .role-icon { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--venom); }
+  .role-card h3 { font-size: 1.1rem; margin-top: 6px; }
+  .role-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.89rem; }
+  .role-card li { margin-bottom: 8px; }
+
+  .table-scroll { overflow-x: auto; margin-top: 22px; }
+  table.diff { width: 100%; border-collapse: collapse; min-width: 640px; }
+  table.diff th, table.diff td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 0.88rem; vertical-align: top; }
+  table.diff th { font-family: Rockwell, Georgia, serif; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); border-bottom: 1px solid var(--line-strong); }
+  table.diff td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  table.diff tr:last-child td { border-bottom: none; }
+
+  .quiz-list { margin-top: 22px; }
+  .quiz-q { padding: 22px 0; border-top: 1px solid var(--line); }
+  .quiz-q:first-child { border-top: none; padding-top: 0; }
+  .quiz-q-num { font-family: "SF Mono", Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+  .quiz-q-title { font-size: 1.02rem; font-weight: 600; margin-bottom: 14px; }
+  .opt-list { display: grid; gap: 8px; }
+  .opt { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 10px 14px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .opt-input { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+  .opt-letter { font-family: "SF Mono", Consolas, monospace; font-weight: 700; font-size: 0.72rem; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center; color: var(--ink-faint); flex: none; }
+  .opt-text { font-size: 0.9rem; color: var(--ink-soft); }
+  .opt:hover { border-color: var(--ink-faint); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] { border-color: var(--venom); background: var(--venom-bg); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-letter { border-color: var(--venom); color: var(--venom); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-text { color: var(--ink); }
+  .opt:has(.opt-input:checked):not([data-correct="true"]) { border-color: var(--danger); background: var(--danger-bg); }
+  .quiz-explain { display: none; margin-top: 12px; padding: 10px 14px; border-left: 2px solid var(--venom); background: var(--bg-panel); font-size: 0.85rem; color: var(--ink-soft); }
+  .quiz-q:has(.opt-input:checked) .quiz-explain { display: block; }
+
+  .disclaimer { background: var(--warn-bg); border: 1px solid var(--line-strong); color: var(--warn-ink); padding: 16px 18px; font-size: 0.87rem; margin-top: 22px; }
+  footer { padding: 32px 0 8px; color: var(--ink-faint); font-size: 0.82rem; }
+  footer h4 { font-family: inherit; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  footer a { color: var(--ink-soft); }
+
+  :focus-visible { outline: 2px solid var(--venom-glow); outline-offset: 2px; }
+
+  .raid-nav { background: var(--bg-panel); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .raid-nav-row { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 24px; }
+  .raid-nav-home { flex: none; font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 0.8rem; color: var(--ink); text-decoration: none; white-space: nowrap; margin-right: 4px; }
+  .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
+  .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="crumb">The Venomous Abyss <b>→</b> Boss 6 <b>→</b> The Twin Fangs</div>
+    <h1 class="title">The Twin Fangs</h1>
+    <p class="subtitle">Kompletní strategie na Vexhula a Ithraze — prastaré hady z prvního výplodu Ula'tek, kteří komnatu hlídají už 16 000 let. Sestaveno z Warcraft Wiki, Icy Veins a Method.gg guidů k patchi 12.1.</p>
+    <div class="meta-row">
+      <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
+      <div class="meta-chip">Raid <b>The Venomous Abyss</b> · Midnight Season 2</div>
+      <div class="meta-chip">Boss <b>6 z 8</b></div>
+      <div class="meta-chip">Obtížnosti <b>LFR / Normal / Heroic / Mythic</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="raid-nav">
+  <div class="raid-nav-row">
+    <a href="index.html" class="raid-nav-home">☣ The Venomous Abyss</a>
+    <a href="nekzali.html" class="raid-pill">1 · Nek'zali</a>
+    <a href="entombed-sentinels.html" class="raid-pill">2 · Entombed Sentinels</a>
+    <a href="lost-explorers.html" class="raid-pill">3 · Lost Explorers</a>
+    <a href="vashnik.html" class="raid-pill">4 · Vashnik</a>
+    <a href="sszorak.html" class="raid-pill">5 · Sszorak</a>
+    <a href="twin-fangs.html" class="raid-pill active">6 · Twin Fangs</a>
+    <a href="coiled-altar.html" class="raid-pill">7 · Coiled Altar</a>
+    <a href="ulatek.html" class="raid-pill">8 · Ula'Tek</a>
+  </div>
+</div>
+
+<nav class="jump">
+  <div class="row">
+    <a href="#prehled">Přehled</a>
+    <a href="#schopnosti">Schopnosti</a>
+    <a href="#faze">Časová osa</a>
+    <a href="#role">Role</a>
+    <a href="#obtiznosti">Obtížnosti</a>
+    <a href="#kviz">Kvíz</a>
+    <a href="#zdroje">Zdroje</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="prehled">
+    <div class="eyebrow">Přehled encounteru</div>
+    <h2 class="section-title">Dva hadi z jednoho vejce</h2>
+    <p class="section-lede">Vexhul a Ithraz se vylíčili ze stejné snůšky a stejnou komnatu hlídají už 16 tisíciletí. Vexhul zdědil jedové žlázy — travuje raid a povolává adds. Ithraz zdědil apetit — polyká hráče a rozbíjí plošinu. Bojujete proti oběma najednou.</p>
+
+    <div class="callout danger">
+      <div class="mark">§1</div>
+      <div>
+        <p><b>Eternal Venom — jedová ekonomika.</b> Permanentní stackující Nature DoT, který sám nikdy nevyprchá. Jediný způsob, jak stack sundat, je dostat zásah od Ithrazova Ravenous Feast (každý zásah sundá 1 stack). Cíl fightu je tedy: vyhýbat se zbytečným stackům a pak vědomě "sníst" zásah, když je stack vysoký.</p>
+        <p class="fine">Zdroje se rozchází v přesné smrtící hranici — jeden uvádí 10 stacků = smrt, Warcraft Wiki uvádí 9 stacků = masivní damage + 8s stun. Berte obě čísla jako orientační.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schopnosti">
+    <div class="eyebrow">Mechaniky fightu</div>
+    <h2 class="section-title">Schopnosti obou hadů</h2>
+    <p class="section-lede">Vexhul tlačí na adds a pohyb, Ithraz na soak a tank management.</p>
+
+    <div class="groups">
+      <div class="group-card a">
+        <div class="group-head">
+          <div class="group-tag">Vexhul · jed a adds</div>
+          <h3>Vexhul</h3>
+          <div class="desc">Zdroj Eternal Venom stacků a přisluhujících hadů.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Caustic Deluge <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Saturuje tanka, jedové kapky poté explodují a aplikují Eternal Venom na okolní hráče.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Venomous Emergence</div>
+            <div class="ability-desc">Neuhýbatelný raid stack + spawn 3 hadích adds doprostřed. Uhýbejte jejich Corrosive Spit liniím a zabijte je rychle.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Vile Flood <span class="ability-tag">Movement</span></div>
+            <div class="ability-desc">14s frontální kanál toxinu. Kdo v něm zůstane, dostává těžký ticking damage a rychle nastackuje Eternal Venom až k smrti. Okamžitě odejděte.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Stir the Depths</div>
+            <div class="ability-desc">Vlny po celé plošině — Nature damage + venom stacky.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card b">
+        <div class="group-head">
+          <div class="group-tag">Ithraz · devour a platforma</div>
+          <h3>Ithraz</h3>
+          <div class="desc">Soak mechaniky a ničení plošiny.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Ravenous Feast <span class="ability-tag">Soak</span></div>
+            <div class="ability-desc">3 explozivní zásahy, každý pro jednu soak skupinu. Soak sundá 1 stack Eternal Venom, ale nikdo by neměl soaknout dvakrát, pokud je již "Feasted".</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Stone Breaker</div>
+            <div class="ability-desc">Praští do plošiny. Pokud nezasáhne nikoho, damage jde na celý raid — musí to někdo soaknout.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Coiling Ichor <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Shadow damage debuff, který se postupně zpřísňuje/zesiluje.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Sanguine Storm <span class="ability-tag">Heroic+</span></div>
+            <div class="ability-desc">Vystřeluje gore globule, aktivní od Heroic výš.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="groups" style="margin-top:18px; grid-template-columns: 1fr;">
+      <div class="group-card mythic">
+        <div class="group-head">
+          <div class="group-tag">Sdílené &amp; Mythic</div>
+          <h3>Submerge intermezzo a Uncoiled Wrath</h3>
+          <div class="desc">Platí pro oba hady po celý fight.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Submerge <span class="ability-tag">~100 energy</span></div>
+            <div class="ability-desc">Oba hadi se potopí a spustí kombinovanou útočnou sekvenci, zanechávají Noxious Slick louže se slowem a damage.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Uncoiled Wrath</div>
+            <div class="ability-desc">Když jeden had zemře, přeživší permanentně získává +25 % damage každé 4 s — snažte se sundat oba hady blízko sebe v čase.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Rouse the Brood <span class="ability-tag">Mythic</span></div>
+            <div class="ability-desc">Ithraz povolá Broodlings s přerušitelným Visceral Burst.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faze">
+    <div class="eyebrow">Průběh pullu</div>
+    <h2 class="section-title">Časová osa fightu</h2>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-time">0:00</div>
+        <div class="tl-body">
+          <h4>Pull</h4>
+          <p>Oba hadi tankováni současně, ihned začíná konstantní raid-wide Nature damage (Toxic Fumes).</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Main phase</div>
+        <div class="tl-body">
+          <h4>Venom economy</h4>
+          <p>Řešíte Vexhulovy adds a Vile Flood, zatímco Ithraz dává pravidelné Ravenous Feast soak okna na sundání Eternal Venom stacků.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">~100 energy</div>
+        <div class="tl-body">
+          <h4>Submerge</h4>
+          <p>Oba hadi se potopí a spustí kombinovaný útok, zanechají Noxious Slick louže — vyhněte se jim.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Repeat</div>
+        <div class="tl-body">
+          <h4>Opakování až do kill</h4>
+          <p>Snažte se sundat oba hady téměř zároveň, ať se minimalizuje okno Uncoiled Wrath.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="role">
+    <div class="eyebrow">Podle role</div>
+    <h2 class="section-title">Co sledovat za tanka, healera a DPS</h2>
+    <div class="roles">
+      <div class="role-card">
+        <div class="role-icon">Tank</div>
+        <h3>Tankování</h3>
+        <ul>
+          <li>Řešte positioning po Caustic Deluge, sledujte stacky Coiling Ichor.</li>
+          <li>Buďte připraveni vědomě "sníst" Ravenous Feast zásah při vysokém Eternal Venom stacku.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">Healer</div>
+        <h3>Healing</h3>
+        <ul>
+          <li>Konstantní raid-wide Nature damage celý fight (Toxic Fumes) — silný sustained/AoE healing.</li>
+          <li>Sledujte damage z Congealed Gore louží a Mythic absorb efekty.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">DPS</div>
+        <h3>Damage</h3>
+        <ul>
+          <li>Zabíjejte adds z Venomous Emergence rychle, uhýbejte Vile Flood a Corrosive Spit.</li>
+          <li>Koordinujte, kdo soakne který Ravenous Feast výbuch podle aktuálního stacku Eternal Venom — nikdy dvakrát/když už jste Feasted.</li>
+          <li>Doporučené složení: 2 tanci / 4 healeři / 14 DPS s důrazem na cleave (dva cíle najednou).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="obtiznosti">
+    <div class="eyebrow">Škálování obtížnosti</div>
+    <h2 class="section-title">Normal → Heroic → Mythic</h2>
+    <div class="table-scroll">
+      <table class="diff">
+        <thead><tr><th>Obtížnost</th><th>Co se mění</th></tr></thead>
+        <tbody>
+          <tr><td>Normal</td><td>Základní verze všech mechanik výše.</td></tr>
+          <tr><td>Heroic</td><td>Přidává Sanguine Storm (extra vystřelování gore globulí) a přísnější exekuci na Feast soaky.</td></tr>
+          <tr><td>Mythic</td><td>Přidává Rouse the Brood (přerušitelné Broodlings), smrt s Eternal Venom stackem po sobě zanechává hazardy, a celkově přísnější požadavky na damage/soak počty.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="disclaimer">
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Přímé fetche Wowheadu a dedikované stránky Icy Veins se nepodařilo strojově stáhnout (JS-rendered) — informace vychází z cachovaných výsledků vyhledávání a z Warcraft Wiki, takže čísla (yardy, přesný smrtící stack) berte s rezervou a zkontrolujte přímo na Wowheadu před pullem.
+    </div>
+  </section>
+
+  <section id="kviz">
+    <div class="eyebrow">Ověřte si znalosti</div>
+    <h2 class="section-title">Kvíz k mechanikám</h2>
+    <p class="section-lede">Šest otázek na hlavní mechaniky fightu. Vyberte odpověď — správná se zvýrazní zeleně, chybná červeně.</p>
+
+    <div class="quiz-list">
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 1</div>
+        <div class="quiz-q-title">Jak se sundává stack Eternal Venom?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">A</span><span class="opt-text">Sám po čase vyprchá</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">B</span><span class="opt-text">Dispelem healera</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">C</span><span class="opt-text">Zásahem od Ithrazova Ravenous Feast</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">D</span><span class="opt-text">Útěkem z arény</span></label>
+        </div>
+        <div class="quiz-explain">Správně: C — DoT sám nikdy nevyprchá, jediná cesta ven je vědomě soaknout Feast.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 2</div>
+        <div class="quiz-q-title">Co je potřeba udělat, když jste zasaženi Vile Flood?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Zůstat na místě a přečkat to</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Okamžitě odejít z kanálu</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Zaútočit na Ithraze</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Dispelovat efekt</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — zůstání v kanálu rychle nastackuje Eternal Venom až k smrti.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 3</div>
+        <div class="quiz-q-title">Co se stane, když Stone Breaker nezasáhne žádného hráče?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">A</span><span class="opt-text">Nic se nestane</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">B</span><span class="opt-text">Damage jde na celý raid</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">C</span><span class="opt-text">Ithraz se vyléčí</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">D</span><span class="opt-text">Spustí se Submerge</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — musí to někdo aktivně soaknout.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 4</div>
+        <div class="quiz-q-title">Co se stane, když jeden ze dvou hadů zemře dřív než druhý?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">A</span><span class="opt-text">Přeživší had permanentně získává +25 % damage každé 4 s (Uncoiled Wrath)</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">B</span><span class="opt-text">Přeživší had okamžitě zemře také</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">C</span><span class="opt-text">Fight automaticky skončí výhrou</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">D</span><span class="opt-text">Raid dostane bonusový cooldown</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — snažte se proto sundat oba hady blízko sebe v čase.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 5</div>
+        <div class="quiz-q-title">Co zanechává Submerge intermezzo na zemi?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Léčivé kruhy</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">B</span><span class="opt-text">Noxious Slick louže se slowem a damage</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">C</span><span class="opt-text">Bezpečné zóny</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">D</span><span class="opt-text">Extra Disgusting Fish</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — vyhněte se jim po zbytek fightu.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 6</div>
+        <div class="quiz-q-title">Co přidává Mythic obtížnost navíc?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Sanguine Storm</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">B</span><span class="opt-text">Rouse the Brood — přerušitelní Broodlings</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">C</span><span class="opt-text">Stone Breaker</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">D</span><span class="opt-text">Submerge intermezzo</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — zbylé možnosti jsou přítomné už od Normal/Heroic.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="zdroje">
+    <h4>Zdroje</h4>
+    <ul>
+      <li><a href="https://warcraft.wiki.gg/wiki/The_Twin_Fangs" target="_blank" rel="noopener">Warcraft Wiki — The Twin Fangs</a></li>
+      <li><a href="https://www.icy-veins.com/wow/venomous-abyss-raid-guide" target="_blank" rel="noopener">Icy Veins — The Venomous Abyss Raid Overview</a></li>
+      <li><a href="https://www.wowhead.com/guide/midnight/raids/venomous-abyss-twin-fangs-boss-strategy-abilities" target="_blank" rel="noopener">Wowhead — The Twin Fangs Boss Guide (doporučeno zkontrolovat přímo)</a></li>
+      <li><a href="https://www.method.gg/guides/the-venomous-abyss/the-twin-fangs-heroic" target="_blank" rel="noopener">Method.gg — The Twin Fangs Heroic Guide</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+</html>

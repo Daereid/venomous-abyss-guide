@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Lost Explorers</title>
+<style>
+  h1, h2, h3, h4, p, ul, ol, blockquote, figure { margin: 0; }
+
+  :root {
+    --bg: #eae3d0;
+    --bg-panel: #f5efde;
+    --bg-raised: #ffffff;
+    --ink: #201d18;
+    --ink-soft: #5b5546;
+    --ink-faint: #8a8271;
+    --line: #cdc3a6;
+    --line-strong: #b3a884;
+    --venom: #4a7a2e;
+    --venom-glow: #6f9a3f;
+    --venom-bg: #e3ecd3;
+    --accent-a: #a1791f;
+    --accent-a-bg: #f2e6cb;
+    --accent-b: #1f6f7a;
+    --accent-b-bg: #dcecee;
+    --accent-c: #2f5f9e;
+    --accent-c-bg: #dde8f5;
+    --accent-d: #6b3f8a;
+    --accent-d-bg: #ece1f0;
+    --mythic: #6b3fa0;
+    --mythic-bg: #ece1f5;
+    --warn-bg: #f6e6c8;
+    --warn-ink: #6b4c14;
+    --danger: #8c2f3a;
+    --danger-bg: #f2e0e0;
+    --shadow: rgba(40, 34, 20, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12140f;
+      --bg-panel: #1a1e14;
+      --bg-raised: #20261a;
+      --ink: #e9e5d5;
+      --ink-soft: #b1a891;
+      --ink-faint: #7d7663;
+      --line: #35392c;
+      --line-strong: #454b38;
+      --venom: #9ecf5f;
+      --venom-glow: #b7e07d;
+      --venom-bg: #253320;
+      --accent-a: #dba954;
+      --accent-a-bg: #332810;
+      --accent-b: #6fc4d1;
+      --accent-b-bg: #122b2e;
+      --accent-c: #8fb8e8;
+      --accent-c-bg: #16233a;
+      --accent-d: #b98fe0;
+      --accent-d-bg: #271c30;
+      --mythic: #b98fe0;
+      --mythic-bg: #281c35;
+      --warn-bg: #33290f;
+      --warn-ink: #e0bb6f;
+      --danger: #e07d84;
+      --danger-bg: #35201f;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12140f;
+    --bg-panel: #1a1e14;
+    --bg-raised: #20261a;
+    --ink: #e9e5d5;
+    --ink-soft: #b1a891;
+    --ink-faint: #7d7663;
+    --line: #35392c;
+    --line-strong: #454b38;
+    --venom: #9ecf5f;
+    --venom-glow: #b7e07d;
+    --venom-bg: #253320;
+    --accent-a: #dba954;
+    --accent-a-bg: #332810;
+    --accent-b: #6fc4d1;
+    --accent-b-bg: #122b2e;
+    --accent-c: #8fb8e8;
+    --accent-c-bg: #16233a;
+    --accent-d: #b98fe0;
+    --accent-d-bg: #271c30;
+    --mythic: #b98fe0;
+    --mythic-bg: #281c35;
+    --warn-bg: #33290f;
+    --warn-ink: #e0bb6f;
+    --danger: #e07d84;
+    --danger-bg: #35201f;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: Rockwell, "Sitka Text", "Iowan Old Style", Georgia, "Times New Roman", serif; text-wrap: balance; margin: 0; color: var(--ink); }
+  a { color: var(--venom); text-decoration-color: var(--line-strong); }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 96px; }
+  header.hero { border-bottom: 1px solid var(--line); padding: 40px 24px 28px; background: var(--bg-panel); }
+  .hero-inner { max-width: 920px; margin: 0 auto; }
+  .crumb { font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px; }
+  .crumb b { color: var(--accent-b); }
+  h1.title { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; }
+  .subtitle { margin-top: 8px; color: var(--ink-soft); font-size: 1.05rem; max-width: 62ch; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .meta-chip { border: 1px solid var(--line-strong); padding: 5px 12px; font-size: 0.75rem; letter-spacing: 0.03em; color: var(--ink-soft); background: var(--bg-raised); }
+  .meta-chip b { color: var(--ink); font-family: inherit; }
+
+  nav.jump { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  nav.jump .row { max-width: 920px; margin: 0 auto; display: flex; gap: 2px; padding: 0 24px; }
+  nav.jump a { flex: none; padding: 12px 14px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; }
+  nav.jump a:hover, nav.jump a:focus-visible { color: var(--ink); border-bottom-color: var(--venom-glow); }
+
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 52px; }
+  section:last-of-type { border-bottom: none; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+  h2.section-title { font-size: 1.6rem; margin-bottom: 6px; }
+  .section-lede { color: var(--ink-soft); max-width: 68ch; margin-top: 8px; }
+
+  .callout { margin-top: 22px; border: 1px solid var(--line-strong); background: var(--bg-panel); padding: 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+  .callout .mark { font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 1.3rem; color: var(--venom); }
+  .callout p { margin: 0; color: var(--ink); }
+  .callout .fine { color: var(--ink-faint); font-size: 0.85rem; margin-top: 6px; }
+  .callout.danger { border-color: var(--danger); background: var(--danger-bg); }
+  .callout.danger .mark { color: var(--danger); }
+
+  .groups { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+  @media (max-width: 720px) { .groups { grid-template-columns: 1fr; } }
+  .group-card { border: 1px solid var(--line-strong); background: var(--bg-raised); }
+  .group-head { padding: 16px 18px; border-bottom: 1px solid var(--line); }
+  .group-card.a .group-head { background: var(--accent-a-bg); }
+  .group-card.b .group-head { background: var(--accent-b-bg); }
+  .group-card.c .group-head { background: var(--accent-c-bg); }
+  .group-card.d .group-head { background: var(--accent-d-bg); }
+  .group-tag { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .group-card.a .group-tag { color: var(--accent-a); }
+  .group-card.b .group-tag { color: var(--accent-b); }
+  .group-card.c .group-tag { color: var(--accent-c); }
+  .group-card.d .group-tag { color: var(--accent-d); }
+  .group-head h3 { font-size: 1.25rem; margin-top: 4px; }
+  .group-head .desc { color: var(--ink-soft); font-size: 0.88rem; margin-top: 6px; }
+
+  .ability-list { padding: 6px 0; }
+  .ability { padding: 12px 18px; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+  .ability:last-child { border-bottom: none; }
+  .ability-name { font-weight: 600; font-size: 0.95rem; }
+  .group-card.a .ability-name { color: var(--accent-a); }
+  .group-card.b .ability-name { color: var(--accent-b); }
+  .group-card.c .ability-name { color: var(--accent-c); }
+  .group-card.d .ability-name { color: var(--accent-d); }
+  .ability-tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--line); padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
+  .ability-desc { color: var(--ink-soft); font-size: 0.87rem; }
+
+  .timeline { margin-top: 28px; display: flex; flex-direction: column; }
+  .tl-step { display: grid; grid-template-columns: 130px 1fr; gap: 18px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .tl-step:first-child { border-top: none; }
+  .tl-time { font-family: "SF Mono", Consolas, monospace; font-size: 0.8rem; color: var(--venom); padding-top: 2px; }
+  .tl-body h4 { font-family: inherit; font-size: 1rem; margin: 0 0 4px; color: var(--ink); }
+  .tl-body p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+  @media (max-width: 780px) { .roles { grid-template-columns: 1fr; } }
+  .role-card { border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 18px; }
+  .role-card .role-icon { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--venom); }
+  .role-card h3 { font-size: 1.1rem; margin-top: 6px; }
+  .role-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.89rem; }
+  .role-card li { margin-bottom: 8px; }
+
+  .table-scroll { overflow-x: auto; margin-top: 22px; }
+  table.diff { width: 100%; border-collapse: collapse; min-width: 640px; }
+  table.diff th, table.diff td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 0.88rem; vertical-align: top; }
+  table.diff th { font-family: Rockwell, Georgia, serif; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); border-bottom: 1px solid var(--line-strong); }
+  table.diff td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  table.diff tr:last-child td { border-bottom: none; }
+
+  .quiz-list { margin-top: 22px; }
+  .quiz-q { padding: 22px 0; border-top: 1px solid var(--line); }
+  .quiz-q:first-child { border-top: none; padding-top: 0; }
+  .quiz-q-num { font-family: "SF Mono", Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+  .quiz-q-title { font-size: 1.02rem; font-weight: 600; margin-bottom: 14px; }
+  .opt-list { display: grid; gap: 8px; }
+  .opt { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 10px 14px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .opt-input { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+  .opt-letter { font-family: "SF Mono", Consolas, monospace; font-weight: 700; font-size: 0.72rem; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center; color: var(--ink-faint); flex: none; }
+  .opt-text { font-size: 0.9rem; color: var(--ink-soft); }
+  .opt:hover { border-color: var(--ink-faint); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] { border-color: var(--venom); background: var(--venom-bg); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-letter { border-color: var(--venom); color: var(--venom); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-text { color: var(--ink); }
+  .opt:has(.opt-input:checked):not([data-correct="true"]) { border-color: var(--danger); background: var(--danger-bg); }
+  .quiz-explain { display: none; margin-top: 12px; padding: 10px 14px; border-left: 2px solid var(--venom); background: var(--bg-panel); font-size: 0.85rem; color: var(--ink-soft); }
+  .quiz-q:has(.opt-input:checked) .quiz-explain { display: block; }
+
+  .disclaimer { background: var(--warn-bg); border: 1px solid var(--line-strong); color: var(--warn-ink); padding: 16px 18px; font-size: 0.87rem; margin-top: 22px; }
+  footer { padding: 32px 0 8px; color: var(--ink-faint); font-size: 0.82rem; }
+  footer h4 { font-family: inherit; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  footer a { color: var(--ink-soft); }
+
+  :focus-visible { outline: 2px solid var(--venom-glow); outline-offset: 2px; }
+
+  .raid-nav { background: var(--bg-panel); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .raid-nav-row { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 24px; }
+  .raid-nav-home { flex: none; font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 0.8rem; color: var(--ink); text-decoration: none; white-space: nowrap; margin-right: 4px; }
+  .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
+  .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="crumb">The Venomous Abyss <b>→</b> Boss 3 <b>→</b> The Lost Explorers</div>
+    <h1 class="title">The Lost Explorers</h1>
+    <p class="subtitle">Kompletní strategie na tortollanskou radu ovládanou duchem Mor'zahi — Vaults of Atal'Utek. Sestaveno z Icy Veins, ExpCarry a Warcraft Wiki guidů k patchi 12.1.</p>
+    <div class="meta-row">
+      <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
+      <div class="meta-chip">Raid <b>The Venomous Abyss</b> · Midnight Season 2</div>
+      <div class="meta-chip">Boss <b>3 z 8</b></div>
+      <div class="meta-chip">Obtížnosti <b>LFR / Normal / Heroic / Mythic</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="raid-nav">
+  <div class="raid-nav-row">
+    <a href="index.html" class="raid-nav-home">☣ The Venomous Abyss</a>
+    <a href="nekzali.html" class="raid-pill">1 · Nek'zali</a>
+    <a href="entombed-sentinels.html" class="raid-pill">2 · Entombed Sentinels</a>
+    <a href="lost-explorers.html" class="raid-pill active">3 · Lost Explorers</a>
+    <a href="vashnik.html" class="raid-pill">4 · Vashnik</a>
+    <a href="sszorak.html" class="raid-pill">5 · Sszorak</a>
+    <a href="twin-fangs.html" class="raid-pill">6 · Twin Fangs</a>
+    <a href="coiled-altar.html" class="raid-pill">7 · Coiled Altar</a>
+    <a href="ulatek.html" class="raid-pill">8 · Ula'Tek</a>
+  </div>
+</div>
+
+<nav class="jump">
+  <div class="row">
+    <a href="#prehled">Přehled</a>
+    <a href="#schopnosti">Schopnosti</a>
+    <a href="#faze">Časová osa</a>
+    <a href="#role">Role</a>
+    <a href="#obtiznosti">Obtížnosti</a>
+    <a href="#kviz">Kvíz</a>
+    <a href="#zdroje">Zdroje</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="prehled">
+    <div class="eyebrow">Přehled encounteru</div>
+    <h2 class="section-title">Tři tortollani, jeden vetřelec</h2>
+    <p class="section-lede">Skupina tortollanských průzkumníků, posedlá duchem <b>Mor'zahi</b>, byla nalezena poblíž sarkofágu prastarého Soulcoilera. Jde o council fight se třemi nezávislými cíli — Scrollsage Iku, First Mate Nama a Trader Gebbo — nad kterými dohlíží nehmotný čtvrtý "boss" Mor'zahi, který periodicky posedne jednoho z nich a udělá z něj nebezpečnou "loutku" s vylepšenými schopnostmi.</p>
+
+    <div class="callout">
+      <div class="mark">§1</div>
+      <div>
+        <p><b>Nestlačujte všechny tři k sobě.</b> Pokud jsou tři bossové namačkáni u sebe, získávají silný defenzivní buff (~99 % redukce damage). Udržujte dva u sebe pro cleave a jednoho lehce odděleně, nebo stabilní trojúhelník.</p>
+      </div>
+    </div>
+
+    <div class="callout danger">
+      <div class="mark">§2</div>
+      <div>
+        <p><b>Fish-feed mechanika.</b> Mor'zahi nabíjí energii k Empower castu. Než se dobije (~90–95 %, nejisté), musí raid "nakrmit" právě posednutého explorera <i>Disgusting Fish</i> (z bedny Trader Gebba) — to zlomí kontrolu, spustí jednorázovou ultimátní schopnost daného explorera a natrvalo ho vyřadí z dalšího posednutí. Zmeškání okna spouští wipe-mechaniku (Final Ascension). Doporučené pořadí ultimátů: Gebbo → Nama → Iku.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schopnosti">
+    <div class="eyebrow">Mechaniky fightu</div>
+    <h2 class="section-title">Schopnosti trojice a Mor'zahi</h2>
+    <p class="section-lede">Každý explorer má vlastní kit — a jednu mocnou ultimátní schopnost odemčenou nakrmením rybou.</p>
+
+    <div class="groups">
+      <div class="group-card a">
+        <div class="group-head">
+          <div class="group-tag">Trader Gebbo</div>
+          <h3>Bedny a suroviny</h3>
+          <div class="desc">Zdroj Disgusting Fish, ale i stackujícího bleedu.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Throw Junk</div>
+            <div class="ability-desc">Rozptýlí bedny po zemi — jedna obsahuje Disgusting Fish. Nesebrané bedny způsobují stackující bleed (Splinters).</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Explosive Surprise <span class="ability-tag">Ultimát</span></div>
+            <div class="ability-desc">Po nakrmení spawne odrážející se "houby" — bomb-marknutí hráči je musí použít k úniku, než vybuchnou.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card b">
+        <div class="group-head">
+          <div class="group-tag">First Mate Nama</div>
+          <h3>Fyzická hrozba</h3>
+          <div class="desc">Melee tlak a stackující tank debuff.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Shell Spin <span class="ability-tag">Bait</span></div>
+            <div class="ability-desc">Vystřelí tři želví krunýře v kuželu na náhodného melee hráče — zásah = 4s stun. Baitujte směrem k okraji plošiny, mimo raid.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Steady Strikes <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Stackující tank debuff — swapujte proaktivně, nečekejte na nebezpečný stack.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Mighty Thud <span class="ability-tag">Ultimát</span></div>
+            <div class="ability-desc">Po nakrmení skočí na tři označené hráče, dopad rozdělí physical damage.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card c">
+        <div class="group-head">
+          <div class="group-tag">Scrollsage Iku</div>
+          <h3>Frost/fire caster</h3>
+          <div class="desc">Interrupt rotace a spreading.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Icebound Flames <span class="ability-tag">Interrupt</span></div>
+            <div class="ability-desc">Vysoká priorita interruptu — přidělte 2–3 hráče do rotace, nespoléhejte na reaktivní přerušení.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Blink Nova</div>
+            <div class="ability-desc">Teleportuje se k označenému ranged hráči, damage klesá se vzdáleností — spreadujte se.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Shredding Shards <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Stackující vulnerability/tank debuff.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Frostfire Volley <span class="ability-tag">Ultimát</span></div>
+            <div class="ability-desc">Po nakrmení odpálí frost+fire střely na několik hráčů — musí se spreadovat, jinak hrozí raid-wide Elemental Explosion.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card d">
+        <div class="group-head">
+          <div class="group-tag">Mor'zahi</div>
+          <h3>Nehmotný kontrolor</h3>
+          <div class="desc">Nikdy ho nevidíte přímo, ale řídí celý fight.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Dark Whispers</div>
+            <div class="ability-desc">Posedne/dominuje jednoho explorera, čímž mu dá vylepšený kit.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Malevolent Presence</div>
+            <div class="ability-desc">Konstantní ambientní shadow damage aura na celý raid.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Evil Eyes</div>
+            <div class="ability-desc">Nebezpečné shadow zóny na zemi — ranged by měl využívat okraj plošiny.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Final Ascension <span class="ability-tag">Wipe check</span></div>
+            <div class="ability-desc">Kanál způsobující wipe, pokud raid nenakrmí rybou včas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faze">
+    <div class="eyebrow">Průběh pullu</div>
+    <h2 class="section-title">Časová osa fightu</h2>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-time">0:00</div>
+        <div class="tl-body">
+          <h4>Pull a positioning</h4>
+          <p>Ihned zafixujte pozice Namy, Iku a Gebba — Namin frontální kužel natočte mimo raid.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Cyklus</div>
+        <div class="tl-body">
+          <h4>Possession → fish-feed → ultimát</h4>
+          <p>Mor'zahi posedne jednoho explorera, energie roste. Raid sebere rybu z beden a nakrmí ho, čímž se spustí jeho jednorázový ultimát. Opakuje se cca třikrát, dokud všichni tři nemají svůj ultimát za sebou.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Průběžně</div>
+        <div class="tl-body">
+          <h4>Interrupt a add balance</h4>
+          <p>Iku běží na nepřerušenou interrupt rotaci, oba bossové se drží u sebe pro cleave (bez toho, aby se HP jednoho odchýlilo příliš daleko).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="role">
+    <div class="eyebrow">Podle role</div>
+    <h2 class="section-title">Co sledovat za tanka, healera a DPS</h2>
+    <div class="roles">
+      <div class="role-card">
+        <div class="role-icon">Tank</div>
+        <h3>Tankování</h3>
+        <ul>
+          <li>Zafixujte pozice hned po pullu, Namin kužel mimo raid.</li>
+          <li>Swapujte proaktivně na Steady Strikes / Shredding Shards.</li>
+          <li>Nedrž bossy příliš namačkané u sebe.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">Healer</div>
+        <h3>Healing</h3>
+        <ul>
+          <li>Konstantní damage z Malevolent Presence/Evil Eyes celý fight.</li>
+          <li>Šetřete cooldowny na okna ultimátů (Frostfire Volley, Mighty Thud).</li>
+          <li>Sledujte sběratele rybí bedny, jsou mimo pozici a zranitelní.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">DPS</div>
+        <h3>Damage</h3>
+        <ul>
+          <li>Běžte nepřerušenou interrupt rotaci na Icebound Flames.</li>
+          <li>Ryby berte jen když jste určeni, nespěchejte to.</li>
+          <li>Drž oba bossy cleavnuté u sebe, hlaste velký rozdíl v HP.</li>
+          <li>Po vlastním ultimátu odejděte z ground efektů, ať nespustíte Elemental Explosion.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="obtiznosti">
+    <div class="eyebrow">Škálování obtížnosti</div>
+    <h2 class="section-title">Normal → Heroic → Mythic</h2>
+    <div class="table-scroll">
+      <table class="diff">
+        <thead><tr><th>Obtížnost</th><th>Co se mění</th></tr></thead>
+        <tbody>
+          <tr><td>Normal</td><td>Základní verze všeho výše, velkorysý timing a damage.</td></tr>
+          <tr><td>Heroic</td><td>Přísnější interrupt rotace (méně prostoru pro chybu), sladěnější pohyb během ultimátů, vyšší damage.</td></tr>
+          <tr><td>Mythic</td><td>Jeden zdroj (Icy Veins) uvádí novou mechaniku "Relic Rupture" — nesebrané bedny Gebba po ~25 s vybuchnou a přidají raid-wide bleed. Druhý zdroj (ExpCarry) tvrdí, že Mythic ladění nebylo v době psaní finální a čekejte hlavně obecné utažení positioningu/damage. Berte "Relic Rupture" jako nepotvrzené.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="disclaimer">
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. U tohoto bosse se zdroje rozchází i v detailech Mythic obtížnosti a přesném prahu energie pro fish-feed okno (90–95 % je z jediného zdroje). Před pullem doporučujeme zkontrolovat aktuální verzi guide, hlavně na Mythicu.
+    </div>
+  </section>
+
+  <section id="kviz">
+    <div class="eyebrow">Ověřte si znalosti</div>
+    <h2 class="section-title">Kvíz k mechanikám</h2>
+    <p class="section-lede">Šest otázek na hlavní mechaniky fightu. Vyberte odpověď — správná se zvýrazní zeleně, chybná červeně.</p>
+
+    <div class="quiz-list">
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 1</div>
+        <div class="quiz-q-title">Co musí raid udělat, než Mor'zahi dokončí Empower cast na posednutém explorerovi?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">A</span><span class="opt-text">Utéct z arény</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">B</span><span class="opt-text">Nakrmit ho Disgusting Fish z bedny Trader Gebba</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">C</span><span class="opt-text">Zabít Mor'zahi přímo</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">D</span><span class="opt-text">Dispelovat celý raid</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — nakrmení zlomí kontrolu a spustí jednorázový ultimát.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 2</div>
+        <div class="quiz-q-title">Co hrozí, když se všichni tři explořeři stlačí příliš blízko k sobě?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Získají silný defenzivní buff (~99 % redukce damage)</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Okamžitě zemřou</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Ztratí své ultimáty</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Spustí se automaticky fish-feed</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — udržujte stabilní trojúhelník, ne úplné stlačení.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 3</div>
+        <div class="quiz-q-title">Jak by se měl tank/raid vypořádat s Shell Spin od First Mate Namy?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">A</span><span class="opt-text">Baitovat ho k okraji plošiny, mimo raid</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">B</span><span class="opt-text">Postavit se doprostřed raidu</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">C</span><span class="opt-text">Dispelovat ho healerem</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">D</span><span class="opt-text">Ignorovat, nedává damage</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — zásah způsobí 4s stun, takže se musí baitovat mimo raid.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 4</div>
+        <div class="quiz-q-title">Jakou schopnost Scrollsage Iku je potřeba nepřetržitě přerušovat?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">A</span><span class="opt-text">Blink Nova</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">B</span><span class="opt-text">Icebound Flames</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">C</span><span class="opt-text">Shredding Shards</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">D</span><span class="opt-text">Frostfire Volley</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — vyžaduje vyhrazenou rotaci 2–3 hráčů, ne reaktivní interrupty.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 5</div>
+        <div class="quiz-q-title">V jakém doporučeném pořadí by měl raid nechat spustit ultimáty (podle jednoho ze zdrojů)?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Iku → Nama → Gebbo</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">B</span><span class="opt-text">Gebbo → Nama → Iku</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">C</span><span class="opt-text">Nama → Gebbo → Iku</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">D</span><span class="opt-text">Pořadí nehraje roli</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — Gebbo → Nama → Iku je doporučené pořadí podle zdrojů.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 6</div>
+        <div class="quiz-q-title">Co je potřeba udělat po zásahu Frostfire Volley, aby se nespustila Elemental Explosion?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Zůstat stát na místě</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">B</span><span class="opt-text">Rozestoupit se a odejít z vlastních frost/fire ground efektů</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">C</span><span class="opt-text">Seskupit se do jednoho místa</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">D</span><span class="opt-text">Zaútočit na Mor'zahi</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — překryv frost a fire ground patchů spustí raid-wide explozi.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="zdroje">
+    <h4>Zdroje</h4>
+    <ul>
+      <li><a href="https://www.icy-veins.com/wow/lost-explorers-raid-guide" target="_blank" rel="noopener">Icy Veins — Lost Explorers Raid Guide</a></li>
+      <li><a href="https://expcarry.com/lost-explorers-boss-guide" target="_blank" rel="noopener">ExpCarry — Lost Explorers Boss Guide</a></li>
+      <li><a href="https://warcraft.wiki.gg/wiki/The_Lost_Explorers" target="_blank" rel="noopener">Warcraft Wiki — The Lost Explorers</a></li>
+      <li><a href="https://www.wowhead.com/guide/midnight/raids/venomous-abyss-lost-explorers-boss-strategy-abilities" target="_blank" rel="noopener">Wowhead — Lost Explorers Boss Guide (doporučeno zkontrolovat přímo)</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+</html>

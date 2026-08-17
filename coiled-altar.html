@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Coiled Altar</title>
+<style>
+  h1, h2, h3, h4, p, ul, ol, blockquote, figure { margin: 0; }
+
+  :root {
+    --bg: #eae3d0;
+    --bg-panel: #f5efde;
+    --bg-raised: #ffffff;
+    --ink: #201d18;
+    --ink-soft: #5b5546;
+    --ink-faint: #8a8271;
+    --line: #cdc3a6;
+    --line-strong: #b3a884;
+    --venom: #4a7a2e;
+    --venom-glow: #6f9a3f;
+    --venom-bg: #e3ecd3;
+    --accent-a: #5a7a2e;
+    --accent-a-bg: #e6ecd3;
+    --accent-b: #3d3d8a;
+    --accent-b-bg: #e2e2f2;
+    --accent-c: #a1791f;
+    --accent-c-bg: #f2e6cb;
+    --mythic: #6b3fa0;
+    --mythic-bg: #ece1f5;
+    --warn-bg: #f6e6c8;
+    --warn-ink: #6b4c14;
+    --danger: #8c2f3a;
+    --danger-bg: #f2e0e0;
+    --shadow: rgba(40, 34, 20, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12140f;
+      --bg-panel: #1a1e14;
+      --bg-raised: #20261a;
+      --ink: #e9e5d5;
+      --ink-soft: #b1a891;
+      --ink-faint: #7d7663;
+      --line: #35392c;
+      --line-strong: #454b38;
+      --venom: #9ecf5f;
+      --venom-glow: #b7e07d;
+      --venom-bg: #253320;
+      --accent-a: #a3cf6a;
+      --accent-a-bg: #263312;
+      --accent-b: #9494e0;
+      --accent-b-bg: #1e1e33;
+      --accent-c: #dba954;
+      --accent-c-bg: #332810;
+      --mythic: #b98fe0;
+      --mythic-bg: #281c35;
+      --warn-bg: #33290f;
+      --warn-ink: #e0bb6f;
+      --danger: #e07d84;
+      --danger-bg: #35201f;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12140f;
+    --bg-panel: #1a1e14;
+    --bg-raised: #20261a;
+    --ink: #e9e5d5;
+    --ink-soft: #b1a891;
+    --ink-faint: #7d7663;
+    --line: #35392c;
+    --line-strong: #454b38;
+    --venom: #9ecf5f;
+    --venom-glow: #b7e07d;
+    --venom-bg: #253320;
+    --accent-a: #a3cf6a;
+    --accent-a-bg: #263312;
+    --accent-b: #9494e0;
+    --accent-b-bg: #1e1e33;
+    --accent-c: #dba954;
+    --accent-c-bg: #332810;
+    --mythic: #b98fe0;
+    --mythic-bg: #281c35;
+    --warn-bg: #33290f;
+    --warn-ink: #e0bb6f;
+    --danger: #e07d84;
+    --danger-bg: #35201f;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: Rockwell, "Sitka Text", "Iowan Old Style", Georgia, "Times New Roman", serif; text-wrap: balance; margin: 0; color: var(--ink); }
+  a { color: var(--venom); text-decoration-color: var(--line-strong); }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 96px; }
+  header.hero { border-bottom: 1px solid var(--line); padding: 40px 24px 28px; background: var(--bg-panel); }
+  .hero-inner { max-width: 920px; margin: 0 auto; }
+  .crumb { font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px; }
+  .crumb b { color: var(--accent-c); }
+  h1.title { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; }
+  .subtitle { margin-top: 8px; color: var(--ink-soft); font-size: 1.05rem; max-width: 62ch; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .meta-chip { border: 1px solid var(--line-strong); padding: 5px 12px; font-size: 0.75rem; letter-spacing: 0.03em; color: var(--ink-soft); background: var(--bg-raised); }
+  .meta-chip b { color: var(--ink); font-family: inherit; }
+
+  nav.jump { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  nav.jump .row { max-width: 920px; margin: 0 auto; display: flex; gap: 2px; padding: 0 24px; }
+  nav.jump a { flex: none; padding: 12px 14px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; }
+  nav.jump a:hover, nav.jump a:focus-visible { color: var(--ink); border-bottom-color: var(--venom-glow); }
+
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 52px; }
+  section:last-of-type { border-bottom: none; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+  h2.section-title { font-size: 1.6rem; margin-bottom: 6px; }
+  .section-lede { color: var(--ink-soft); max-width: 68ch; margin-top: 8px; }
+
+  .callout { margin-top: 22px; border: 1px solid var(--line-strong); background: var(--bg-panel); padding: 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+  .callout .mark { font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 1.3rem; color: var(--venom); }
+  .callout p { margin: 0; color: var(--ink); }
+  .callout .fine { color: var(--ink-faint); font-size: 0.85rem; margin-top: 6px; }
+  .callout.danger { border-color: var(--danger); background: var(--danger-bg); }
+  .callout.danger .mark { color: var(--danger); }
+
+  .groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; }
+  @media (max-width: 900px) { .groups { grid-template-columns: 1fr; } }
+  .group-card { border: 1px solid var(--line-strong); background: var(--bg-raised); }
+  .group-head { padding: 16px 18px; border-bottom: 1px solid var(--line); }
+  .group-card.a .group-head { background: var(--accent-a-bg); }
+  .group-card.b .group-head { background: var(--accent-b-bg); }
+  .group-card.c .group-head { background: var(--accent-c-bg); }
+  .group-tag { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .group-card.a .group-tag { color: var(--accent-a); }
+  .group-card.b .group-tag { color: var(--accent-b); }
+  .group-card.c .group-tag { color: var(--accent-c); }
+  .group-head h3 { font-size: 1.15rem; margin-top: 4px; }
+  .group-head .desc { color: var(--ink-soft); font-size: 0.86rem; margin-top: 6px; }
+
+  .ability-list { padding: 6px 0; }
+  .ability { padding: 12px 18px; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+  .ability:last-child { border-bottom: none; }
+  .ability-name { font-weight: 600; font-size: 0.93rem; }
+  .group-card.a .ability-name { color: var(--accent-a); }
+  .group-card.b .ability-name { color: var(--accent-b); }
+  .group-card.c .ability-name { color: var(--accent-c); }
+  .ability-tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--line); padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
+  .ability-desc { color: var(--ink-soft); font-size: 0.86rem; }
+
+  .timeline { margin-top: 28px; display: flex; flex-direction: column; }
+  .tl-step { display: grid; grid-template-columns: 130px 1fr; gap: 18px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .tl-step:first-child { border-top: none; }
+  .tl-time { font-family: "SF Mono", Consolas, monospace; font-size: 0.8rem; color: var(--venom); padding-top: 2px; }
+  .tl-body h4 { font-family: inherit; font-size: 1rem; margin: 0 0 4px; color: var(--ink); }
+  .tl-body p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+  @media (max-width: 780px) { .roles { grid-template-columns: 1fr; } }
+  .role-card { border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 18px; }
+  .role-card .role-icon { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--venom); }
+  .role-card h3 { font-size: 1.1rem; margin-top: 6px; }
+  .role-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.89rem; }
+  .role-card li { margin-bottom: 8px; }
+
+  .table-scroll { overflow-x: auto; margin-top: 22px; }
+  table.diff { width: 100%; border-collapse: collapse; min-width: 640px; }
+  table.diff th, table.diff td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 0.88rem; vertical-align: top; }
+  table.diff th { font-family: Rockwell, Georgia, serif; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); border-bottom: 1px solid var(--line-strong); }
+  table.diff td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  table.diff tr:last-child td { border-bottom: none; }
+
+  .quiz-list { margin-top: 22px; }
+  .quiz-q { padding: 22px 0; border-top: 1px solid var(--line); }
+  .quiz-q:first-child { border-top: none; padding-top: 0; }
+  .quiz-q-num { font-family: "SF Mono", Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+  .quiz-q-title { font-size: 1.02rem; font-weight: 600; margin-bottom: 14px; }
+  .opt-list { display: grid; gap: 8px; }
+  .opt { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 10px 14px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .opt-input { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+  .opt-letter { font-family: "SF Mono", Consolas, monospace; font-weight: 700; font-size: 0.72rem; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center; color: var(--ink-faint); flex: none; }
+  .opt-text { font-size: 0.9rem; color: var(--ink-soft); }
+  .opt:hover { border-color: var(--ink-faint); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] { border-color: var(--venom); background: var(--venom-bg); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-letter { border-color: var(--venom); color: var(--venom); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-text { color: var(--ink); }
+  .opt:has(.opt-input:checked):not([data-correct="true"]) { border-color: var(--danger); background: var(--danger-bg); }
+  .quiz-explain { display: none; margin-top: 12px; padding: 10px 14px; border-left: 2px solid var(--venom); background: var(--bg-panel); font-size: 0.85rem; color: var(--ink-soft); }
+  .quiz-q:has(.opt-input:checked) .quiz-explain { display: block; }
+
+  .disclaimer { background: var(--warn-bg); border: 1px solid var(--line-strong); color: var(--warn-ink); padding: 16px 18px; font-size: 0.87rem; margin-top: 22px; }
+  footer { padding: 32px 0 8px; color: var(--ink-faint); font-size: 0.82rem; }
+  footer h4 { font-family: inherit; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  footer a { color: var(--ink-soft); }
+
+  :focus-visible { outline: 2px solid var(--venom-glow); outline-offset: 2px; }
+
+  .raid-nav { background: var(--bg-panel); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .raid-nav-row { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 24px; }
+  .raid-nav-home { flex: none; font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 0.8rem; color: var(--ink); text-decoration: none; white-space: nowrap; margin-right: 4px; }
+  .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
+  .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="crumb">The Venomous Abyss <b>→</b> Boss 7 <b>→</b> The Coiled Altar</div>
+    <h1 class="title">The Coiled Altar</h1>
+    <p class="subtitle">Kompletní strategie na rituál Zul'jana a Hex Lorda Malacrasse — tři fighty slité v jeden, těsně před finálním bossem. Sestaveno z Icy Veins a Warcraft Wiki guidů k patchi 12.1.</p>
+    <div class="meta-row">
+      <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
+      <div class="meta-chip">Raid <b>The Venomous Abyss</b> · Midnight Season 2</div>
+      <div class="meta-chip">Boss <b>7 z 8</b></div>
+      <div class="meta-chip">Obtížnosti <b>LFR / Normal / Heroic / Mythic</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="raid-nav">
+  <div class="raid-nav-row">
+    <a href="index.html" class="raid-nav-home">☣ The Venomous Abyss</a>
+    <a href="nekzali.html" class="raid-pill">1 · Nek'zali</a>
+    <a href="entombed-sentinels.html" class="raid-pill">2 · Entombed Sentinels</a>
+    <a href="lost-explorers.html" class="raid-pill">3 · Lost Explorers</a>
+    <a href="vashnik.html" class="raid-pill">4 · Vashnik</a>
+    <a href="sszorak.html" class="raid-pill">5 · Sszorak</a>
+    <a href="twin-fangs.html" class="raid-pill">6 · Twin Fangs</a>
+    <a href="coiled-altar.html" class="raid-pill active">7 · Coiled Altar</a>
+    <a href="ulatek.html" class="raid-pill">8 · Ula'Tek</a>
+  </div>
+</div>
+
+<nav class="jump">
+  <div class="row">
+    <a href="#prehled">Přehled</a>
+    <a href="#schopnosti">Schopnosti</a>
+    <a href="#faze">Časová osa</a>
+    <a href="#role">Role</a>
+    <a href="#obtiznosti">Obtížnosti</a>
+    <a href="#kviz">Kvíz</a>
+    <a href="#zdroje">Zdroje</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="prehled">
+    <div class="eyebrow">Přehled encounteru</div>
+    <h2 class="section-title">Rituál dvou vyzyvatelů</h2>
+    <p class="section-lede">Zul'jan a Hex Lord Malacrass provádí u Altaru společný rituál, aby uvolnili Ula'tek — z pomsty i za slíbenou odměnu proti Amani. Mechanicky jde o <b>tři fighty slité v jeden</b>: nejdřív samotný Zul'jan (jed/melee), po jeho smrti samotný Malacrass (stín/posednutí), a nakonec se oba vrátí společně ve finální fázi.</p>
+
+    <div class="callout danger">
+      <div class="mark">§1</div>
+      <div>
+        <p><b>Soulbind trest ve Fázi 3.</b> Když se oba bossové vrátí společně, nechat jednoho žít příliš dlouho po smrti druhého uděluje přeživšímu <b>+500 % rychlost útoku a damage</b> — to prakticky okamžitě ukončí pokus. HP obou bossů musí ve Fázi 3 klesat vyrovnaně/společně.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schopnosti">
+    <div class="eyebrow">Mechaniky podle fáze</div>
+    <h2 class="section-title">Schopnosti Zul'jana, Malacrasse a spojené fáze</h2>
+    <p class="section-lede">Fight se řeší postupně — nejdřív jeden boss, pak druhý, pak oba společně.</p>
+
+    <div class="groups">
+      <div class="group-card a">
+        <div class="group-head">
+          <div class="group-tag">Fáze 1 · Zul'jan</div>
+          <h3>Jed a orby</h3>
+          <div class="desc">Sběr venom orbů a jejich odpal přes Sever.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Fangs of the Coiled Altar</div>
+            <div class="ability-desc">Opakující se raid-wide jedový damage, aplikuje Twinfang Toxin na tanky.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Toxic Deluge</div>
+            <div class="ability-desc">Spawnuje zelené jedové kruhy/louže, po kterých zůstávají sběratelné venom orby.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Sever <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Frontální kužel na tanka — natočte ho přes nasbírané orby, aby se zničily.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Guillotine</div>
+            <div class="ability-desc">Vržená sekera musí zasáhnout ≥5 hráčů. Na Heroic přidává stackující damage-taken debuff.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Axegrinder</div>
+            <div class="ability-desc">Pojízdný rotující sekerový hazard, těžký damage při kontaktu.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card b">
+        <div class="group-head">
+          <div class="group-tag">Fáze 2 · Malacrass</div>
+          <h3>Stín a posednutí</h3>
+          <div class="desc">Ghost adds a sběr duchovních fragmentů.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Dreadmarch</div>
+            <div class="ability-desc">Posedne/mind-controluje hráče, dá absorb štít a donutí je kráčet k okraji plošiny a skočit dolů.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Unnerving Fixation <span class="ability-tag">"Weeping Angel"</span></div>
+            <div class="ability-desc">Duchovní adds postupují na hráče, pokud na ně nekoukáte.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Soul Sever <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Frontální útok na tanka, vyžaduje následný sběr duchovních fragmentů.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Gloombomb</div>
+            <div class="ability-desc">Exploze vyžadující rozestup + sběr fragmentů.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Eternal Nightfall</div>
+            <div class="ability-desc">Cast vyžadující rozbití štítu/interrupt, jinak těžký pokračující shadow damage.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card c">
+        <div class="group-head">
+          <div class="group-tag">Intermezzo &amp; Fáze 3</div>
+          <h3>Coiled Union</h3>
+          <div class="desc">Oba bossové společně, kombinovaný kit.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Intermezzo — soak fragmentů</div>
+            <div class="ability-desc">Okno amplifikace damage; raid musí zachytit/soaknout essence fragmenty. Spirit Shield chrání adds, dokud je nenaruší Gloombomb.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Coiled Union <span class="ability-tag">P3</span></div>
+            <div class="ability-desc">Kombinuje kit Fáze 1 + Fáze 2. Platí soulbind trest (§1) — udržujte HP obou bossů vyrovnané.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faze">
+    <div class="eyebrow">Průběh pullu</div>
+    <h2 class="section-title">Časová osa fightu</h2>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-time">Fáze 1</div>
+        <div class="tl-body">
+          <h4>Zul'jan</h4>
+          <p>Sbírejte venom orby a naveďte na ně Sever. Řešte Guillotine (5+ hráčů) a Axegrindery.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Zul'jan padá</div>
+        <div class="tl-body">
+          <h4>Přechod na Malacrasse</h4>
+          <p>Umístění hazardů z Fáze 1 přímo ovlivňuje, jak náročná bude Fáze 2 — dávejte pozor, kam je pouštíte.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Fáze 2</div>
+        <div class="tl-body">
+          <h4>Malacrass</h4>
+          <p>Řešte Dreadmarch posednutí, dívejte se na Unnerving Fixation manifestace, sbírejte fragmenty po Soul Sever/Gloombomb.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Intermezzo</div>
+        <div class="tl-body">
+          <h4>Soak fragmentů</h4>
+          <p>Damage-amplifikační okno, raid soakuje fragmenty; Spirit Shield na adds se dá narušit jen Gloombombem.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Fáze 3</div>
+        <div class="tl-body">
+          <h4>Coiled Union</h4>
+          <p>Oba bossové bojují společně — udržujte jejich HP vyrovnané, abyste se vyhnuli soulbind trestu (§1).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="role">
+    <div class="eyebrow">Podle role</div>
+    <h2 class="section-title">Co sledovat za tanka, healera a DPS</h2>
+    <div class="roles">
+      <div class="role-card">
+        <div class="role-icon">Tank</div>
+        <h3>Tankování</h3>
+        <ul>
+          <li>Naveďte Sever/Soul Sever přes orby/manifestace, swapujte po každém castu.</li>
+          <li>Pomozte soaknout fragmenty v intermezzu.</li>
+          <li>Ve Fázi 3 udržujte HP obou bossů vyrovnané.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">Healer</div>
+        <h3>Healing</h3>
+        <ul>
+          <li>Připravte se na skoky damage, když vybuchne víc venom orbů najednou.</li>
+          <li>Rotujte cooldowny na intermission soaky.</li>
+          <li>Dispelujte Venomfang co nejrychleji.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">DPS</div>
+        <h3>Damage</h3>
+        <ul>
+          <li>Určete mobilní hráče na sběr/navádění venom orbů do Severova kuželu.</li>
+          <li>Interruptujte a prioritně zabíjejte Spiritcackle (Heroic+).</li>
+          <li>Ve Fázi 3 cleavujte oba bossy vyrovnaně.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="obtiznosti">
+    <div class="eyebrow">Škálování obtížnosti</div>
+    <h2 class="section-title">Normal → Heroic → Mythic</h2>
+    <div class="table-scroll">
+      <table class="diff">
+        <thead><tr><th>Obtížnost</th><th>Co se mění</th></tr></thead>
+        <tbody>
+          <tr><td>Normal</td><td>Základní kit napříč všemi třemi fázemi.</td></tr>
+          <tr><td>Heroic</td><td>Guillotine aplikuje trvalý stackující damage-taken debuff, Venomfang se stává stackujícím DoT.</td></tr>
+          <tr><td>Mythic</td><td>Přidává Virulent Cyst (nekonečně spawnuje další orby) a Virulent Mutation orby (kontinuální raid damage), Tainted Blood prodlužuje cooldown sběračů venomu, Axegrindery nikdy nedespawnou, Unnerving Fixation manifestace vidí jen postižení hráči, Malevolent Resonance poškozuje při kontaktu s duchem.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="disclaimer">
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Zdroje se lehce rozchází v přesném počtu fází (Icy Veins implikuje 4 bloky, Warcraft Wiki mluví o "třech stádiích" a slučuje intermezzo do fáze) a v tom, zda Spirit Shield/Malevolent Resonance platí už na Heroic nebo jen na Mythic. Před pullem doporučujeme zkontrolovat aktuální verzi guide.
+    </div>
+  </section>
+
+  <section id="kviz">
+    <div class="eyebrow">Ověřte si znalosti</div>
+    <h2 class="section-title">Kvíz k mechanikám</h2>
+    <p class="section-lede">Šest otázek na hlavní mechaniky fightu. Vyberte odpověď — správná se zvýrazní zeleně, chybná červeně.</p>
+
+    <div class="quiz-list">
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 1</div>
+        <div class="quiz-q-title">Co musí tank udělat s nasbíranými venom orby ve Fázi 1?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">A</span><span class="opt-text">Ignorovat je</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">B</span><span class="opt-text">Natočit na ně Sever, aby se zničily</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">C</span><span class="opt-text">Sesbírat je do vlastního inventáře</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">D</span><span class="opt-text">Nechat je dojít k Malacrassovi</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — orby se sbírají z Toxic Deluge louží a ničí Severovým kuželem.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 2</div>
+        <div class="quiz-q-title">Co se stane, když Guillotine nezasáhne alespoň 5 hráčů?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Nic, mechanika se ignoruje</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Mechanika není splněna — je nutné se přeskupit tak, aby zasáhla dost hráčů</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Zul'jan se okamžitě uzdraví</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Spustí se Fáze 3</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — sekera musí zasáhnout alespoň 5 hráčů, jinak mechanika neproběhne správně.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 3</div>
+        <div class="quiz-q-title">Co se stane, pokud se nedíváte na manifestaci Unnerving Fixation?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">A</span><span class="opt-text">Postupuje na vás blíž (podobně jako "Weeping Angel")</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">B</span><span class="opt-text">Zmizí</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">C</span><span class="opt-text">Uzdraví Malacrasse</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">D</span><span class="opt-text">Automaticky zemře</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — musíte na ni koukat, jinak se přibližuje.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 4</div>
+        <div class="quiz-q-title">Co je potřeba udělat, aby se prolomil Spirit Shield na intermission adds?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">A</span><span class="opt-text">Ignorovat štít, sám zmizí</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">B</span><span class="opt-text">Zasáhnout je Gloombombem</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">C</span><span class="opt-text">Dispelovat ho healerem</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">D</span><span class="opt-text">Nechat je dojít k Zul'janovi</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — Gloombomb je jediný způsob, jak štít narušit.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 5</div>
+        <div class="quiz-q-title">Co se stane ve Fázi 3, pokud jeden boss zůstane žít příliš dlouho po smrti druhého?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Nic, oba mají oddělené HP poolы</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">B</span><span class="opt-text">Přeživší dostane +500 % rychlost útoku a damage — prakticky wipe</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">C</span><span class="opt-text">Přeživší automaticky zemře taky</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">D</span><span class="opt-text">Spustí se bonusové intermezzo</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — proto je nutné udržovat HP obou bossů vyrovnané.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 6</div>
+        <div class="quiz-q-title">Co přidává Mythic obtížnost navíc?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Guillotine stackující debuff</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">B</span><span class="opt-text">Virulent Cyst — nekonečně spawnující orby</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">C</span><span class="opt-text">Stackující Venomfang DoT</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">D</span><span class="opt-text">Axegrinder hazard</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — zbylé možnosti jsou Heroic-exclusive nebo přítomné od Normal.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="zdroje">
+    <h4>Zdroje</h4>
+    <ul>
+      <li><a href="https://www.icy-veins.com/wow/coiled-altar-raid-guide" target="_blank" rel="noopener">Icy Veins — Coiled Altar Raid Guide</a></li>
+      <li><a href="https://warcraft.wiki.gg/wiki/The_Coiled_Altar" target="_blank" rel="noopener">Warcraft Wiki — The Coiled Altar</a></li>
+      <li><a href="https://www.wowhead.com/guide/midnight/raids/venomous-abyss-coiled-altar-boss-strategy-abilities" target="_blank" rel="noopener">Wowhead — The Coiled Altar Boss Guide (doporučeno zkontrolovat přímo)</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+</html>

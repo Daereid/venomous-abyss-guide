@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Venomous Abyss — Raid Guide</title>
+<style>
+  h1, h2, h3, h4, p, ul, ol, blockquote, figure { margin: 0; }
+
+  :root {
+    --bg: #eae3d0;
+    --bg-panel: #f5efde;
+    --bg-raised: #ffffff;
+    --ink: #201d18;
+    --ink-soft: #5b5546;
+    --ink-faint: #8a8271;
+    --line: #cdc3a6;
+    --line-strong: #b3a884;
+    --venom: #4a7a2e;
+    --venom-glow: #6f9a3f;
+    --venom-bg: #e3ecd3;
+    --warn-bg: #f6e6c8;
+    --warn-ink: #6b4c14;
+    --shadow: rgba(40, 34, 20, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12140f;
+      --bg-panel: #1a1e14;
+      --bg-raised: #20261a;
+      --ink: #e9e5d5;
+      --ink-soft: #b1a891;
+      --ink-faint: #7d7663;
+      --line: #35392c;
+      --line-strong: #454b38;
+      --venom: #9ecf5f;
+      --venom-glow: #b7e07d;
+      --venom-bg: #253320;
+      --warn-bg: #33290f;
+      --warn-ink: #e0bb6f;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12140f;
+    --bg-panel: #1a1e14;
+    --bg-raised: #20261a;
+    --ink: #e9e5d5;
+    --ink-soft: #b1a891;
+    --ink-faint: #7d7663;
+    --line: #35392c;
+    --line-strong: #454b38;
+    --venom: #9ecf5f;
+    --venom-glow: #b7e07d;
+    --venom-bg: #253320;
+    --warn-bg: #33290f;
+    --warn-ink: #e0bb6f;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: Rockwell, "Sitka Text", "Iowan Old Style", Georgia, "Times New Roman", serif; text-wrap: balance; margin: 0; color: var(--ink); }
+  a { color: var(--venom); text-decoration-color: var(--line-strong); }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px 96px; }
+
+  header.hero { border-bottom: 1px solid var(--line); padding: 56px 24px 36px; background: var(--bg-panel); }
+  .hero-inner { max-width: 1040px; margin: 0 auto; }
+  .crumb { font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px; }
+  h1.title { font-size: clamp(2.4rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -0.01em; }
+  .subtitle { margin-top: 10px; color: var(--ink-soft); font-size: 1.08rem; max-width: 68ch; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .meta-chip { border: 1px solid var(--line-strong); padding: 5px 12px; font-size: 0.75rem; letter-spacing: 0.03em; color: var(--ink-soft); background: var(--bg-raised); }
+  .meta-chip b { color: var(--ink); font-family: inherit; }
+
+  .raid-nav { background: var(--bg-panel); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .raid-nav-row { max-width: 1040px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 24px; }
+  .raid-nav-home { flex: none; font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 0.8rem; color: var(--ink); text-decoration: none; white-space: nowrap; margin-right: 4px; }
+  .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
+  .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+
+  section { padding: 44px 0; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+  h2.section-title { font-size: 1.6rem; margin-bottom: 6px; }
+  .section-lede { color: var(--ink-soft); max-width: 68ch; margin-top: 8px; }
+
+  .boss-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 28px; }
+  @media (max-width: 720px) { .boss-grid { grid-template-columns: 1fr; } }
+
+  .boss-card {
+    display: block;
+    border: 1px solid var(--line-strong);
+    border-top: 3px solid var(--card-accent);
+    background: var(--bg-raised);
+    padding: 20px 22px;
+    text-decoration: none;
+    transition: border-color 0.15s, transform 0.1s;
+  }
+  .boss-card:hover { border-color: var(--card-accent); transform: translateY(-1px); }
+  .boss-num { font-family: "SF Mono", Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--card-accent); font-weight: 700; }
+  .boss-name { font-family: Rockwell, Georgia, serif; font-size: 1.25rem; color: var(--ink); margin-top: 6px; }
+  .boss-hook { color: var(--ink-soft); font-size: 0.9rem; margin-top: 8px; }
+  .boss-tag { display: inline-block; margin-top: 12px; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--line); padding: 2px 8px; }
+
+  .disclaimer { background: var(--warn-bg); border: 1px solid var(--line-strong); color: var(--warn-ink); padding: 16px 18px; font-size: 0.87rem; margin-top: 8px; }
+
+  footer { padding: 32px 0 8px; color: var(--ink-faint); font-size: 0.82rem; border-top: 1px solid var(--line); }
+  footer a { color: var(--ink-soft); }
+
+  :focus-visible { outline: 2px solid var(--venom-glow); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="crumb">Raid guide · Midnight Season 2</div>
+    <h1 class="title">The Venomous Abyss</h1>
+    <p class="subtitle">Kompletní strategie na všech 8 bossů raidu ve Vaults of Atal'Utek — od úvodního rituálu u Soulcoil Well až po finální probuzení Ula'tek. Sestaveno z Wowhead, Icy Veins, ExpCarry a Warcraft Wiki guidů k patchi 12.1.</p>
+    <div class="meta-row">
+      <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
+      <div class="meta-chip">Zóna <b>The Coiled Isle</b></div>
+      <div class="meta-chip">Odemčeno <b>18.–19. 8. 2026</b></div>
+      <div class="meta-chip">Obtížnosti <b>LFR / Normal / Heroic / Mythic</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="raid-nav">
+  <div class="raid-nav-row">
+    <a href="index.html" class="raid-nav-home">☣ The Venomous Abyss</a>
+    <a href="nekzali.html" class="raid-pill">1 · Nek'zali</a>
+    <a href="entombed-sentinels.html" class="raid-pill">2 · Entombed Sentinels</a>
+    <a href="lost-explorers.html" class="raid-pill">3 · Lost Explorers</a>
+    <a href="vashnik.html" class="raid-pill">4 · Vashnik</a>
+    <a href="sszorak.html" class="raid-pill">5 · Sszorak</a>
+    <a href="twin-fangs.html" class="raid-pill">6 · Twin Fangs</a>
+    <a href="coiled-altar.html" class="raid-pill">7 · Coiled Altar</a>
+    <a href="ulatek.html" class="raid-pill">8 · Ula'Tek</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <section>
+    <div class="eyebrow">8 bossů</div>
+    <h2 class="section-title">Vyberte bosse</h2>
+    <p class="section-lede">Každá stránka obsahuje kompletní mechaniky, časovou osu fightu, tipy podle role, rozdíly mezi obtížnostmi a kvíz na ověření znalostí.</p>
+
+    <div class="boss-grid">
+      <a class="boss-card" style="--card-accent:#5b4a9e" href="nekzali.html">
+        <div class="boss-num">Boss 1</div>
+        <div class="boss-name">Nek'zali the Soulcoiler</div>
+        <div class="boss-hook">Rituál u Soulcoil Well — nepusťte adds ke studni, jinak boss enrage na 100 Energy.</div>
+        <div class="boss-tag">Well &amp; energy race</div>
+      </a>
+
+      <a class="boss-card" style="--card-accent:#2c6e64" href="entombed-sentinels.html">
+        <div class="boss-num">Boss 2</div>
+        <div class="boss-name">Entombed Sentinels</div>
+        <div class="boss-hook">Dva golemové, Breath a Blood of Ula'tek — musí se drž po celou dobu rozdělení.</div>
+        <div class="boss-tag">Dvojboss</div>
+      </a>
+
+      <a class="boss-card" style="--card-accent:#1f6f7a" href="lost-explorers.html">
+        <div class="boss-num">Boss 3</div>
+        <div class="boss-name">The Lost Explorers</div>
+        <div class="boss-hook">Tři tortollani posednutí Mor'zahi — nakrmte je rybou, než se dokončí Empower.</div>
+        <div class="boss-tag">Council fight</div>
+      </a>
+
+      <a class="boss-card" style="--card-accent:#7a3d6e" href="vashnik.html">
+        <div class="boss-num">Boss 4</div>
+        <div class="boss-name">Vashnik the Malignant</div>
+        <div class="boss-hook">Rotace tří fontán jedu — Imbibe empowerne dvě nejbližší, tank musí řídit pořadí.</div>
+        <div class="boss-tag">Fountain rotace</div>
+      </a>
+
+      <a class="boss-card" style="--card-accent:#a15a1f" href="sszorak.html">
+        <div class="boss-num">Boss 5</div>
+        <div class="boss-name">Sszorak</div>
+        <div class="boss-hook">Predátor na Altaru šesti větrů — positioning proti vichrovým tunelům.</div>
+        <div class="boss-tag">Wind survival</div>
+      </a>
+
+      <a class="boss-card" style="--card-accent:#8c2f3a" href="twin-fangs.html">
+        <div class="boss-num">Boss 6</div>
+        <div class="boss-name">The Twin Fangs</div>
+        <div class="boss-hook">Vexhul a Ithraz — jedová ekonomika, kde se stack Eternal Venom musí vědomě "sníst".</div>
+        <div class="boss-tag">Dvojboss</div>
+      </a>
+
+      <a class="boss-card" style="--card-accent:#3d3d8a" href="coiled-altar.html">
+        <div class="boss-num">Boss 7</div>
+        <div class="boss-name">The Coiled Altar</div>
+        <div class="boss-hook">Zul'jan → Malacrass → spojená fáze. Tři fighty slité v jeden před finálním bossem.</div>
+        <div class="boss-tag">3 fáze v jednom</div>
+      </a>
+
+      <a class="boss-card" style="--card-accent:#6b1f3a" href="ulatek.html">
+        <div class="boss-num">Boss 8 · Finální</div>
+        <div class="boss-name">Ula'Tek</div>
+        <div class="boss-hook">Prastará hadí bohyně — egg management a hroutící se plošina přes tři stádia.</div>
+        <div class="boss-tag">Finální boss</div>
+      </a>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="disclaimer">
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Jednotlivé stránky obsahují upozornění, kde se komunitní zdroje (Wowhead, Icy Veins, ExpCarry, Warcraft Wiki) rozchází v detailech, hlavně na Mythic obtížnosti. Před raid nightem doporučujeme mechaniky zkontrolovat i na Wowheadu.
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap" style="padding:0;">
+    Fanovský guide, sestavený z veřejně dostupných community zdrojů. Není spojen s Blizzard Entertainment.
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ula'Tek</title>
+<style>
+  h1, h2, h3, h4, p, ul, ol, blockquote, figure { margin: 0; }
+
+  :root {
+    --bg: #eae3d0;
+    --bg-panel: #f5efde;
+    --bg-raised: #ffffff;
+    --ink: #201d18;
+    --ink-soft: #5b5546;
+    --ink-faint: #8a8271;
+    --line: #cdc3a6;
+    --line-strong: #b3a884;
+    --venom: #4a7a2e;
+    --venom-glow: #6f9a3f;
+    --venom-bg: #e3ecd3;
+    --accent-a: #8c2f3a;
+    --accent-a-bg: #f2e0e0;
+    --accent-b: #a1791f;
+    --accent-b-bg: #f2e6cb;
+    --accent-c: #6b1f3a;
+    --accent-c-bg: #f0e0e6;
+    --mythic: #6b3fa0;
+    --mythic-bg: #ece1f5;
+    --loot: #a1791f;
+    --loot-bg: #f6efd8;
+    --warn-bg: #f6e6c8;
+    --warn-ink: #6b4c14;
+    --danger: #8c2f3a;
+    --danger-bg: #f2e0e0;
+    --shadow: rgba(40, 34, 20, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12140f;
+      --bg-panel: #1a1e14;
+      --bg-raised: #20261a;
+      --ink: #e9e5d5;
+      --ink-soft: #b1a891;
+      --ink-faint: #7d7663;
+      --line: #35392c;
+      --line-strong: #454b38;
+      --venom: #9ecf5f;
+      --venom-glow: #b7e07d;
+      --venom-bg: #253320;
+      --accent-a: #e07d84;
+      --accent-a-bg: #35201f;
+      --accent-b: #dba954;
+      --accent-b-bg: #332810;
+      --accent-c: #e0698f;
+      --accent-c-bg: #341c28;
+      --mythic: #b98fe0;
+      --mythic-bg: #281c35;
+      --loot: #dba954;
+      --loot-bg: #2e2711;
+      --warn-bg: #33290f;
+      --warn-ink: #e0bb6f;
+      --danger: #e07d84;
+      --danger-bg: #35201f;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12140f;
+    --bg-panel: #1a1e14;
+    --bg-raised: #20261a;
+    --ink: #e9e5d5;
+    --ink-soft: #b1a891;
+    --ink-faint: #7d7663;
+    --line: #35392c;
+    --line-strong: #454b38;
+    --venom: #9ecf5f;
+    --venom-glow: #b7e07d;
+    --venom-bg: #253320;
+    --accent-a: #e07d84;
+    --accent-a-bg: #35201f;
+    --accent-b: #dba954;
+    --accent-b-bg: #332810;
+    --accent-c: #e0698f;
+    --accent-c-bg: #341c28;
+    --mythic: #b98fe0;
+    --mythic-bg: #281c35;
+    --loot: #dba954;
+    --loot-bg: #2e2711;
+    --warn-bg: #33290f;
+    --warn-ink: #e0bb6f;
+    --danger: #e07d84;
+    --danger-bg: #35201f;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: Rockwell, "Sitka Text", "Iowan Old Style", Georgia, "Times New Roman", serif; text-wrap: balance; margin: 0; color: var(--ink); }
+  a { color: var(--venom); text-decoration-color: var(--line-strong); }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 96px; }
+  header.hero { border-bottom: 1px solid var(--line); padding: 40px 24px 28px; background: var(--bg-panel); }
+  .hero-inner { max-width: 920px; margin: 0 auto; }
+  .crumb { font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px; }
+  .crumb b { color: var(--accent-c); }
+  h1.title { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; }
+  .subtitle { margin-top: 8px; color: var(--ink-soft); font-size: 1.05rem; max-width: 62ch; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .meta-chip { border: 1px solid var(--line-strong); padding: 5px 12px; font-size: 0.75rem; letter-spacing: 0.03em; color: var(--ink-soft); background: var(--bg-raised); }
+  .meta-chip b { color: var(--ink); font-family: inherit; }
+  .meta-chip.final { border-color: var(--accent-c); color: var(--accent-c); }
+  .meta-chip.final b { color: var(--accent-c); }
+
+  nav.jump { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  nav.jump .row { max-width: 920px; margin: 0 auto; display: flex; gap: 2px; padding: 0 24px; }
+  nav.jump a { flex: none; padding: 12px 14px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; }
+  nav.jump a:hover, nav.jump a:focus-visible { color: var(--ink); border-bottom-color: var(--venom-glow); }
+
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 52px; }
+  section:last-of-type { border-bottom: none; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+  h2.section-title { font-size: 1.6rem; margin-bottom: 6px; }
+  .section-lede { color: var(--ink-soft); max-width: 68ch; margin-top: 8px; }
+
+  .callout { margin-top: 22px; border: 1px solid var(--line-strong); background: var(--bg-panel); padding: 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+  .callout .mark { font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 1.3rem; color: var(--venom); }
+  .callout p { margin: 0; color: var(--ink); }
+  .callout .fine { color: var(--ink-faint); font-size: 0.85rem; margin-top: 6px; }
+  .callout.danger { border-color: var(--danger); background: var(--danger-bg); }
+  .callout.danger .mark { color: var(--danger); }
+  .callout.loot { border-color: var(--loot); background: var(--loot-bg); }
+  .callout.loot .mark { color: var(--loot); }
+
+  .groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; }
+  @media (max-width: 900px) { .groups { grid-template-columns: 1fr; } }
+  .group-card { border: 1px solid var(--line-strong); background: var(--bg-raised); }
+  .group-head { padding: 16px 18px; border-bottom: 1px solid var(--line); }
+  .group-card.a .group-head { background: var(--accent-a-bg); }
+  .group-card.b .group-head { background: var(--accent-b-bg); }
+  .group-card.c .group-head { background: var(--accent-c-bg); }
+  .group-card.mythic .group-head { background: var(--mythic-bg); }
+  .group-tag { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .group-card.a .group-tag { color: var(--accent-a); }
+  .group-card.b .group-tag { color: var(--accent-b); }
+  .group-card.c .group-tag { color: var(--accent-c); }
+  .group-card.mythic .group-tag { color: var(--mythic); }
+  .group-head h3 { font-size: 1.15rem; margin-top: 4px; }
+  .group-head .desc { color: var(--ink-soft); font-size: 0.86rem; margin-top: 6px; }
+
+  .ability-list { padding: 6px 0; }
+  .ability { padding: 12px 18px; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+  .ability:last-child { border-bottom: none; }
+  .ability-name { font-weight: 600; font-size: 0.93rem; }
+  .group-card.a .ability-name { color: var(--accent-a); }
+  .group-card.b .ability-name { color: var(--accent-b); }
+  .group-card.c .ability-name { color: var(--accent-c); }
+  .group-card.mythic .ability-name { color: var(--mythic); }
+  .ability-tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--line); padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
+  .ability-desc { color: var(--ink-soft); font-size: 0.86rem; }
+
+  .timeline { margin-top: 28px; display: flex; flex-direction: column; }
+  .tl-step { display: grid; grid-template-columns: 130px 1fr; gap: 18px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .tl-step:first-child { border-top: none; }
+  .tl-time { font-family: "SF Mono", Consolas, monospace; font-size: 0.8rem; color: var(--venom); padding-top: 2px; }
+  .tl-body h4 { font-family: inherit; font-size: 1rem; margin: 0 0 4px; color: var(--ink); }
+  .tl-body p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+  @media (max-width: 780px) { .roles { grid-template-columns: 1fr; } }
+  .role-card { border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 18px; }
+  .role-card .role-icon { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--venom); }
+  .role-card h3 { font-size: 1.1rem; margin-top: 6px; }
+  .role-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.89rem; }
+  .role-card li { margin-bottom: 8px; }
+
+  .table-scroll { overflow-x: auto; margin-top: 22px; }
+  table.diff { width: 100%; border-collapse: collapse; min-width: 640px; }
+  table.diff th, table.diff td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 0.88rem; vertical-align: top; }
+  table.diff th { font-family: Rockwell, Georgia, serif; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); border-bottom: 1px solid var(--line-strong); }
+  table.diff td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  table.diff tr:last-child td { border-bottom: none; }
+
+  .quiz-list { margin-top: 22px; }
+  .quiz-q { padding: 22px 0; border-top: 1px solid var(--line); }
+  .quiz-q:first-child { border-top: none; padding-top: 0; }
+  .quiz-q-num { font-family: "SF Mono", Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+  .quiz-q-title { font-size: 1.02rem; font-weight: 600; margin-bottom: 14px; }
+  .opt-list { display: grid; gap: 8px; }
+  .opt { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 10px 14px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .opt-input { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+  .opt-letter { font-family: "SF Mono", Consolas, monospace; font-weight: 700; font-size: 0.72rem; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center; color: var(--ink-faint); flex: none; }
+  .opt-text { font-size: 0.9rem; color: var(--ink-soft); }
+  .opt:hover { border-color: var(--ink-faint); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] { border-color: var(--venom); background: var(--venom-bg); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-letter { border-color: var(--venom); color: var(--venom); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-text { color: var(--ink); }
+  .opt:has(.opt-input:checked):not([data-correct="true"]) { border-color: var(--danger); background: var(--danger-bg); }
+  .quiz-explain { display: none; margin-top: 12px; padding: 10px 14px; border-left: 2px solid var(--venom); background: var(--bg-panel); font-size: 0.85rem; color: var(--ink-soft); }
+  .quiz-q:has(.opt-input:checked) .quiz-explain { display: block; }
+
+  .disclaimer { background: var(--warn-bg); border: 1px solid var(--line-strong); color: var(--warn-ink); padding: 16px 18px; font-size: 0.87rem; margin-top: 22px; }
+  footer { padding: 32px 0 8px; color: var(--ink-faint); font-size: 0.82rem; }
+  footer h4 { font-family: inherit; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  footer a { color: var(--ink-soft); }
+
+  :focus-visible { outline: 2px solid var(--venom-glow); outline-offset: 2px; }
+
+  .raid-nav { background: var(--bg-panel); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .raid-nav-row { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 24px; }
+  .raid-nav-home { flex: none; font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 0.8rem; color: var(--ink); text-decoration: none; white-space: nowrap; margin-right: 4px; }
+  .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
+  .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="crumb">The Venomous Abyss <b>→</b> Finální boss <b>→</b> Ula'Tek</div>
+    <h1 class="title">Ula'Tek</h1>
+    <p class="subtitle">Kompletní strategie na finálního bosse raidu — prastarou hadí bohyni uvězněnou od Aqir-Trollí války. Sestaveno z ExpCarry a Warcraft Wiki guidů k patchi 12.1.</p>
+    <div class="meta-row">
+      <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
+      <div class="meta-chip">Raid <b>The Venomous Abyss</b> · Midnight Season 2</div>
+      <div class="meta-chip final">Boss <b>8 z 8 — finální</b></div>
+      <div class="meta-chip">Obtížnosti <b>LFR / Normal / Heroic / Mythic</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="raid-nav">
+  <div class="raid-nav-row">
+    <a href="index.html" class="raid-nav-home">☣ The Venomous Abyss</a>
+    <a href="nekzali.html" class="raid-pill">1 · Nek'zali</a>
+    <a href="entombed-sentinels.html" class="raid-pill">2 · Entombed Sentinels</a>
+    <a href="lost-explorers.html" class="raid-pill">3 · Lost Explorers</a>
+    <a href="vashnik.html" class="raid-pill">4 · Vashnik</a>
+    <a href="sszorak.html" class="raid-pill">5 · Sszorak</a>
+    <a href="twin-fangs.html" class="raid-pill">6 · Twin Fangs</a>
+    <a href="coiled-altar.html" class="raid-pill">7 · Coiled Altar</a>
+    <a href="ulatek.html" class="raid-pill active">8 · Ula'Tek</a>
+  </div>
+</div>
+
+<nav class="jump">
+  <div class="row">
+    <a href="#prehled">Přehled</a>
+    <a href="#schopnosti">Schopnosti</a>
+    <a href="#faze">Časová osa</a>
+    <a href="#role">Role</a>
+    <a href="#obtiznosti">Obtížnosti</a>
+    <a href="#loot">Loot</a>
+    <a href="#kviz">Kvíz</a>
+    <a href="#zdroje">Zdroje</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="prehled">
+    <div class="eyebrow">Přehled encounteru</div>
+    <h2 class="section-title">Prastará hadí bohyně z Rift of Aln</h2>
+    <p class="section-lede">Ula'tek je "noční děsivá bytost zrozená z Rift of Aln", kterou Amani vyvolali během Aqir-Trollí války proti Kith'ixovi — ukázala se ale stejně nebezpečná jako hrozba, kterou měla zastavit. Chrám/trezor, do kterého sestupujete, byl postaven přesně za účelem jejího uvěznění. Uvolněná Zul'janem nyní vypouští jedové vlny, spawnuje nekonečný hadí brood a ničí plošinu pod raidem, jak fight postupuje.</p>
+
+    <div class="callout danger">
+      <div class="mark">§1</div>
+      <div>
+        <p><b>Nikdy neztrácejte melee kontakt.</b> Na rozdíl od Entombed Sentinels tu není jedna izolovaná gimmick mechanika s energií/vzdáleností — hlavní vlákno přes všechny tři fáze je <b>management vajec/adds pod časovým tlakem</b>, přičemž aréna se ve Fázi 3 postupně zmenšuje/hroutí. Tank nesmí nikdy ztratit melee kontakt s Ula'tek — <i>Mother's Wrath</i> trestá knockbackem celý raid, pokud se to stane.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schopnosti">
+    <div class="eyebrow">Mechaniky podle stádia</div>
+    <h2 class="section-title">Schopnosti podle fáze</h2>
+    <p class="section-lede">Tři stádia s narůstající intenzitou — od základního add-controlu až po kolaps plošiny.</p>
+
+    <div class="groups">
+      <div class="group-card a">
+        <div class="group-head">
+          <div class="group-tag">Stádium 1</div>
+          <h3>Fury of the Serpent Mother</h3>
+          <div class="desc">Vlny jedu a první vejce.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Caustic Waves</div>
+            <div class="ability-desc">Putující vlny nature damage se stackujícím DoT; okamžitě rozklíčí jakékoliv vejce, kterého se dotknou.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Call of the Serpent</div>
+            <div class="ability-desc">Potomci padají shora — musíte odejít z dopadové zóny.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Mother's Wrath <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Knockback na tanka + stackující Stone Venom; raid-wide trest, pokud tank ztratí melee.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Rage of the Shackled</div>
+            <div class="ability-desc">Opakující se raid damage; odhaluje Venomous Heart (+200 % damage okno, 20 s).</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Blightscale Vipers</div>
+            <div class="ability-desc">Z vylíhnutých vajec — Acidic Burst + přetrvávající Putrid Membrane debuff.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card b">
+        <div class="group-head">
+          <div class="group-tag">Stádium 2</div>
+          <h3>Children of the Doomscale</h3>
+          <div class="desc">Vejce, strážci a jejich rozhořčení.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Doomscale Eggs</div>
+            <div class="ability-desc">Plné vylíhnutí → Ravenous Doomscale (kanáluje Dread Roar); narušené vylíhnutí → slabší verze.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Weakened Doomscale <span class="ability-tag">Interrupt</span></div>
+            <div class="ability-desc">Anguished Cry (interrupt), Desperate Thrash (frontální, natočte mimo raid).</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Doomscale Wardens</div>
+            <div class="ability-desc">Writhing Gestation mění okolní potomky na Clutches; Warden's Protection blokuje interakci s vejci.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Grasping Fangs</div>
+            <div class="ability-desc">Periodický nature damage + slow; rozbití spustí Blight Vein.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card c">
+        <div class="group-head">
+          <div class="group-tag">Stádium 3</div>
+          <h3>Ula'tek's Ascension</h3>
+          <div class="desc">Kolaps plošiny, finální exekuce.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Circling Prey</div>
+            <div class="ability-desc">Zničí sekci plošiny; těžký damage + knockback poblíž okraje, damage i pro ty příliš daleko od bezpečné zóny.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Serpent's Bite</div>
+            <div class="ability-desc">Injekce jedu; při vypršení → smrtící Calcified Corpse. Pomocník ho může odstranit, ale dostane Volatile Purge (5s odložená exploze, 7yd okruh).</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Fury Unleashed <span class="ability-tag">Execute</span></div>
+            <div class="ability-desc">Extrémní raid-wide damage, finální exekuční check.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="groups" style="margin-top:18px; grid-template-columns: 1fr;">
+      <div class="group-card mythic">
+        <div class="group-head">
+          <div class="group-tag">Mythic only</div>
+          <h3>Egg lanes a rage payoff</h3>
+          <div class="desc">Nejtěsnější exekuční vrstva raidu.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Noxious Shell</div>
+            <div class="ability-desc">Dva nositelé vajec do 3 yardů od sebe = okamžité vylíhnutí + velký damage. Vynucuje pevné "egg lanes".</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Rancid Yolk</div>
+            <div class="ability-desc">+200 % damage taken na 20 s po skončení skořápky.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Revenge</div>
+            <div class="ability-desc">Přeživší Weakened Doomscale získává +100 % haste/damage, když jeho pár zemře.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Toxic Incubation</div>
+            <div class="ability-desc">Přidělení hráčů na zachytávání jedu (venom-interception assignment).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faze">
+    <div class="eyebrow">Průběh pullu</div>
+    <h2 class="section-title">Časová osa fightu</h2>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-time">Stádium 1</div>
+        <div class="tl-body">
+          <h4>Fury of the Serpent Mother</h4>
+          <p>Uhýbejte Caustic Waves, řešte padající potomky, tank udržuje melee uptime. Zabíjejte Blightscale Vipers dřív, než napáchají škodu.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Stádium 2</div>
+        <div class="tl-body">
+          <h4>Children of the Doomscale</h4>
+          <p>Add management kolem vajec — přerušujte Anguished Cry, natáčejte Desperate Thrash mimo raid, dávejte pozor na Doomscale Wardens.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Intermezzo</div>
+        <div class="tl-body">
+          <h4>The Shattering</h4>
+          <p>Environmentální tlak roste, pokračuje soak rotace Spectral Coils, Necrotic Vapors zvyšuje raid-wide nature damage v čase.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Stádium 3</div>
+        <div class="tl-body">
+          <h4>Ula'tek's Ascension</h4>
+          <p>Plošina se postupně hroutí (Circling Prey), řešíte Serpent's Bite předávání a Volatile Purge, finální execute check Fury Unleashed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="role">
+    <div class="eyebrow">Podle role</div>
+    <h2 class="section-title">Co sledovat za tanka, healera a DPS</h2>
+    <div class="roles">
+      <div class="role-card">
+        <div class="role-icon">Tank</div>
+        <h3>Tankování</h3>
+        <ul>
+          <li>Nikdy neztraťte melee uptime (Mother's Wrath), po knockbacku se okamžitě vraťte.</li>
+          <li>Řešte stacky Stone Venom, swapujte podle potřeby.</li>
+          <li>Doomscale adds natáčejte mimo raid během Desperate Thrash.</li>
+          <li>Zachovávejte prostor arény pro Caustic Waves/Circling Prey.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">Healer</div>
+        <h3>Healing</h3>
+        <ul>
+          <li>Cooldowny na Spectral Coils a Rage of the Shackled.</li>
+          <li>Sledujte Putrid Membrane a koordinujte odstranění Grasping Fangs s cooldowny (Heroic+).</li>
+          <li>Po předání Serpent's Bite sledujte cíle Volatile Purge.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">DPS</div>
+        <h3>Damage</h3>
+        <ul>
+          <li>Priorita adds před bossem — Vipers/Clutches/Wardens dřív, než napáchají další škody.</li>
+          <li>Přerušujte Anguished Cry, vybuchujte Venomous Heart okno.</li>
+          <li>Zabíjejte Rawlings/Shriekery dřív, než eskaluje Boiling Venom.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="obtiznosti">
+    <div class="eyebrow">Škálování obtížnosti</div>
+    <h2 class="section-title">Normal → Heroic → Mythic</h2>
+    <div class="table-scroll">
+      <table class="diff">
+        <thead><tr><th>Obtížnost</th><th>Co se mění</th></tr></thead>
+        <tbody>
+          <tr><td>Normal</td><td>Naučte se smyčku vlna-dodge/egg-control/melee-uptime/Spectral-Coil-soak. Hlavní příčina wipů: nekontrolované vylíhnutí Viperů nebo zmeškané soaky.</td></tr>
+          <tr><td>Heroic</td><td>Přidává Soul Constrictor (soakeři nemůžou soaknout další Coil — vynucuje rotaci skupiny), Petrifying Sting (Viperové dávají healing absorb), Poisonous Bite, Mass Gestation a Blight Vein zasahující celý raid.</td></tr>
+          <tr><td>Mythic</td><td>Přidává Hardened Blightscale Spawn (nehybná vejce se skořápkou), Noxious Shell (egg lanes), Rancid Yolk, Toxic Womb/Blightscale Wretch add s Fester Burst, Toxic Incubation, Revenge, Boiling Venom a Mythic-only twist na Serpent's Bite.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="disclaimer">
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Icy Veins v době psaní ještě neměl dedikovaný guide na Ula'Tek ("boss nebyl dostupný pro PTR testing"), takže tento report vychází primárně z ExpCarry, křížově ověřeno strukturou proti Warcraft Wiki. Přesná čísla (procenta, yardy, sekundy) berte jako jednodrocí a před pullem zkontrolujte aktuální verzi guide.
+    </div>
+  </section>
+
+  <section id="loot">
+    <div class="eyebrow">Odměna</div>
+    <h2 class="section-title">Primeval Skyfriend</h2>
+    <div class="callout loot">
+      <div class="mark">★</div>
+      <div>
+        <p><b>Primeval Skyfriend</b> — mount padající z Ula'tek pouze na <b>Mythic</b> obtížnosti. Item level dle jednoho zdroje (nepotvrzeno přímým fetchem loot tabulky): Normal 302 / Heroic 315 / Mythic 344.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kviz">
+    <div class="eyebrow">Ověřte si znalosti</div>
+    <h2 class="section-title">Kvíz k mechanikám</h2>
+    <p class="section-lede">Šest otázek na hlavní mechaniky fightu. Vyberte odpověď — správná se zvýrazní zeleně, chybná červeně.</p>
+
+    <div class="quiz-list">
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 1</div>
+        <div class="quiz-q-title">Co se stane, pokud tank ztratí melee kontakt s Ula'tek?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">A</span><span class="opt-text">Nic, jde jen o kosmetický efekt</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">B</span><span class="opt-text">Mother's Wrath potrestá celý raid knockbackem</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">C</span><span class="opt-text">Ula'tek se okamžitě uzdraví</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">D</span><span class="opt-text">Spustí se Stádium 3 předčasně</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — tank se musí po knockbacku okamžitě vrátit.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 2</div>
+        <div class="quiz-q-title">Co dělá Caustic Waves s nevylíhnutými vejci?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Nic, vejce jsou imunní</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Okamžitě je rozklíčí, pokud se jich dotknou</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Zničí vejce úplně</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Vyléčí Ula'tek</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — proto je positioning vln vůči vejcím klíčový.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 3</div>
+        <div class="quiz-q-title">Co se stane, pokud Serpent's Bite vyprší bez odstranění?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">A</span><span class="opt-text">Nic, jednoduše zmizí</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">B</span><span class="opt-text">Vede k smrtícímu Calcified Corpse</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">C</span><span class="opt-text">Vyléčí postiženého hráče</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">D</span><span class="opt-text">Přenese se automaticky na tanka</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — pomocník ho může odebrat, ale dostane odloženou explozi Volatile Purge.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 4</div>
+        <div class="quiz-q-title">Co je potřeba udělat s Weakened Doomscale a jeho Desperate Thrash?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">A</span><span class="opt-text">Natočit ho mimo raid</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">B</span><span class="opt-text">Postavit se před něj</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">C</span><span class="opt-text">Ignorovat, nedává damage</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">D</span><span class="opt-text">Dispelovat healerem</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — jde o frontální útok, musí být natočen mimo raid.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 5</div>
+        <div class="quiz-q-title">Na které obtížnosti padá mount Primeval Skyfriend?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Normal</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">B</span><span class="opt-text">Heroic</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">C</span><span class="opt-text">Mythic</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">D</span><span class="opt-text">LFR</span></label>
+        </div>
+        <div class="quiz-explain">Správně: C — Primeval Skyfriend je Mythic-exclusive drop.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 6</div>
+        <div class="quiz-q-title">Co dělá Noxious Shell na Mythic obtížnosti?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Léčí Ula'tek</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">B</span><span class="opt-text">Dva nositelé vajec do 3 yardů od sebe způsobí okamžité vylíhnutí a velký damage</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">C</span><span class="opt-text">Zpomaluje kolaps plošiny</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">D</span><span class="opt-text">Odstraní Rancid Yolk</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — vynucuje pevné "egg lanes", aby se nositelé nedostali příliš blízko.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="zdroje">
+    <h4>Zdroje</h4>
+    <ul>
+      <li><a href="https://expcarry.com/ula-tek-boss-guide" target="_blank" rel="noopener">ExpCarry — Ula'Tek Boss Guide</a></li>
+      <li><a href="https://warcraft.wiki.gg/wiki/Ula%27tek" target="_blank" rel="noopener">Warcraft Wiki — Ula'tek</a></li>
+      <li><a href="https://www.icy-veins.com/wow/ulatek-raid-guide" target="_blank" rel="noopener">Icy Veins — Ula'tek Raid Guide (v době psaní bez obsahu, zkontrolujte aktuální stav)</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+</html>

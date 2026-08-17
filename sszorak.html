@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sszorak</title>
+<style>
+  h1, h2, h3, h4, p, ul, ol, blockquote, figure { margin: 0; }
+
+  :root {
+    --bg: #eae3d0;
+    --bg-panel: #f5efde;
+    --bg-raised: #ffffff;
+    --ink: #201d18;
+    --ink-soft: #5b5546;
+    --ink-faint: #8a8271;
+    --line: #cdc3a6;
+    --line-strong: #b3a884;
+    --venom: #4a7a2e;
+    --venom-glow: #6f9a3f;
+    --venom-bg: #e3ecd3;
+    --accent-a: #a15a1f;
+    --accent-a-bg: #f2e3cf;
+    --accent-b: #2c7a7a;
+    --accent-b-bg: #dcecec;
+    --mythic: #6b3fa0;
+    --mythic-bg: #ece1f5;
+    --warn-bg: #f6e6c8;
+    --warn-ink: #6b4c14;
+    --shadow: rgba(40, 34, 20, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12140f;
+      --bg-panel: #1a1e14;
+      --bg-raised: #20261a;
+      --ink: #e9e5d5;
+      --ink-soft: #b1a891;
+      --ink-faint: #7d7663;
+      --line: #35392c;
+      --line-strong: #454b38;
+      --venom: #9ecf5f;
+      --venom-glow: #b7e07d;
+      --venom-bg: #253320;
+      --accent-a: #d99a54;
+      --accent-a-bg: #362512;
+      --accent-b: #7fd2c8;
+      --accent-b-bg: #17302e;
+      --mythic: #b98fe0;
+      --mythic-bg: #281c35;
+      --warn-bg: #33290f;
+      --warn-ink: #e0bb6f;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12140f;
+    --bg-panel: #1a1e14;
+    --bg-raised: #20261a;
+    --ink: #e9e5d5;
+    --ink-soft: #b1a891;
+    --ink-faint: #7d7663;
+    --line: #35392c;
+    --line-strong: #454b38;
+    --venom: #9ecf5f;
+    --venom-glow: #b7e07d;
+    --venom-bg: #253320;
+    --accent-a: #d99a54;
+    --accent-a-bg: #362512;
+    --accent-b: #7fd2c8;
+    --accent-b-bg: #17302e;
+    --mythic: #b98fe0;
+    --mythic-bg: #281c35;
+    --warn-bg: #33290f;
+    --warn-ink: #e0bb6f;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: Rockwell, "Sitka Text", "Iowan Old Style", Georgia, "Times New Roman", serif;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .num { font-family: "SF Mono", "Cascadia Mono", Consolas, Menlo, monospace; font-variant-numeric: tabular-nums; }
+  a { color: var(--venom); text-decoration-color: var(--line-strong); }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 96px; }
+
+  header.hero { border-bottom: 1px solid var(--line); padding: 40px 24px 28px; background: var(--bg-panel); }
+  .hero-inner { max-width: 920px; margin: 0 auto; }
+  .crumb { font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px; }
+  .crumb b { color: var(--accent-b); }
+  h1.title { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; }
+  .subtitle { margin-top: 8px; color: var(--ink-soft); font-size: 1.05rem; max-width: 62ch; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .meta-chip { border: 1px solid var(--line-strong); padding: 5px 12px; font-size: 0.75rem; letter-spacing: 0.03em; color: var(--ink-soft); background: var(--bg-raised); }
+  .meta-chip b { color: var(--ink); font-family: inherit; }
+
+  nav.jump { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  nav.jump .row { max-width: 920px; margin: 0 auto; display: flex; gap: 2px; padding: 0 24px; }
+  nav.jump a { flex: none; padding: 12px 14px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; }
+  nav.jump a:hover, nav.jump a:focus-visible { color: var(--ink); border-bottom-color: var(--venom-glow); }
+
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 52px; }
+  section:last-of-type { border-bottom: none; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+  h2.section-title { font-size: 1.6rem; margin-bottom: 6px; }
+  .section-lede { color: var(--ink-soft); max-width: 68ch; margin-top: 8px; }
+
+  .callout { margin-top: 22px; border: 1px solid var(--line-strong); background: var(--bg-panel); padding: 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+  .callout .mark { font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 1.3rem; color: var(--venom); }
+  .callout p { margin: 0; color: var(--ink); }
+  .callout .fine { color: var(--ink-faint); font-size: 0.85rem; margin-top: 6px; }
+  .callout.mythic { border-color: var(--mythic); background: var(--mythic-bg); }
+  .callout.mythic .mark { color: var(--mythic); }
+
+  .groups { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+  @media (max-width: 720px) { .groups { grid-template-columns: 1fr; } }
+  .group-card { border: 1px solid var(--line-strong); background: var(--bg-raised); }
+  .group-head { padding: 16px 18px; border-bottom: 1px solid var(--line); }
+  .group-card.a .group-head { background: var(--accent-a-bg); }
+  .group-card.b .group-head { background: var(--accent-b-bg); }
+  .group-card.mythic .group-head { background: var(--mythic-bg); }
+  .group-tag { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .group-card.a .group-tag { color: var(--accent-a); }
+  .group-card.b .group-tag { color: var(--accent-b); }
+  .group-card.mythic .group-tag { color: var(--mythic); }
+  .group-head h3 { font-size: 1.25rem; margin-top: 4px; }
+  .group-head .desc { color: var(--ink-soft); font-size: 0.88rem; margin-top: 6px; }
+
+  .ability-list { padding: 6px 0; }
+  .ability { padding: 12px 18px; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+  .ability:last-child { border-bottom: none; }
+  .ability-name { font-weight: 600; font-size: 0.95rem; }
+  .group-card.a .ability-name { color: var(--accent-a); }
+  .group-card.b .ability-name { color: var(--accent-b); }
+  .group-card.mythic .ability-name { color: var(--mythic); }
+  .ability-tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--line); padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
+  .ability-desc { color: var(--ink-soft); font-size: 0.87rem; }
+
+  .timeline { margin-top: 28px; display: flex; flex-direction: column; }
+  .tl-step { display: grid; grid-template-columns: 120px 1fr; gap: 18px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .tl-step:first-child { border-top: none; }
+  .tl-time { font-family: "SF Mono", Consolas, monospace; font-size: 0.8rem; color: var(--venom); padding-top: 2px; }
+  .tl-body h4 { font-family: inherit; font-size: 1rem; margin: 0 0 4px; color: var(--ink); }
+  .tl-body p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+  @media (max-width: 780px) { .roles { grid-template-columns: 1fr; } }
+  .role-card { border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 18px; }
+  .role-card .role-icon { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--venom); }
+  .role-card h3 { font-size: 1.1rem; margin-top: 6px; }
+  .role-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.89rem; }
+  .role-card li { margin-bottom: 8px; }
+
+  .table-scroll { overflow-x: auto; margin-top: 22px; }
+  table.diff { width: 100%; border-collapse: collapse; min-width: 640px; }
+  table.diff th, table.diff td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 0.88rem; vertical-align: top; }
+  table.diff th { font-family: Rockwell, Georgia, serif; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); border-bottom: 1px solid var(--line-strong); }
+  table.diff td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  table.diff tr:last-child td { border-bottom: none; }
+
+  .quiz-list { margin-top: 22px; }
+  .quiz-q { padding: 22px 0; border-top: 1px solid var(--line); }
+  .quiz-q:first-child { border-top: none; padding-top: 0; }
+  .quiz-q-num { font-family: "SF Mono", Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+  .quiz-q-title { font-size: 1.02rem; font-weight: 600; margin-bottom: 14px; }
+  .opt-list { display: grid; gap: 8px; }
+  .opt { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 10px 14px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .opt-input { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+  .opt-letter { font-family: "SF Mono", Consolas, monospace; font-weight: 700; font-size: 0.72rem; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center; color: var(--ink-faint); flex: none; }
+  .opt-text { font-size: 0.9rem; color: var(--ink-soft); }
+  .opt:hover { border-color: var(--ink-faint); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] { border-color: var(--venom); background: var(--venom-bg); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-letter { border-color: var(--venom); color: var(--venom); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-text { color: var(--ink); }
+  .opt:has(.opt-input:checked):not([data-correct="true"]) { border-color: #8c2f3a; background: #f2e0e0; }
+  :root:not([data-theme="light"]) .opt:has(.opt-input:checked):not([data-correct="true"]) { border-color: #e07d84; background: #35201f; }
+  :root[data-theme="dark"] .opt:has(.opt-input:checked):not([data-correct="true"]) { border-color: #e07d84; background: #35201f; }
+  .opt:has(.opt-input:checked):not([data-correct="true"]) .opt-letter { border-color: inherit; color: inherit; }
+  .quiz-explain { display: none; margin-top: 12px; padding: 10px 14px; border-left: 2px solid var(--venom); background: var(--bg-panel); font-size: 0.85rem; color: var(--ink-soft); }
+  .quiz-q:has(.opt-input:checked) .quiz-explain { display: block; }
+
+  .disclaimer { background: var(--warn-bg); border: 1px solid var(--line-strong); color: var(--warn-ink); padding: 16px 18px; font-size: 0.87rem; margin-top: 22px; }
+  footer { padding: 32px 0 8px; color: var(--ink-faint); font-size: 0.82rem; }
+  footer h4 { font-family: inherit; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  footer a { color: var(--ink-soft); }
+
+  :focus-visible { outline: 2px solid var(--venom-glow); outline-offset: 2px; }
+
+  .raid-nav { background: var(--bg-panel); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .raid-nav-row { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 24px; }
+  .raid-nav-home { flex: none; font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 0.8rem; color: var(--ink); text-decoration: none; white-space: nowrap; margin-right: 4px; }
+  .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
+  .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="crumb">The Venomous Abyss <b>→</b> Boss 5 <b>→</b> Sszorak</div>
+    <h1 class="title">Sszorak</h1>
+    <p class="subtitle">Kompletní strategie na hadího predátora Altaru šesti větrů — Vaults of Atal'Utek, Coiled Isle. Sestaveno z Icy Veins a Warcraft Wiki guidů k patchi 12.1.</p>
+    <div class="meta-row">
+      <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
+      <div class="meta-chip">Raid <b>The Venomous Abyss</b> · Midnight Season 2</div>
+      <div class="meta-chip">Boss <b>5 z 8</b></div>
+      <div class="meta-chip">Obtížnosti <b>LFR / Normal / Heroic / Mythic</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="raid-nav">
+  <div class="raid-nav-row">
+    <a href="index.html" class="raid-nav-home">☣ The Venomous Abyss</a>
+    <a href="nekzali.html" class="raid-pill">1 · Nek'zali</a>
+    <a href="entombed-sentinels.html" class="raid-pill">2 · Entombed Sentinels</a>
+    <a href="lost-explorers.html" class="raid-pill">3 · Lost Explorers</a>
+    <a href="vashnik.html" class="raid-pill">4 · Vashnik</a>
+    <a href="sszorak.html" class="raid-pill active">5 · Sszorak</a>
+    <a href="twin-fangs.html" class="raid-pill">6 · Twin Fangs</a>
+    <a href="coiled-altar.html" class="raid-pill">7 · Coiled Altar</a>
+    <a href="ulatek.html" class="raid-pill">8 · Ula'Tek</a>
+  </div>
+</div>
+
+<nav class="jump">
+  <div class="row">
+    <a href="#prehled">Přehled</a>
+    <a href="#schopnosti">Schopnosti</a>
+    <a href="#faze">Časová osa</a>
+    <a href="#role">Role</a>
+    <a href="#obtiznosti">Obtížnosti</a>
+    <a href="#kviz">Kvíz</a>
+    <a href="#zdroje">Zdroje</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="prehled">
+    <div class="eyebrow">Přehled encounteru</div>
+    <h2 class="section-title">Predátor na Altaru šesti větrů</h2>
+    <p class="section-lede">Sszorak je popisován jako "brutální nástroj pomsty" zdeformovaný jedem Ula'tek — hadí predátor, kterého potkáte na otevřené, větrné plošině (Altar of the Six Winds). Jde o pátého bosse v raidu, po Vashnikovi. Na rozdíl od hádankových fightů je Sszorak především čistý survival check s důrazem na positioning proti větru.</p>
+
+    <div class="callout">
+      <div class="mark">§1</div>
+      <div>
+        <p><b>Vichrové tunely a Viscous Cyst.</b> Plošina periodicky spustí vichrové tunely (gale), které hráče odfouknou přes okraj. Hráči zasažení Venomous Surge musí předem položit "Viscous Cyst" na určené místo naproti danému tunelu, aby odfuk skončil bezpečně uvnitř plošiny, ne za jejím okrajem.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="mark">§2</div>
+      <div>
+        <p><b>Dig In okno.</b> Zhruba každé 2 minuty přichází Howling Maelstrom — sekvence vichrových tunelů, které postrkují raid do předem položených cyst. Sszorak se během toho zaboří (Dig In) a na 25 sekund utrpí +30 % damage taken. Šetřete si na tuto chvíli DPS cooldowny.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schopnosti">
+    <div class="eyebrow">Mechaniky fightu</div>
+    <h2 class="section-title">Schopnosti Sszoraka</h2>
+    <p class="section-lede">Hlavní fáze kombinuje tankový comba blok (Apex Predator) s raid-wide positioningem kolem větru a jedu.</p>
+
+    <div class="groups">
+      <div class="group-card a">
+        <div class="group-head">
+          <div class="group-tag">Tank combo · Apex Predator</div>
+          <h3>Náhodná 5-hit sekvence</h3>
+          <div class="desc">2× Ravage, 2× Mutilate, 1× Tempest v náhodném pořadí.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Ravage <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Musí být natočen mimo raid. Stacky zvyšují damage dalšího Ravage o 300 % — swapujte tanka po prvním zásahu.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Mutilate <span class="ability-tag">Soak</span></div>
+            <div class="ability-desc">Vyžaduje soak skupinou, nebo solo-soak Blood DK s defenzivami.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Tempest <span class="ability-tag">Dodge</span></div>
+            <div class="ability-desc">Uhýbatelné tornádo.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Corroding Venom <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Stackující debuff zvyšující utrpěný physical damage. Swapujte kolem 6 stacků.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Mutilated Gash</div>
+            <div class="ability-desc">Přetrvávající toxická rána (DoT) z Mutilate.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card b">
+        <div class="group-head">
+          <div class="group-tag">Raid-wide · Vítr a jed</div>
+          <h3>Positioning a soak</h3>
+          <div class="desc">Hlavní nároky na pohyb a rozestavení celého raidu.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Venomous Surge <span class="ability-tag">Placement</span></div>
+            <div class="ability-desc">Postižení hráči položí Viscous Cyst na určené místo naproti vichrovému tunelu. Cysta při vypršení uděluje raid-wide Nature damage, klesající se vzdáleností.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Raging Crosswinds <span class="ability-tag">Knockback</span></div>
+            <div class="ability-desc">DoT následovaný směrovým odfukem. Spárujte se s hráčem s opačným směrem větru, abyste se vzájemně vyrušili bezpečně.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Howling Maelstrom <span class="ability-tag">~2 min</span></div>
+            <div class="ability-desc">Sekvenční vichrové tunely postrkují raid do cyst. Sszorak dostane Dig In (+30 % damage taken, 25 s) — hlavní DPS okno.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Caustic Claws <span class="ability-tag">Heroic+</span></div>
+            <div class="ability-desc">Zanechává jedovaté louže na zemi, vyžaduje pečlivý positioning.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="groups" style="margin-top:18px; grid-template-columns: 1fr;">
+      <div class="group-card mythic">
+        <div class="group-head">
+          <div class="group-tag">Mythic only</div>
+          <h3>Serpent's Fury &amp; Virulence</h3>
+          <div class="desc">Rage-based wipe mechanic vrstvená přes celý fight.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Serpent's Fury <span class="ability-tag">Stack</span></div>
+            <div class="ability-desc">Označí hráče (obvykle nejvzdálenějšího), boss nabírá rage. Při 100 rage je potřeba 14+ raiderů do 8 yardů od označeného hráče, jinak přijde Unbound Ferocity.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Unbound Ferocity <span class="ability-tag">Wipe check</span></div>
+            <div class="ability-desc">Pokud se rage nevybije, damage dealt bossovi masivně narůstá (dle Warcraft Wiki cca 500 % — nízká jistota, jeden zdroj).</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">To the Slaughter</div>
+            <div class="ability-desc">Sszorak nabíhá na označeného hráče a šíří Virulence na všechny zasažené.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Virulence <span class="ability-tag">Spread</span></div>
+            <div class="ability-desc">Viditelný beam/spread debuff — postižení hráči se musí rozestoupit, aby nedošlo k řetězové infekci.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Raging Crosswinds (Mythic)</div>
+            <div class="ability-desc">Rozšiřuje se do všech čtyř světových stran — párování je náročnější.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faze">
+    <div class="eyebrow">Průběh pullu</div>
+    <h2 class="section-title">Časová osa fightu</h2>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-time">0:00</div>
+        <div class="tl-body">
+          <h4>Pull</h4>
+          <p>Tank natočí Sszoraka mimo raid, ihned řešte Apex Predator combo a Corroding Venom stacky.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Main phase</div>
+        <div class="tl-body">
+          <h4>Positioning a soak</h4>
+          <p>Postižení hráči kladou Viscous Cyst, raid řeší Raging Crosswinds páry, tank swapy po Ravage a kolem 6 stacků Corroding Venom.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">~2:00</div>
+        <div class="tl-body">
+          <h4>Howling Maelstrom</h4>
+          <p>Vichrové tunely postrkují raid do cyst, Sszorak dostává Dig In. Využijte DPS cooldowny.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Repeat</div>
+        <div class="tl-body">
+          <h4>Opakování cyklu</h4>
+          <p>Cyklus main phase → Howling Maelstrom se opakuje až do execute. Na Mythic navíc sledujte Serpent's Fury stack a včas se shlukněte kolem označeného hráče.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="role">
+    <div class="eyebrow">Podle role</div>
+    <h2 class="section-title">Co sledovat za tanka, healera a DPS</h2>
+    <div class="roles">
+      <div class="role-card">
+        <div class="role-icon">Tank</div>
+        <h3>Tankování</h3>
+        <ul>
+          <li>Natočte Ravage mimo raid, swapujte po prvním zásahu.</li>
+          <li>Swapujte i kolem 6 stacků Corroding Venom.</li>
+          <li>Udržujte bosse mimo cystové markery na zemi.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">Healer</div>
+        <h3>Healing</h3>
+        <ul>
+          <li>Sledujte damage spike z Mutilate soaku a tank defenzivy.</li>
+          <li>Raid-wide healing připravte na výbuchy cyst a na Howling Maelstrom.</li>
+          <li>Na Mythic léčte spread poškození z Virulence.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">DPS</div>
+        <h3>Damage</h3>
+        <ul>
+          <li>Šetřete cooldowny na Dig In okno (+30 % damage taken).</li>
+          <li>Uhýbejte Tempestu, na Heroic+ řešte Caustic Claws louže.</li>
+          <li>Na Mythic pomozte se stackem na Serpent's Fury a rozestupte se u Virulence.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="obtiznosti">
+    <div class="eyebrow">Škálování obtížnosti</div>
+    <h2 class="section-title">Normal → Heroic → Mythic</h2>
+    <div class="table-scroll">
+      <table class="diff">
+        <thead><tr><th>Obtížnost</th><th>Co se mění</th></tr></thead>
+        <tbody>
+          <tr><td>Normal</td><td>Jen základní mechaniky — Apex Predator combo, Venomous Surge, Raging Crosswinds, Howling Maelstrom.</td></tr>
+          <tr><td>Heroic</td><td>Mutilate potřebuje dvě vyhrazené soak skupiny (pokud není solo-soaknuto Blood DK); přidává se Caustic Claws — jedovaté louže na zemi.</td></tr>
+          <tr><td>Mythic</td><td>Přidává Serpent's Fury / Unbound Ferocity rage wipe mechaniku, To the Slaughter nabíhání a Virulence spread; Raging Crosswinds se rozšiřuje na všechny 4 směry.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="disclaimer">
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Přesná čísla se mezi zdroji mohou lišit (např. přesné % u Unbound Ferocity vychází jen z jednoho zdroje) a Blizzard mechaniky může ještě doladit hotfixy. Wowheadova dedikovaná guide stránka existuje, ale v době psaní se nedala strojově stáhnout — doporučuji ji zkontrolovat přímo.
+    </div>
+  </section>
+
+  <section id="kviz">
+    <div class="eyebrow">Ověřte si znalosti</div>
+    <h2 class="section-title">Kvíz k mechanikám</h2>
+    <p class="section-lede">Šest otázek na hlavní mechaniky fightu. Vyberte odpověď — správná se zvýrazní zeleně, chybná červeně.</p>
+
+    <div class="quiz-list">
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 1</div>
+        <div class="quiz-q-title">Co musí udělat hráč postižený Venomous Surge?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">A</span><span class="opt-text">Okamžitě opustit plošinu</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">B</span><span class="opt-text">Položit Viscous Cyst na určené místo naproti vichrovému tunelu</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">C</span><span class="opt-text">Dispelovat si debuff</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">D</span><span class="opt-text">Zaútočit na tanka</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — cysta zajistí, že odfuk z Howling Maelstrom skončí bezpečně na plošině.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 2</div>
+        <div class="quiz-q-title">Co dostane Sszorak během Howling Maelstrom, a proč je to důležité pro DPS?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Immunity — nedává se žádný damage</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Dig In (+30 % damage taken) — ideální okno na cooldowny</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Heal na 100 % HP</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Enrage, dvojnásobný damage output</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — Dig In dává +30 % damage taken na 25 sekund.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 3</div>
+        <div class="quiz-q-title">Jak by se měl tank vypořádat s Ravage?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">A</span><span class="opt-text">Natočit ho mimo raid a swapovat po prvním zásahu</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">B</span><span class="opt-text">Ignorovat, jde jen o kosmetický efekt</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">C</span><span class="opt-text">Utíkat od bosse</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">D</span><span class="opt-text">Nechat ho dopadnout na celý raid</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — další zásah stejného tanka by dostal +300 % damage.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 4</div>
+        <div class="quiz-q-title">Jak se řeší Raging Crosswinds?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">A</span><span class="opt-text">Celý raid stojí na jednom místě</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">B</span><span class="opt-text">Spárovat se s hráčem s opačným směrem větru</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">C</span><span class="opt-text">Dispelovat efekt healerem</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">D</span><span class="opt-text">Zaútočit na Sszoraka zezadu</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — opačné směry větru se vzájemně vyruší a odfuk je bezpečný.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 5</div>
+        <div class="quiz-q-title">Co se stane na Mythic, pokud se raid nestihne shluknout kolem hráče se Serpent's Fury?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Nic, efekt sám zmizí</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">B</span><span class="opt-text">Sszorak se dočasně stane neporazitelný</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">C</span><span class="opt-text">Přijde Unbound Ferocity — masivní nárůst jeho damage</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">D</span><span class="opt-text">Raid získá extra DPS cooldown</span></label>
+        </div>
+        <div class="quiz-explain">Správně: C — je potřeba 14+ raiderů do 8 yardů od označeného hráče, aby se rage vybila bezpečně.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 6</div>
+        <div class="quiz-q-title">Co přidává obtížnost Heroic navíc oproti Normal?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Serpent's Fury rage mechaniku</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">B</span><span class="opt-text">Caustic Claws — jedovaté louže na zemi</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">C</span><span class="opt-text">Čtyřsměrné Raging Crosswinds</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">D</span><span class="opt-text">Virulence spread</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — Caustic Claws je Heroic+ mechanika, zbytek je Mythic-exclusive.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="zdroje">
+    <h4>Zdroje</h4>
+    <ul>
+      <li><a href="https://www.icy-veins.com/wow/sszorak-raid-guide" target="_blank" rel="noopener">Icy Veins — Sszorak Raid Guide</a></li>
+      <li><a href="https://warcraft.wiki.gg/wiki/Sszorak" target="_blank" rel="noopener">Warcraft Wiki — Sszorak</a></li>
+      <li><a href="https://www.wowhead.com/guide/midnight/raids/venomous-abyss-sszorak-boss-strategy-abilities" target="_blank" rel="noopener">Wowhead — Sszorak Boss Guide (doporučeno zkontrolovat přímo)</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+</html>

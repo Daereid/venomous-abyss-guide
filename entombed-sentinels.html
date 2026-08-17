@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entombed Sentinels</title>
+<style>
+  h1, h2, h3, h4, p, ul, ol, blockquote, figure { margin: 0; }
+
+  :root {
+    --bg: #eae3d0;
+    --bg-panel: #f5efde;
+    --bg-raised: #ffffff;
+    --ink: #201d18;
+    --ink-soft: #5b5546;
+    --ink-faint: #8a8271;
+    --line: #cdc3a6;
+    --line-strong: #b3a884;
+    --venom: #4a7a2e;
+    --venom-glow: #6f9a3f;
+    --venom-bg: #e3ecd3;
+    --blood: #8c2f3a;
+    --blood-bg: #f2e0e0;
+    --breath: #2c6e64;
+    --breath-bg: #dfece7;
+    --warn-bg: #f6e6c8;
+    --warn-ink: #6b4c14;
+    --shadow: rgba(40, 34, 20, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12140f;
+      --bg-panel: #1a1e14;
+      --bg-raised: #20261a;
+      --ink: #e9e5d5;
+      --ink-soft: #b1a891;
+      --ink-faint: #7d7663;
+      --line: #35392c;
+      --line-strong: #454b38;
+      --venom: #9ecf5f;
+      --venom-glow: #b7e07d;
+      --venom-bg: #253320;
+      --blood: #e07d84;
+      --blood-bg: #35201f;
+      --breath: #7fd2be;
+      --breath-bg: #17322c;
+      --warn-bg: #33290f;
+      --warn-ink: #e0bb6f;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12140f;
+    --bg-panel: #1a1e14;
+    --bg-raised: #20261a;
+    --ink: #e9e5d5;
+    --ink-soft: #b1a891;
+    --ink-faint: #7d7663;
+    --line: #35392c;
+    --line-strong: #454b38;
+    --venom: #9ecf5f;
+    --venom-glow: #b7e07d;
+    --venom-bg: #253320;
+    --blood: #e07d84;
+    --blood-bg: #35201f;
+    --breath: #7fd2be;
+    --breath-bg: #17322c;
+    --warn-bg: #33290f;
+    --warn-ink: #e0bb6f;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: Rockwell, "Sitka Text", "Iowan Old Style", Georgia, "Times New Roman", serif;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .num { font-family: "SF Mono", "Cascadia Mono", Consolas, Menlo, monospace; font-variant-numeric: tabular-nums; }
+
+  a { color: var(--venom); text-decoration-color: var(--line-strong); }
+
+  /* ---------- shell ---------- */
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 96px; }
+
+  header.hero {
+    border-bottom: 1px solid var(--line);
+    padding: 40px 24px 28px;
+    background: var(--bg-panel);
+  }
+  .hero-inner { max-width: 920px; margin: 0 auto; }
+  .crumb {
+    font-size: 0.72rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+  }
+  .crumb b { color: var(--breath); }
+  h1.title {
+    font-size: clamp(2.1rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    margin-top: 8px;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 62ch;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .meta-chip {
+    border: 1px solid var(--line-strong);
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    color: var(--ink-soft);
+    background: var(--bg-raised);
+  }
+  .meta-chip b { color: var(--ink); font-family: inherit; }
+
+  /* ---------- sticky nav ---------- */
+  nav.jump {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+  }
+  nav.jump .row {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2px;
+    padding: 0 24px;
+  }
+  nav.jump a {
+    flex: none;
+    padding: 12px 14px;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  nav.jump a:hover, nav.jump a:focus-visible { color: var(--ink); border-bottom-color: var(--venom-glow); }
+
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 8px;
+  }
+  h2.section-title { font-size: 1.6rem; margin-bottom: 6px; }
+  .section-lede { color: var(--ink-soft); max-width: 68ch; margin-top: 8px; }
+
+  /* ---------- key-rule callout ---------- */
+  .callout {
+    margin-top: 22px;
+    border: 1px solid var(--line-strong);
+    background: var(--bg-panel);
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .callout .mark { font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 1.3rem; color: var(--venom); }
+  .callout p { margin: 0; color: var(--ink); }
+  .callout .fine { color: var(--ink-faint); font-size: 0.85rem; margin-top: 6px; }
+
+  /* ---------- golem cards ---------- */
+  .golems {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 26px;
+  }
+  @media (max-width: 720px) { .golems { grid-template-columns: 1fr; } }
+
+  .golem-card {
+    border: 1px solid var(--line-strong);
+    background: var(--bg-raised);
+  }
+  .golem-head {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .golem-card.breath .golem-head { background: var(--breath-bg); }
+  .golem-card.blood .golem-head { background: var(--blood-bg); }
+  .golem-tag { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .golem-card.breath .golem-tag { color: var(--breath); }
+  .golem-card.blood .golem-tag { color: var(--blood); }
+  .golem-head h3 { font-size: 1.25rem; margin-top: 4px; }
+  .golem-head .desc { color: var(--ink-soft); font-size: 0.88rem; margin-top: 6px; }
+
+  .ability-list { padding: 6px 0; }
+  .ability {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    gap: 4px;
+  }
+  .ability:last-child { border-bottom: none; }
+  .ability-name { font-weight: 600; font-size: 0.95rem; }
+  .golem-card.breath .ability-name { color: var(--breath); }
+  .golem-card.blood .ability-name { color: var(--blood); }
+  .ability-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border: 1px solid var(--line);
+    padding: 1px 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .ability-desc { color: var(--ink-soft); font-size: 0.87rem; }
+
+  /* ---------- intermission pairing diagram ---------- */
+  .pairing {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 720px) { .pairing { grid-template-columns: 1fr; } }
+  .pair-card {
+    border: 1px solid var(--line-strong);
+    background: var(--bg-panel);
+    padding: 18px;
+  }
+  .pair-card h4 { font-family: inherit; font-size: 0.95rem; margin: 0 0 12px; color: var(--ink); }
+  .orb-row { display: flex; align-items: center; gap: 10px; }
+  .orb {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "SF Mono", Consolas, monospace;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border: 2px solid var(--venom);
+    color: var(--venom);
+    background: var(--venom-bg);
+    flex: none;
+  }
+  .plus { color: var(--ink-faint); font-size: 1.1rem; }
+  .equals { color: var(--ink-faint); font-size: 1.1rem; margin: 0 4px; }
+  .orb-total {
+    font-family: "SF Mono", Consolas, monospace;
+    font-weight: 700;
+    color: var(--venom);
+    border: 2px solid var(--venom);
+    border-radius: 50%;
+    width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--venom-bg);
+  }
+  .pair-note { margin-top: 12px; font-size: 0.85rem; color: var(--ink-soft); }
+
+  /* ---------- timeline ---------- */
+  .timeline { margin-top: 28px; display: flex; flex-direction: column; }
+  .tl-step {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 18px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .tl-step:first-child { border-top: none; }
+  .tl-time {
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 0.8rem;
+    color: var(--venom);
+    padding-top: 2px;
+  }
+  .tl-body h4 { font-family: inherit; font-size: 1rem; margin: 0 0 4px; color: var(--ink); }
+  .tl-body p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  /* ---------- role columns ---------- */
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+  @media (max-width: 780px) { .roles { grid-template-columns: 1fr; } }
+  .role-card { border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 18px; }
+  .role-card .role-icon { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--venom); }
+  .role-card h3 { font-size: 1.1rem; margin-top: 6px; }
+  .role-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.89rem; }
+  .role-card li { margin-bottom: 8px; }
+
+  /* ---------- difficulty table ---------- */
+  .table-scroll { overflow-x: auto; margin-top: 22px; }
+  table.diff { width: 100%; border-collapse: collapse; min-width: 640px; }
+  table.diff th, table.diff td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.88rem;
+    vertical-align: top;
+  }
+  table.diff th {
+    font-family: Rockwell, Georgia, serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  table.diff td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  table.diff tr:last-child td { border-bottom: none; }
+
+  /* ---------- disclaimer + sources ---------- */
+  /* ---------- quiz ---------- */
+  .quiz-list { margin-top: 22px; }
+  .quiz-q {
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .quiz-q:first-child { border-top: none; padding-top: 0; }
+  .quiz-q-num {
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
+  }
+  .quiz-q-title { font-size: 1.02rem; font-weight: 600; margin-bottom: 14px; }
+  .opt-list { display: grid; gap: 8px; }
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--line-strong);
+    background: var(--bg-raised);
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .opt-input {
+    position: absolute;
+    width: 0; height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .opt-letter {
+    font-family: "SF Mono", Consolas, monospace;
+    font-weight: 700;
+    font-size: 0.72rem;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-faint);
+    flex: none;
+  }
+  .opt-text { font-size: 0.9rem; color: var(--ink-soft); }
+  .opt:hover { border-color: var(--ink-faint); }
+
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] {
+    border-color: var(--venom);
+    background: var(--venom-bg);
+  }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-letter {
+    border-color: var(--venom);
+    color: var(--venom);
+  }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-text { color: var(--ink); }
+  .opt:has(.opt-input:checked):not([data-correct="true"]) {
+    border-color: var(--blood);
+    background: var(--blood-bg);
+  }
+  .opt:has(.opt-input:checked):not([data-correct="true"]) .opt-letter {
+    border-color: var(--blood);
+    color: var(--blood);
+  }
+
+  .quiz-explain {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-left: 2px solid var(--venom);
+    background: var(--bg-panel);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .quiz-q:has(.opt-input:checked) .quiz-explain { display: block; }
+
+  .disclaimer {
+    background: var(--warn-bg);
+    border: 1px solid var(--line-strong);
+    color: var(--warn-ink);
+    padding: 16px 18px;
+    font-size: 0.87rem;
+    margin-top: 22px;
+  }
+  footer {
+    padding: 32px 0 8px;
+    color: var(--ink-faint);
+    font-size: 0.82rem;
+  }
+  footer h4 { font-family: inherit; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  footer a { color: var(--ink-soft); }
+
+  :focus-visible { outline: 2px solid var(--venom-glow); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    section { scroll-margin-top: 52px; }
+  }
+
+  .raid-nav { background: var(--bg-panel); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .raid-nav-row { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 24px; }
+  .raid-nav-home { flex: none; font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 0.8rem; color: var(--ink); text-decoration: none; white-space: nowrap; margin-right: 4px; }
+  .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
+  .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="crumb">The Venomous Abyss <b>→</b> Boss 2 <b>→</b> Entombed Sentinels</div>
+    <h1 class="title">Entombed Sentinels</h1>
+    <p class="subtitle">Kompletní strategie na dvojboss Breath of Ula'tek &amp; Blood of Ula'tek — Vaults of Atal'Utek, Coiled Isle. Sestaveno z Wowhead, Icy Veins, Warcraft Wiki a ExpCarry guidů k patchi 12.1.</p>
+    <div class="meta-row">
+      <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
+      <div class="meta-chip">Raid <b>The Venomous Abyss</b> · Midnight Season 2</div>
+      <div class="meta-chip">Odemčeno <b>18.–19. 8. 2026</b></div>
+      <div class="meta-chip">Obtížnosti <b>LFR / Normal / Heroic / Mythic</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="raid-nav">
+  <div class="raid-nav-row">
+    <a href="index.html" class="raid-nav-home">☣ The Venomous Abyss</a>
+    <a href="nekzali.html" class="raid-pill">1 · Nek'zali</a>
+    <a href="entombed-sentinels.html" class="raid-pill active">2 · Entombed Sentinels</a>
+    <a href="lost-explorers.html" class="raid-pill">3 · Lost Explorers</a>
+    <a href="vashnik.html" class="raid-pill">4 · Vashnik</a>
+    <a href="sszorak.html" class="raid-pill">5 · Sszorak</a>
+    <a href="twin-fangs.html" class="raid-pill">6 · Twin Fangs</a>
+    <a href="coiled-altar.html" class="raid-pill">7 · Coiled Altar</a>
+    <a href="ulatek.html" class="raid-pill">8 · Ula'Tek</a>
+  </div>
+</div>
+
+<nav class="jump">
+  <div class="row">
+    <a href="#prehled">Přehled</a>
+    <a href="#schopnosti">Schopnosti</a>
+    <a href="#intermezzo">Intermezzo</a>
+    <a href="#faze">Časová osa</a>
+    <a href="#role">Role</a>
+    <a href="#obtiznosti">Obtížnosti</a>
+    <a href="#kviz">Kvíz</a>
+    <a href="#zdroje">Zdroje</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="prehled">
+    <div class="eyebrow">Přehled encounteru</div>
+    <h2 class="section-title">Dva golemové, jeden had</h2>
+    <p class="section-lede">Entombed Sentinels jsou prastaří kamenní strážci, kteří po tisíciletí drželi Ula'tek uvězněnou — než ji Zul'jan vypustil. Zkorumpovaní jejím jedem se probouzejí jako <b>Breath of Ula'tek</b> (jed a dech) a <b>Blood of Ula'tek</b> (krev a infekce). Bojujete proti oběma najednou, ale jde v podstatě o dva paralelní fighty spojené jedním rytmem.</p>
+
+    <div class="callout">
+      <div class="mark">§1</div>
+      <div>
+        <p><b>Golemové nesmí zůstat blízko sebe.</b> Pokud jsou od sebe méně než ~25–40 yardů, získávají <i>Ula'tek's Dominance</i> — 99% snížení utrpěného damage. Rozdělte raid na dvě přibližně stejně silné DPS skupiny, každou k jednomu golemovi, a odtáhněte je na opačné konce místnosti.</p>
+        <p class="fine">Zdroje se v přesné vzdálenosti rozchází (Icy Veins uvádí 40 yardů, ExpCarry 25) — bezpečná praxe je dostat je co nejdál od sebe, ideálně do protilehlých koutů arény.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="mark">§2</div>
+      <div>
+        <p><b>Energy a Vitriolic Stasis.</b> Oba golemové nabíjí energii; při 100 energy vstupují na ~30 sekund do <i>Vitriolic Stasis</i> — téměř neporazitelní, slabší golem si doléčí HP na úroveň silnějšího. Cíl je proto udržovat DPS na obě strany <b>vyrovnaný</b>, aby žádný golem nebyl výrazně napřed a stasis vás nezpomalila.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schopnosti">
+    <div class="eyebrow">Mechaniky hlavní fáze</div>
+    <h2 class="section-title">Schopnosti obou golemů</h2>
+    <p class="section-lede">Každá skupina řeší svého golema nezávisle — tanka, healery i DPS rozdělte podle toho, komu na koho zbyde více práce s dispely a pohybem.</p>
+
+    <div class="golems">
+      <div class="golem-card breath">
+        <div class="golem-head">
+          <div class="golem-tag">Golem 1 · jed a dech</div>
+          <h3>Breath of Ula'tek</h3>
+          <div class="desc">Animuje jed do prostoru — hlavní nároky na pohyb a AoE damage.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Toxic Droplets <span class="ability-tag">Pohyb</span></div>
+            <div class="ability-desc">Rozstříkne malé kapky jedu po zemi. Musíte na ně došlápnout a zničit je dřív, než se za ~16 sekund promění v <i>Noxious Blast</i>. Na Heroic zničené kapky vypustí Living Venom, který putuje zpět k bossovi — je potřeba přeskupení.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Living Venom <span class="ability-tag">Dodge</span></div>
+            <div class="ability-desc">Vystřelené projektily jedu, které se po ~4 sekundách vrací zpět. Vyhýbejte se dráze letu, hlavně při návratu.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Venom Coagulation <span class="ability-tag">Priority kill</span></div>
+            <div class="ability-desc">Přisluhující sliz, který přes <i>Contaminate</i> uděluje raid-wide damage celé skupině. Zabijte ho co nejdřív po spawnu.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Empowering Slam <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Melee útok na tanka, který sílí o cca 15 % s každým dalším zásahem stejného cíle. Jak golem stoupá k 100 energy, damage roste — použijte defenzivní cooldowny a zvažte tank swap.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="golem-card blood">
+        <div class="golem-head">
+          <div class="golem-tag">Golem 2 · krev a infekce</div>
+          <h3>Blood of Ula'tek</h3>
+          <div class="desc">Infekce a soak mechaniky — hlavní nároky na dispely a healing.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Blighted Blood <span class="ability-tag">Dispel</span></div>
+            <div class="ability-desc">Nakažlivý debuff s periodickým shadow damage. Musí být dispellnut okamžitě — pokud vyprší sám, po sobě zanechá jedovatou louži na zemi (na Heroic ještě nebezpečnější).</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Unstable Miasma <span class="ability-tag">Soak</span></div>
+            <div class="ability-desc">Označený hráč po ~8 sekundách exploduje a šíří damage na okolí. Soak by měla řešit určená skupina hráčů stojící u sebe, mimo zbytek raidu.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Bloodvenom Injection <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Stackující shadow damage-over-time na tanka. Podobně jako u Breath golema řešte defenzivami a tank swapem po intermezzu.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="intermezzo">
+    <div class="eyebrow">Intermission</div>
+    <h2 class="section-title">Helical Toxins — hádanka s páry</h2>
+    <p class="section-lede">Po hlavní fázi (obvykle po energy resetu) přichází společné intermezzo. Každý hráč dostane ikonu s číslem <b>1, 2 nebo 3</b> (znázorněné spojenými orby jedu). Cíl: srazit se s jiným hráčem tak, aby se vaše čísla <b>sečetla přesně na 4</b> — pak efekt zmizí bez následků.</p>
+
+    <div class="pairing">
+      <div class="pair-card">
+        <h4>Bezpečná kombinace A</h4>
+        <div class="orb-row">
+          <div class="orb">1</div><span class="plus">+</span><div class="orb">3</div><span class="equals">=</span><div class="orb-total">4</div>
+        </div>
+        <p class="pair-note">Hráč s 1 stackem najde hráče se 3 stacky.</p>
+      </div>
+      <div class="pair-card">
+        <h4>Bezpečná kombinace B</h4>
+        <div class="orb-row">
+          <div class="orb">2</div><span class="plus">+</span><div class="orb">2</div><span class="equals">=</span><div class="orb-total">4</div>
+        </div>
+        <p class="pair-note">Dva hráči se 2 stacky se spojí spolu.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:22px;">
+      <div class="mark">!</div>
+      <div>
+        <p><b>Co se stane při chybě:</b> Na Normal/Heroic srážka s kombinací nad 4 na Normal jen odhodí hráče zpět; na <b>Heroic</b> už kombinace nad 4 hráče přímo zabíjí. Na <b>Mythic</b> přibývá <i>Shifting Protovenom</i> — postižení hráči se musí spárovat jen mezi sebou; srazíte-li se s nepostiženým hráčem, spustí se <i>Protovenom Eruption</i> s knockbackem a damage v okruhu 10 yardů.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faze">
+    <div class="eyebrow">Průběh pullu</div>
+    <h2 class="section-title">Časová osa fightu</h2>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-time">0:00</div>
+        <div class="tl-body">
+          <h4>Pull a rozdělení</h4>
+          <p>Ihned rozdělte raid na dvě skupiny, odtáhněte golemy na opačné konce arény, aby nesplnili Ula'tek's Dominance.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Main phase</div>
+        <div class="tl-body">
+          <h4>Souběžný damage race</h4>
+          <p>Obě skupiny řeší své mechaniky (Toxic Droplets / Venom Coagulation na Breath; Blighted Blood / Unstable Miasma na Blood) a udržují energy obou golemů vyrovnanou.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">100 energy</div>
+        <div class="tl-body">
+          <h4>Vitriolic Stasis</h4>
+          <p>~30 s neporazitelnosti, slabší golem doléčen na úroveň silnějšího. Využijte jako oddechový čas na přesuny a cooldowny.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Intermission</div>
+        <div class="tl-body">
+          <h4>Helical Toxins</h4>
+          <p>Celý raid řeší párování na součet 4. Po vyřešení se tankové marky/stacky z hlavní fáze vynulují.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Repeat</div>
+        <div class="tl-body">
+          <h4>Tank swap a další main phase</h4>
+          <p>Po každém intermezzu proveďte tank swap na obou golemech, aby stackující debuffy (Empowering Slam, Bloodvenom Injection) měly čas odeznít. Cyklus se opakuje až do zabití obou golemů — snažte se je srazit na nula HP zhruba ve stejnou dobu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="role">
+    <div class="eyebrow">Podle role</div>
+    <h2 class="section-title">Co sledovat za tanka, healera a DPS</h2>
+    <div class="roles">
+      <div class="role-card">
+        <div class="role-icon">Tank</div>
+        <h3>Tankování</h3>
+        <ul>
+          <li>Udržujte golemy min. 25–40 yardů od sebe po celý fight.</li>
+          <li>Swapujte se po každém intermezzu, ať stacky Empowering Slam / Bloodvenom Injection expirují.</li>
+          <li>Před koncem hlavní fáze (vysoký stack) použijte defenzivní cooldown.</li>
+          <li>Snažte se udržet HP obou golemů vyrovnané před Vitriolic Stasis.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">Healer</div>
+        <h3>Healing</h3>
+        <ul>
+          <li>Blighted Blood dispelujte okamžitě — vyprchání efektu je horší než dispel.</li>
+          <li>Plánujte raid cooldowny na konec hlavní fáze, kdy stacky marků vrcholí.</li>
+          <li>Sledujte skupinu řešící Unstable Miasma soak, ať nejsou izolovaní od topheal rangu.</li>
+          <li>Vlastní pár v Helical Toxins vyřešte rychle, ať se můžete vrátit k healování.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">DPS</div>
+        <h3>Damage</h3>
+        <ul>
+          <li>Držte poměr DPS mezi oběma golemy vyrovnaný — nevytahujte jednoho příliš napřed.</li>
+          <li>Venom Coagulation zabijte prioritně, ať nespustí Contaminate na celý raid.</li>
+          <li>Šlapejte na Toxic Droplets včas, na Heroic sledujte i vracející se Living Venom.</li>
+          <li>V intermezzu si předem domluvte pevné dvojice (1↔3, 2↔2), obzvlášť na Mythic.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="obtiznosti">
+    <div class="eyebrow">Škálování obtížnosti</div>
+    <h2 class="section-title">Normal → Heroic → Mythic</h2>
+    <div class="table-scroll">
+      <table class="diff">
+        <thead>
+          <tr><th>Obtížnost</th><th>Co se mění</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Normal</td>
+            <td>Základní verze všech mechanik s velkorysými časovými okny. Chyba v Helical Toxins jen odhodí hráče zpět.</td>
+          </tr>
+          <tr>
+            <td>Heroic</td>
+            <td>Přísnější positioning, nebezpečnější jedové efekty (zničené Toxic Droplets vypustí Living Venom), přísnější dispel management. Chyba v Helical Toxins (kombinace nad 4) už hráče <b>zabíjí</b>.</td>
+          </tr>
+          <tr>
+            <td>Mythic</td>
+            <td>Čistě exekuční check: DPS mezi golemy musí být přesně vyvážený, přidává se <i>Shifting Protovenom</i> v intermezzu (postižení hráči se párují jen mezi sebou, srážka s nepostiženým = knockback + damage), management prostoru je kritický.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="disclaimer">
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Přesná čísla (vzdálenosti, timery, damage) se mezi komunitními guide zdroji drobně liší a Blizzard je může ještě doladit hotfixy. Před pullem doporučuji zkontrolovat aktuální verzi guide na Wowheadu.
+    </div>
+  </section>
+
+  <section id="kviz">
+    <div class="eyebrow">Ověřte si znalosti</div>
+    <h2 class="section-title">Kvíz k mechanikám</h2>
+    <p class="section-lede">Šest otázek na hlavní mechaniky fightu. Vyberte odpověď — správná se zvýrazní zeleně, chybná červeně.</p>
+
+    <div class="quiz-list">
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 1</div>
+        <div class="quiz-q-title">Co se stane, když jsou Breath of Ula'tek a Blood of Ula'tek k sobě blíž než bezpečná vzdálenost?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">A</span><span class="opt-text">Získají 99% redukci utrpěného damage (Ula'tek's Dominance)</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">B</span><span class="opt-text">Okamžitě se uzdraví na plné HP</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">C</span><span class="opt-text">Spustí se Helical Toxins intermezzo</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">D</span><span class="opt-text">Vymění si aktuální stacky tank debuffu</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — proto je nutné golemy odtáhnout na opačné konce arény.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 2</div>
+        <div class="quiz-q-title">Co se stane, když golem dosáhne 100 energy?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Vstoupí do Vitriolic Stasis a slabší golem se doléčí na úroveň silnějšího</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Okamžitě zemře</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Zdvojnásobí rychlost útoku</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Spustí Empowering Slam na celý raid</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — proto je klíčové držet DPS na oba golemy vyrovnaný.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 3</div>
+        <div class="quiz-q-title">Na kolik se musí sečíst stacky v Helical Toxins, aby se efekt neutralizoval bez následků?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">A</span><span class="opt-text">3</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">B</span><span class="opt-text">4</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">C</span><span class="opt-text">5</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">D</span><span class="opt-text">6</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — pár 1+3 nebo 2+2.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 4</div>
+        <div class="quiz-q-title">Jakou schopnost Breath of Ula'tek je potřeba zabít prioritně, aby nespustila raid-wide damage přes Contaminate?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">A</span><span class="opt-text">Toxic Droplets</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">B</span><span class="opt-text">Living Venom</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">C</span><span class="opt-text">Venom Coagulation</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">D</span><span class="opt-text">Empowering Slam</span></label>
+        </div>
+        <div class="quiz-explain">Správně: C — je to add, ne golem schopnost, a musí padnout rychle.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 5</div>
+        <div class="quiz-q-title">Co je potřeba udělat s debuffem Blighted Blood od Blood of Ula'tek?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Nechat ho vyprchat samovolně</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">B</span><span class="opt-text">Okamžitě ho dispelovat</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">C</span><span class="opt-text">Nastoupit na něj, aby explodoval</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">D</span><span class="opt-text">Ignorovat, dokud nedosáhne 3 stacků</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — pokud vyprší sám, zanechá po sobě jedovatou louži.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 6</div>
+        <div class="quiz-q-title">Kdy je vhodné provést tank swap na obou golemech?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Po každém intermezzu (Helical Toxins)</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">B</span><span class="opt-text">Jen jednou za celý fight</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">C</span><span class="opt-text">Při Vitriolic Stasis</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">D</span><span class="opt-text">Nikdy, tank se nemění</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — dá to čas stackům Empowering Slam / Bloodvenom Injection odeznít.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="zdroje">
+    <h4>Zdroje</h4>
+    <ul>
+      <li><a href="https://www.wowhead.com/guide/midnight/raids/venomous-abyss-entombed-sentinels-boss-strategy-abilities" target="_blank" rel="noopener">Wowhead — Entombed Sentinels Boss Guide</a></li>
+      <li><a href="https://www.icy-veins.com/wow/entombed-sentinels-raid-guide" target="_blank" rel="noopener">Icy Veins — Entombed Sentinels Raid Guide</a></li>
+      <li><a href="https://warcraft.wiki.gg/wiki/Entombed_Sentinels" target="_blank" rel="noopener">Warcraft Wiki — Entombed Sentinels</a></li>
+      <li><a href="https://expcarry.com/entombed-sentinels-boss-guide" target="_blank" rel="noopener">ExpCarry — Entombed Sentinels Boss Guide</a></li>
+      <li><a href="https://www.wowhead.com/guide/midnight/raids/the-venomous-abyss-overview-location-rewards-bosses" target="_blank" rel="noopener">Wowhead — The Venomous Abyss Raid Overview</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+</html>

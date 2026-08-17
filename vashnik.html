@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vashnik the Malignant</title>
+<style>
+  h1, h2, h3, h4, p, ul, ol, blockquote, figure { margin: 0; }
+
+  :root {
+    --bg: #eae3d0;
+    --bg-panel: #f5efde;
+    --bg-raised: #ffffff;
+    --ink: #201d18;
+    --ink-soft: #5b5546;
+    --ink-faint: #8a8271;
+    --line: #cdc3a6;
+    --line-strong: #b3a884;
+    --venom: #4a7a2e;
+    --venom-glow: #6f9a3f;
+    --venom-bg: #e3ecd3;
+    --accent-a: #7a3d6e;
+    --accent-a-bg: #f0e1ec;
+    --accent-b: #a1521f;
+    --accent-b-bg: #f2e3cf;
+    --accent-c: #1f7a6e;
+    --accent-c-bg: #dcecea;
+    --mythic: #6b3fa0;
+    --mythic-bg: #ece1f5;
+    --warn-bg: #f6e6c8;
+    --warn-ink: #6b4c14;
+    --danger: #8c2f3a;
+    --danger-bg: #f2e0e0;
+    --shadow: rgba(40, 34, 20, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12140f;
+      --bg-panel: #1a1e14;
+      --bg-raised: #20261a;
+      --ink: #e9e5d5;
+      --ink-soft: #b1a891;
+      --ink-faint: #7d7663;
+      --line: #35392c;
+      --line-strong: #454b38;
+      --venom: #9ecf5f;
+      --venom-glow: #b7e07d;
+      --venom-bg: #253320;
+      --accent-a: #d98fc4;
+      --accent-a-bg: #331e2c;
+      --accent-b: #e0954f;
+      --accent-b-bg: #35270f;
+      --accent-c: #6fd1c0;
+      --accent-c-bg: #123029;
+      --mythic: #b98fe0;
+      --mythic-bg: #281c35;
+      --warn-bg: #33290f;
+      --warn-ink: #e0bb6f;
+      --danger: #e07d84;
+      --danger-bg: #35201f;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12140f;
+    --bg-panel: #1a1e14;
+    --bg-raised: #20261a;
+    --ink: #e9e5d5;
+    --ink-soft: #b1a891;
+    --ink-faint: #7d7663;
+    --line: #35392c;
+    --line-strong: #454b38;
+    --venom: #9ecf5f;
+    --venom-glow: #b7e07d;
+    --venom-bg: #253320;
+    --accent-a: #d98fc4;
+    --accent-a-bg: #331e2c;
+    --accent-b: #e0954f;
+    --accent-b-bg: #35270f;
+    --accent-c: #6fd1c0;
+    --accent-c-bg: #123029;
+    --mythic: #b98fe0;
+    --mythic-bg: #281c35;
+    --warn-bg: #33290f;
+    --warn-ink: #e0bb6f;
+    --danger: #e07d84;
+    --danger-bg: #35201f;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: Rockwell, "Sitka Text", "Iowan Old Style", Georgia, "Times New Roman", serif; text-wrap: balance; margin: 0; color: var(--ink); }
+  a { color: var(--venom); text-decoration-color: var(--line-strong); }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 96px; }
+  header.hero { border-bottom: 1px solid var(--line); padding: 40px 24px 28px; background: var(--bg-panel); }
+  .hero-inner { max-width: 920px; margin: 0 auto; }
+  .crumb { font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px; }
+  .crumb b { color: var(--accent-a); }
+  h1.title { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; }
+  .subtitle { margin-top: 8px; color: var(--ink-soft); font-size: 1.05rem; max-width: 62ch; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .meta-chip { border: 1px solid var(--line-strong); padding: 5px 12px; font-size: 0.75rem; letter-spacing: 0.03em; color: var(--ink-soft); background: var(--bg-raised); }
+  .meta-chip b { color: var(--ink); font-family: inherit; }
+
+  nav.jump { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  nav.jump .row { max-width: 920px; margin: 0 auto; display: flex; gap: 2px; padding: 0 24px; }
+  nav.jump a { flex: none; padding: 12px 14px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; }
+  nav.jump a:hover, nav.jump a:focus-visible { color: var(--ink); border-bottom-color: var(--venom-glow); }
+
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 52px; }
+  section:last-of-type { border-bottom: none; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+  h2.section-title { font-size: 1.6rem; margin-bottom: 6px; }
+  .section-lede { color: var(--ink-soft); max-width: 68ch; margin-top: 8px; }
+
+  .callout { margin-top: 22px; border: 1px solid var(--line-strong); background: var(--bg-panel); padding: 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+  .callout .mark { font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 1.3rem; color: var(--venom); }
+  .callout p { margin: 0; color: var(--ink); }
+  .callout .fine { color: var(--ink-faint); font-size: 0.85rem; margin-top: 6px; }
+  .callout.danger { border-color: var(--danger); background: var(--danger-bg); }
+  .callout.danger .mark { color: var(--danger); }
+
+  .groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; }
+  @media (max-width: 900px) { .groups { grid-template-columns: 1fr; } }
+  .group-card { border: 1px solid var(--line-strong); background: var(--bg-raised); }
+  .group-head { padding: 16px 18px; border-bottom: 1px solid var(--line); }
+  .group-card.a .group-head { background: var(--accent-a-bg); }
+  .group-card.b .group-head { background: var(--accent-b-bg); }
+  .group-card.c .group-head { background: var(--accent-c-bg); }
+  .group-card.mythic .group-head { background: var(--mythic-bg); }
+  .group-tag { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .group-card.a .group-tag { color: var(--accent-a); }
+  .group-card.b .group-tag { color: var(--accent-b); }
+  .group-card.c .group-tag { color: var(--accent-c); }
+  .group-card.mythic .group-tag { color: var(--mythic); }
+  .group-head h3 { font-size: 1.15rem; margin-top: 4px; }
+  .group-head .desc { color: var(--ink-soft); font-size: 0.86rem; margin-top: 6px; }
+
+  .ability-list { padding: 6px 0; }
+  .ability { padding: 12px 18px; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+  .ability:last-child { border-bottom: none; }
+  .ability-name { font-weight: 600; font-size: 0.93rem; }
+  .group-card.a .ability-name { color: var(--accent-a); }
+  .group-card.b .ability-name { color: var(--accent-b); }
+  .group-card.c .ability-name { color: var(--accent-c); }
+  .group-card.mythic .ability-name { color: var(--mythic); }
+  .ability-tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--line); padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
+  .ability-desc { color: var(--ink-soft); font-size: 0.86rem; }
+
+  .timeline { margin-top: 28px; display: flex; flex-direction: column; }
+  .tl-step { display: grid; grid-template-columns: 130px 1fr; gap: 18px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .tl-step:first-child { border-top: none; }
+  .tl-time { font-family: "SF Mono", Consolas, monospace; font-size: 0.8rem; color: var(--venom); padding-top: 2px; }
+  .tl-body h4 { font-family: inherit; font-size: 1rem; margin: 0 0 4px; color: var(--ink); }
+  .tl-body p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+  @media (max-width: 780px) { .roles { grid-template-columns: 1fr; } }
+  .role-card { border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 18px; }
+  .role-card .role-icon { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--venom); }
+  .role-card h3 { font-size: 1.1rem; margin-top: 6px; }
+  .role-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.89rem; }
+  .role-card li { margin-bottom: 8px; }
+
+  .table-scroll { overflow-x: auto; margin-top: 22px; }
+  table.diff { width: 100%; border-collapse: collapse; min-width: 640px; }
+  table.diff th, table.diff td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 0.88rem; vertical-align: top; }
+  table.diff th { font-family: Rockwell, Georgia, serif; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); border-bottom: 1px solid var(--line-strong); }
+  table.diff td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  table.diff tr:last-child td { border-bottom: none; }
+
+  .quiz-list { margin-top: 22px; }
+  .quiz-q { padding: 22px 0; border-top: 1px solid var(--line); }
+  .quiz-q:first-child { border-top: none; padding-top: 0; }
+  .quiz-q-num { font-family: "SF Mono", Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+  .quiz-q-title { font-size: 1.02rem; font-weight: 600; margin-bottom: 14px; }
+  .opt-list { display: grid; gap: 8px; }
+  .opt { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 10px 14px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .opt-input { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+  .opt-letter { font-family: "SF Mono", Consolas, monospace; font-weight: 700; font-size: 0.72rem; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center; color: var(--ink-faint); flex: none; }
+  .opt-text { font-size: 0.9rem; color: var(--ink-soft); }
+  .opt:hover { border-color: var(--ink-faint); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] { border-color: var(--venom); background: var(--venom-bg); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-letter { border-color: var(--venom); color: var(--venom); }
+  .quiz-q:has(.opt-input:checked) .opt[data-correct="true"] .opt-text { color: var(--ink); }
+  .opt:has(.opt-input:checked):not([data-correct="true"]) { border-color: var(--danger); background: var(--danger-bg); }
+  .quiz-explain { display: none; margin-top: 12px; padding: 10px 14px; border-left: 2px solid var(--venom); background: var(--bg-panel); font-size: 0.85rem; color: var(--ink-soft); }
+  .quiz-q:has(.opt-input:checked) .quiz-explain { display: block; }
+
+  .disclaimer { background: var(--warn-bg); border: 1px solid var(--line-strong); color: var(--warn-ink); padding: 16px 18px; font-size: 0.87rem; margin-top: 22px; }
+  footer { padding: 32px 0 8px; color: var(--ink-faint); font-size: 0.82rem; }
+  footer h4 { font-family: inherit; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  footer a { color: var(--ink-soft); }
+
+  :focus-visible { outline: 2px solid var(--venom-glow); outline-offset: 2px; }
+
+  .raid-nav { background: var(--bg-panel); border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .raid-nav-row { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 24px; }
+  .raid-nav-home { flex: none; font-family: Rockwell, Georgia, serif; font-weight: 700; font-size: 0.8rem; color: var(--ink); text-decoration: none; white-space: nowrap; margin-right: 4px; }
+  .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
+  .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="crumb">The Venomous Abyss <b>→</b> Boss 4 <b>→</b> Vashnik the Malignant</div>
+    <h1 class="title">Vashnik the Malignant</h1>
+    <p class="subtitle">Kompletní strategie na alchymistu jedu v Chamber of Virulence — Vaults of Atal'Utek. Sestaveno z Icy Veins, ExpCarry a Warcraft Wiki guidů k patchi 12.1.</p>
+    <div class="meta-row">
+      <div class="meta-chip">Patch <b>12.1 — Curse of Ula'tek</b></div>
+      <div class="meta-chip">Raid <b>The Venomous Abyss</b> · Midnight Season 2</div>
+      <div class="meta-chip">Boss <b>4 z 8</b></div>
+      <div class="meta-chip">Obtížnosti <b>LFR / Normal / Heroic / Mythic</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="raid-nav">
+  <div class="raid-nav-row">
+    <a href="index.html" class="raid-nav-home">☣ The Venomous Abyss</a>
+    <a href="nekzali.html" class="raid-pill">1 · Nek'zali</a>
+    <a href="entombed-sentinels.html" class="raid-pill">2 · Entombed Sentinels</a>
+    <a href="lost-explorers.html" class="raid-pill">3 · Lost Explorers</a>
+    <a href="vashnik.html" class="raid-pill active">4 · Vashnik</a>
+    <a href="sszorak.html" class="raid-pill">5 · Sszorak</a>
+    <a href="twin-fangs.html" class="raid-pill">6 · Twin Fangs</a>
+    <a href="coiled-altar.html" class="raid-pill">7 · Coiled Altar</a>
+    <a href="ulatek.html" class="raid-pill">8 · Ula'Tek</a>
+  </div>
+</div>
+
+<nav class="jump">
+  <div class="row">
+    <a href="#prehled">Přehled</a>
+    <a href="#schopnosti">Schopnosti</a>
+    <a href="#faze">Časová osa</a>
+    <a href="#role">Role</a>
+    <a href="#obtiznosti">Obtížnosti</a>
+    <a href="#kviz">Kvíz</a>
+    <a href="#zdroje">Zdroje</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="prehled">
+    <div class="eyebrow">Přehled encounteru</div>
+    <h2 class="section-title">Alchymista v Chamber of Virulence</h2>
+    <p class="section-lede">Vashnik the Malignant destiluje jed Ula'tek do zbraní a čerpá sílu ze tří magických fontán — Krve, Stínu a Ohně — rozmístěných po komnatě. Zároveň spawnuje venom-adds, které musí padnout dřív, než dorazí ke středové Malignant Cavity.</p>
+
+    <div class="callout danger">
+      <div class="mark">§1</div>
+      <div>
+        <p><b>Imbibe a rotace fontán.</b> Zhruba každých 90 sekund (při 100 Energy) se Vashnik napije ze dvou nejbližších fontán — získá +100 % damage daného typu jedu a +50 % max HP pro adds toho typu (stackuje, trvá 1,5 min). Tank musí bosse vodit tak, aby žádná fontána nebyla použita víc než dvakrát v řadě (např. Krev+Stín → Stín+Oheň → Oheň+Krev).</p>
+        <p class="fine">Přesná čísla (90 s, 100 Energy) uvádí jen ExpCarry/Icy Veins parafrázovaně, berte jako orientační — raid je čerstvý a Blizzard může hodnoty doladit hotfixy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schopnosti">
+    <div class="eyebrow">Mechaniky fightu</div>
+    <h2 class="section-title">Schopnosti Vashnika</h2>
+    <p class="section-lede">Fight kombinuje tankový management, add priority a rozlišování typu infekce podle aktivní fontány.</p>
+
+    <div class="groups">
+      <div class="group-card a">
+        <div class="group-head">
+          <div class="group-tag">Boss &amp; tank</div>
+          <h3>Vashnik samotný</h3>
+          <div class="desc">Hlavní castované schopnosti a tank mechaniky.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Imbibe</div>
+            <div class="ability-desc">Napije se ze dvou nejbližších fontán — jádro mechaniky (viz výše).</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Dripping Fangs <span class="ability-tag">Tank</span></div>
+            <div class="ability-desc">Těžký physical hit + Nature DoT, stackující debuff zvyšující physical damage taken. Vyžaduje tank swap na stack.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Plague Froth</div>
+            <div class="ability-desc">Debuff na náhodné hráče; při vypršení vystřelí 4 směrové "Plague Wave" linie. Nositel se musí odsunout od raidu/okrajů komnaty dřív, než vyprší.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Malignant Burst <span class="ability-tag">Wipe check</span></div>
+            <div class="ability-desc">Raid-wide damage + DoT, pokud add dorazí k Malignant Cavity. Víc než jeden příchod = fakticky wipe.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card b">
+        <div class="group-head">
+          <div class="group-tag">Fountain adds</div>
+          <h3>Priorita: Oheň → Krev → Stín</h3>
+          <div class="desc">Adds spawnující z aktuálně empowerovaných fontán.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Burning Venoms <span class="ability-tag">Top priority</span></div>
+            <div class="ability-desc">Z Fountain of Flame. Konstantní raid damage, dokud žijí. Smrt spustí Caustic Surge (raid damage) — nezabíjejte dva najednou (na Heroic nebezpečné stacky DoT).</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Clotting Venom</div>
+            <div class="ability-desc">Z Fountain of Blood. CC-immune, chráněn Sanguinous Fortitude. Při smrti se rozdělí na menší Splitting Clot adds.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Shrouded Venoms <span class="ability-tag">×5</span></div>
+            <div class="ability-desc">Z Fountain of Shadow, nejnižší priorita. Chráněni štítem; smrt vystřelí Umbral Ejection střelu — rozestupte se.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-card c">
+        <div class="group-head">
+          <div class="group-tag">Adaptive infections</div>
+          <h3>Podle aktivní fontány</h3>
+          <div class="desc">Náhodní hráči dostávají variantu podle typu jedu.</div>
+        </div>
+        <div class="ability-list">
+          <div class="ability">
+            <div class="ability-name">Exploding Infection <span class="ability-tag">Fire</span></div>
+            <div class="ability-desc">Musí odejít od raidu dřív, než vybuchne — damage roste se vzdáleností od raidu (dál od raidu = bezpečnější pro ostatní).</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Siphoning Infection <span class="ability-tag">Blood</span></div>
+            <div class="ability-desc">Neléčitelný absorb — ostatní hráči musí stát blízko postiženého, aby se HP přeneslo/soaklo do něj.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Stygian Infection <span class="ability-tag">Shadow</span></div>
+            <div class="ability-desc">Periodický shadow damage + healing absorb, zanechává stopu Stygian Burst — je nutné se stále hýbat.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faze">
+    <div class="eyebrow">Průběh pullu</div>
+    <h2 class="section-title">Časová osa fightu</h2>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-time">0:00</div>
+        <div class="tl-body">
+          <h4>Pull</h4>
+          <p>Tank umístí Vashnika mezi dvě fontány, které chcete jako první empowerovat. Bloodlust/Heroism na pull.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-time">Kontinuální cyklus</div>
+        <div class="tl-body">
+          <h4>Energy → Imbibe → adds</h4>
+          <p>Bez tvrdých fází — energie roste, Imbibe vymění empowerované fontány a infekce, adds musí padnout dřív, než dorazí ke Cavity, vyřešte Plague Froth. Cyklus se opakuje až do kill.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="role">
+    <div class="eyebrow">Podle role</div>
+    <h2 class="section-title">Co sledovat za tanka, healera a DPS</h2>
+    <div class="roles">
+      <div class="role-card">
+        <div class="role-icon">Tank</div>
+        <h3>Tankování</h3>
+        <ul>
+          <li>Držte bosse mezi fontánami, které chcete empowerovat jako další.</li>
+          <li>Rotujte fontány tak, aby žádná nebyla použita víc než 2× v řadě.</li>
+          <li>Swapujte čistě na stacky Dripping Fangs, defenzivy při překrytí s infekcí.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">Healer</div>
+        <h3>Healing</h3>
+        <ul>
+          <li>Připravte cooldowny na Malignant Burst.</li>
+          <li>Exploding Infection lze dispelovat pro bezpečnější/rychlejší explozi.</li>
+          <li>Siphoning/Stygian Infection řešte soakem/absorb-removal, ne čistým healingem.</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">DPS</div>
+        <h3>Damage</h3>
+        <ul>
+          <li>Držte add priority: Burning Venoms → Clotting Venom → Shrouded Venoms.</li>
+          <li>Nikdy CC Clotting Venom, rozestupte se na smrt Shrouded Venoms.</li>
+          <li>Pomozte stacknout/cleavnout Burning Venoms bez zabití dvou najednou.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="obtiznosti">
+    <div class="eyebrow">Škálování obtížnosti</div>
+    <h2 class="section-title">Normal → Heroic → Mythic</h2>
+    <div class="table-scroll">
+      <table class="diff">
+        <thead><tr><th>Obtížnost</th><th>Co se mění</th></tr></thead>
+        <tbody>
+          <tr><td>Normal</td><td>Základní kit — Imbibe, fountain adds, adaptive infekce.</td></tr>
+          <tr><td>Heroic</td><td>Přidává Malignant Catalyst — orba nad Cavity střílí Catalytic Bile; zásah hráče = těžký Nature damage, žádný zásah = raid-wide damage. Vyžaduje vyhrazené interceptory.</td></tr>
+          <tr><td>Mythic</td><td>Přidává Malignant Tumors s Hardened Tumor (99 % redukce damage) — musí být nejdřív zasaženy Plague Wave, než je lze zabít. Add, který dorazí k Cavity, teď dává stackující 1min DoT místo okamžitého wipe.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="disclaimer">
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Přesný timing Imbibe (90 s / 100 Energy) a směr rotace tanka (jeden zdroj uvádí "proti směru hodinových ručiček") nejsou nezávisle potvrzené více zdroji. Před pullem doporučujeme zkontrolovat aktuální verzi guide.
+    </div>
+  </section>
+
+  <section id="kviz">
+    <div class="eyebrow">Ověřte si znalosti</div>
+    <h2 class="section-title">Kvíz k mechanikám</h2>
+    <p class="section-lede">Šest otázek na hlavní mechaniky fightu. Vyberte odpověď — správná se zvýrazní zeleně, chybná červeně.</p>
+
+    <div class="quiz-list">
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 1</div>
+        <div class="quiz-q-title">Co dělá Imbibe?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">A</span><span class="opt-text">Vashnik se napije ze dvou nejbližších fontán a získá jejich buffy</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">B</span><span class="opt-text">Vashnik se uzdraví na plné HP</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">C</span><span class="opt-text">Zničí všechny fontány najednou</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q1"><span class="opt-letter">D</span><span class="opt-text">Vyvolá intermezzo</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — proto tank musí kontrolovat, které dvě fontány jsou nejblíž.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 2</div>
+        <div class="quiz-q-title">Kterého adda je potřeba zabíjet s nejvyšší prioritou?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Burning Venoms</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Clotting Venom</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Shrouded Venoms</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Všichni stejně</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — Burning Venoms dávají konstantní raid damage, dokud žijí.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 3</div>
+        <div class="quiz-q-title">Co se stane, pokud Clotting Venom zemře?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">A</span><span class="opt-text">Nic, jednoduše zmizí</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">B</span><span class="opt-text">Rozdělí se na menší Splitting Clot adds</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">C</span><span class="opt-text">Uzdraví Vashnika</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">D</span><span class="opt-text">Zruší aktuální Imbibe</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — proto se také nesmí CC-ovat, aby se rozdělení nezkomplikovalo.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 4</div>
+        <div class="quiz-q-title">Co musí udělat hráč postižený Exploding Infection?</div>
+        <div class="opt-list">
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">A</span><span class="opt-text">Odejít od raidu, než vybuchne</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">B</span><span class="opt-text">Stát co nejblíž ostatním</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">C</span><span class="opt-text">Zaútočit na fontánu</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">D</span><span class="opt-text">Ignorovat efekt</span></label>
+        </div>
+        <div class="quiz-explain">Správně: A — damage roste se vzdáleností od raidu, takže dál od raidu je pro ostatní bezpečněji.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 5</div>
+        <div class="quiz-q-title">Co se stane, pokud add dorazí k Malignant Cavity (Normal/Heroic)?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Nic zvláštního</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">B</span><span class="opt-text">Malignant Burst — raid-wide damage + DoT, víc příchodů je fakticky wipe</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">C</span><span class="opt-text">Vashnik ztratí veškerý damage</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">D</span><span class="opt-text">Add se vrátí zpět k fontáně</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — proto je add-control klíčovou součástí celého fightu.</div>
+      </div>
+
+      <div class="quiz-q">
+        <div class="quiz-q-num">Otázka 6</div>
+        <div class="quiz-q-title">Co dělá Hardened Tumor na Mythic obtížnosti?</div>
+        <div class="opt-list">
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Léčí Vashnika</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">B</span><span class="opt-text">Dává Malignant Tumor 99 % redukci damage, dokud ho nezasáhne Plague Wave</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">C</span><span class="opt-text">Zrychluje Imbibe cyklus</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">D</span><span class="opt-text">Automaticky zabije tumor po 10 s</span></label>
+        </div>
+        <div class="quiz-explain">Správně: B — musíte na tumor nejdřív navést Plague Wave, než ho půjde zabít.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="zdroje">
+    <h4>Zdroje</h4>
+    <ul>
+      <li><a href="https://www.icy-veins.com/wow/vashnik-raid-guide" target="_blank" rel="noopener">Icy Veins — Vashnik Raid Guide</a></li>
+      <li><a href="https://expcarry.com/vashnik-malignant-boss-guide" target="_blank" rel="noopener">ExpCarry — Vashnik the Malignant Boss Guide</a></li>
+      <li><a href="https://warcraft.wiki.gg/wiki/Vashnik_the_Malignant" target="_blank" rel="noopener">Warcraft Wiki — Vashnik the Malignant</a></li>
+      <li><a href="https://www.wowhead.com/guide/midnight/raids/venomous-abyss-vashnik-the-malignant-boss-strategy-abilities" target="_blank" rel="noopener">Wowhead — Vashnik the Malignant Boss Guide (doporučeno zkontrolovat přímo)</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+</html>
