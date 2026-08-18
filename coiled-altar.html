@@ -267,12 +267,19 @@
   <section id="prehled">
     <div class="eyebrow">Přehled encounteru</div>
     <h2 class="section-title">Rituál dvou vyzyvatelů</h2>
-    <p class="section-lede">Zul'jan a Hex Lord Malacrass provádí u Altaru společný rituál, aby uvolnili Ula'tek — z pomsty i za slíbenou odměnu proti Amani. Mechanicky jde o <b>tři fighty slité v jeden</b>: nejdřív samotný Zul'jan (jed/melee), po jeho smrti samotný Malacrass (stín/posednutí), a nakonec se oba vrátí společně ve finální fázi.</p>
+    <p class="section-lede">Zul'jan a Hex Lord Malacrass provádí u Altaru společný rituál, aby uvolnili Ula'tek — z pomsty i za slíbenou odměnu proti Amani. Je to citelný skok v obtížnosti oproti předchozím bossům. Mechanicky jde o <b>tři fáze plus krátké intermezzo</b>: nejdřív samotný Zul'jan (jed/orby), po jeho smrti samotný Malacrass (stín/duchové), pak intermezzo s Bloodlustem, a nakonec oba bossové společně ve finální fázi.</p>
 
-    <div class="callout danger">
+    <div class="callout">
       <div class="mark">§1</div>
       <div>
-        <p><b>Soulbind trest ve Fázi 3.</b> Když se oba bossové vrátí společně, nechat jednoho žít příliš dlouho po smrti druhého uděluje přeživšímu <b>+500 % rychlost útoku a damage</b> — to prakticky okamžitě ukončí pokus. HP obou bossů musí ve Fázi 3 klesat vyrovnaně/společně.</p>
+        <p><b>Rozdejte role ještě před pullem.</b> Umístěte world markery na obou koncích plošiny (na stackování duchů ve Fázi 2 a 3), určete 2–3 mobilní hráče jako sběrače orbů (Fáze 1 a 3), a na Heroic navíc 2–3 hráče na interrupt rotaci addu ve Fázi 2 a rozdělte raid na půl pro soak Guillotine.</p>
+      </div>
+    </div>
+
+    <div class="callout danger">
+      <div class="mark">§2</div>
+      <div>
+        <p><b>Enrage ve Fázi 3.</b> Když se oba bossové vrátí společně, nechat jednoho žít příliš dlouho po smrti druhého uděluje přeživšímu masivní enrage (+500 % rychlost útoku a damage podle staršího zdroje) — to prakticky okamžitě ukončí pokus. HP obou bossů musí ve Fázi 3 klesat vyrovnaně/společně.</p>
       </div>
     </div>
   </section>
@@ -292,23 +299,27 @@
         <div class="ability-list">
           <div class="ability">
             <div class="ability-name">Fangs of the Coiled Altar</div>
-            <div class="ability-desc">Opakující se raid-wide jedový damage, aplikuje Twinfang Toxin na tanky.</div>
+            <div class="ability-desc">Opakující se raid-wide jedový kanál, po sobě zanechává zmenšující se jedové louže. Aplikuje i Twinfang Toxin na tanky.</div>
           </div>
           <div class="ability">
-            <div class="ability-name">Toxic Deluge</div>
-            <div class="ability-desc">Spawnuje zelené jedové kruhy/louže, po kterých zůstávají sběratelné venom orby.</div>
+            <div class="ability-name">Toxic Deluge <span class="ability-tag">Sběr</span></div>
+            <div class="ability-desc">Zelené swirlie po místnosti dávají area damage a nechávají po sobě sběratelné Coalesced Venom orby, které tikají raid damage, dokud žijí. Určení sběrači je zvednou a po pár sekundách odnesou na značky — na Heroic ničení víc než 5–6 orbů najednou nastackuje nebezpečný raid-wide DoT.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Sever <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Frontální kužel na tanka — natočte ho přes nasbírané orby, aby se zničily.</div>
+            <div class="ability-desc">Frontální kužel na tanka, který ničí orby v cestě — natočte ho přes nasbírané orby na značce. Taunt-swap po každém castu. Orby, co ještě žijí, když Zul'jan zemře, instantně vybuchnou — healer si na to nachystej cooldown.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Guillotine</div>
-            <div class="ability-desc">Označí kruhy na zemi — v každém musí stát a soaknout minimálně 5 hráčů (debuff "Guillotined"), poté z kruhu odejděte. Na Heroic je potřeba soaknout dva oddělené kruhy zároveň.</div>
+            <div class="ability-desc">Označený hráč odejde na okraj plošiny, půlka raidu tam soakne a rozdělí si damage, pak všichni z kruhu utečou, než vybuchne. Na Heroic nesmí stejní hráči soaknout dvakrát po sobě — je potřeba rotace.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Axegrinder</div>
-            <div class="ability-desc">Pojízdný rotující sekerový hazard, těžký damage při kontaktu.</div>
+            <div class="ability-desc">Pojízdný rotující sekerový hazard, těžký damage při kontaktu — jen uhýbejte.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Venomfang <span class="ability-tag">Dispel</span></div>
+            <div class="ability-desc">Dispellovatelný jedový DoT na náhodné hráče.</div>
           </div>
         </div>
       </div>
@@ -321,24 +332,32 @@
         </div>
         <div class="ability-list">
           <div class="ability">
+            <div class="ability-name">Přechod na Malacrasse</div>
+            <div class="ability-desc">Po smrti Zul'jana zbylé orby vybuchnou — dobré místo na raid damage-reduction cooldown. Malacrass se objeví a nechá se odtáhnout na značku, raid se sesype za ním.</div>
+          </div>
+          <div class="ability">
             <div class="ability-name">Dreadmarch</div>
-            <div class="ability-desc">Posedne/mind-controluje hráče, dá absorb štít a donutí je kráčet k okraji plošiny a skočit dolů.</div>
+            <div class="ability-desc">Mind-controluje několik hráčů k okraji plošiny. Ostatní jim musí co nejdřív rozbít absorb štít, jinak spadnou dolů. Osvobození hráči navíc vypustí dva duchy.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Unnerving Fixation <span class="ability-tag">"Weeping Angel"</span></div>
-            <div class="ability-desc">Duchovní adds postupují na hráče, pokud na ně nekoukáte.</div>
+            <div class="ability-desc">Duchové z Dreadmarch se fixují na náhodné hráče a postupují k nim, pokud se na ně přímo nedíváte. Doveďte je na značku a tam je "zmrazte" pohledem.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Soul Sever <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Frontální útok na tanka, vyžaduje následný sběr duchovních fragmentů.</div>
+            <div class="ability-desc">Frontální útok na tanka, který musí být natočený přes nastackované duchy na značce, aby je zničil. Zasažený tank navíc vysype Soul Fragments — rychle je posbírejte, jinak umřete.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Gloombomb</div>
-            <div class="ability-desc">Exploze vyžadující rozestup + sběr fragmentů.</div>
+            <div class="ability-desc">Kruhová exploze — rozestupte se a zároveň sbírejte fragmenty, co po sobě zanechá.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Eternal Nightfall</div>
-            <div class="ability-desc">Cast vyžadující rozbití štítu/interrupt, jinak těžký pokračující shadow damage.</div>
+            <div class="ability-desc">Malacrass se ohradí štítem a začne kanálovat — spalte štít a přerušte cast, zatímco uhýbáte shadow kruhům na zemi.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Wail of Terror <span class="ability-tag">Heroic add</span></div>
+            <div class="ability-desc">Add spamující tenhle cast, který musí padnout nebo být přerušen dřív, než dosáhne plné energie. Interruptujte ho spíš uprostřed castu — po přerušení se totiž přemístí, takže dřívější interrupt vám ušetří honičku.</div>
           </div>
         </div>
       </div>
@@ -351,12 +370,12 @@
         </div>
         <div class="ability-list">
           <div class="ability">
-            <div class="ability-name">Intermise — soak fragmentů</div>
-            <div class="ability-desc">Soulbinding dá bossovi +100 % utrpěného damage — hlavní okno na burst. Raid soakuje Fragmenty Malacrasse (každý soak přidá +20 % damage stack přes Spirit Erasure). Na Mythic navíc chrání Spirit Shield, který naruší jen Gloombomb.</div>
+            <div class="ability-name">Intermezzo — vzkříšení Zul'jana</div>
+            <div class="ability-desc">Jakmile Malacrass klesne na 1 HP, začne intermezzo: sám bere 99 % redukci damage a 35 sekund vzkřísí Zul'jana, který během toho bere +100 % damage — ideální okno na Bloodlust. Duchovní fragmenty se snaží doběhnout k Zul'janovi a doléčit ho; kdo je zachytí, dá tím raidu stack +20 % damage (Spirit Erasure), ale zároveň to raidu samo o sobě ublíží — počítejte s tím a šetřete si sem raid cooldowny.</div>
           </div>
           <div class="ability">
-            <div class="ability-name">Coiled Union <span class="ability-tag">P3</span></div>
-            <div class="ability-desc">Kombinuje kit Fáze 1 + Fáze 2. Platí soulbind trest (§1) — udržujte HP obou bossů vyrovnané.</div>
+            <div class="ability-name">Coiled Union <span class="ability-tag">Fáze 3</span></div>
+            <div class="ability-desc">Oba bossové bojují společně. Nový sjednocený tankový frontal ničí orby i duchy najednou — obojí musí být nastackované pohromadě na jednu značku. Zul'janův raid-wide kanál navíc dává velký healing absorb. Na Heroic se vrací i Guillotine, teď navrch přes management orbů i duchů zároveň.</div>
           </div>
         </div>
       </div>
@@ -371,35 +390,35 @@
         <div class="tl-time">Fáze 1</div>
         <div class="tl-body">
           <h4>Zul'jan</h4>
-          <p>Sbírejte venom orby a naveďte na ně Sever. Soakněte kruhy Guillotine (5+ hráčů na kruh) a vyhýbejte se Axegrinderům.</p>
+          <p>Sběrači nosí Coalesced Venom orby na značky, tank na ně navádí Sever a taunt-swapuje po každém castu. Půlka raidu soakuje Guillotine (rotujte, ať stejní lidé nesoaknou dvakrát na Heroic), zbytek uhýbá Axegrinderům.</p>
         </div>
       </div>
       <div class="tl-step">
         <div class="tl-time">Zul'jan padá</div>
         <div class="tl-body">
           <h4>Přechod na Malacrasse</h4>
-          <p>Umístění hazardů z Fáze 1 přímo ovlivňuje, jak náročná bude Fáze 2 — dávejte pozor, kam je pouštíte.</p>
+          <p>Zbylé orby vybuchnou — dobré místo na raid cooldown. Malacrass se objeví, raid ho odtáhne na značku a sesype se za ním.</p>
         </div>
       </div>
       <div class="tl-step">
         <div class="tl-time">Fáze 2</div>
         <div class="tl-body">
           <h4>Malacrass</h4>
-          <p>Řešte Dreadmarch posednutí, dívejte se na Unnerving Fixation manifestace, sbírejte fragmenty po Soul Sever/Gloombomb.</p>
+          <p>Rozbíjejte štíty Dreadmarch obětí, duchy doveďte na značku a "zmrazte" pohledem. Nový tank frontal Soul Sever je ničí, zasažený tank sbírá Soul Fragments. Na Heroic navíc běží interrupt rotace na Wail of Terror.</p>
         </div>
       </div>
       <div class="tl-step">
-        <div class="tl-time">Intermise</div>
+        <div class="tl-time">Intermezzo (35 s)</div>
         <div class="tl-body">
-          <h4>Soak fragmentů</h4>
-          <p>Damage-amplifikační okno, raid soakuje fragmenty; Spirit Shield na adds se dá narušit jen Gloombombem.</p>
+          <h4>Vzkříšení Zul'jana</h4>
+          <p>Bloodlust okno — Zul'jan bere +100 % damage, dokud ho Malacrass křísí. Zachytávejte fragmenty mířící k Zul'janovi, i když to samo o sobě bolí; šetřete si sem raid cooldowny.</p>
         </div>
       </div>
       <div class="tl-step">
         <div class="tl-time">Fáze 3</div>
         <div class="tl-body">
           <h4>Coiled Union</h4>
-          <p>Oba bossové bojují společně — udržujte jejich HP vyrovnané, abyste se vyhnuli soulbind trestu (§1).</p>
+          <p>Oba bossové bojují společně, sjednocený frontal ničí orby i duchy najednou. Na Heroic se navíc vrací Guillotine. Udržujte jejich HP vyrovnané, abyste se vyhnuli enrage (§2).</p>
         </div>
       </div>
     </div>
@@ -413,8 +432,8 @@
         <div class="role-icon">Tank</div>
         <h3>Tankování</h3>
         <ul>
-          <li>Naveďte Sever/Soul Sever přes orby/manifestace, swapujte po každém castu.</li>
-          <li>Pomozte soaknout fragmenty v intermisi.</li>
+          <li>Naveďte Sever/Soul Sever přes nastackované orby/duchy, taunt-swapujte po každém castu.</li>
+          <li>Pomozte zachytávat fragmenty v intermezzu.</li>
           <li>Ve Fázi 3 udržujte HP obou bossů vyrovnané.</li>
         </ul>
       </div>
@@ -422,8 +441,8 @@
         <div class="role-icon">Healer</div>
         <h3>Healing</h3>
         <ul>
-          <li>Připravte se na skoky damage, když vybuchne víc venom orbů najednou.</li>
-          <li>Rotujte cooldowny na intermission soaky.</li>
+          <li>Připravte se na skoky damage, když orby vybuchnou po smrti Zul'jana.</li>
+          <li>Rotujte cooldowny na zachytávání fragmentů v intermezzu.</li>
           <li>Dispelujte Venomfang co nejrychleji.</li>
         </ul>
       </div>
@@ -431,8 +450,8 @@
         <div class="role-icon">DPS</div>
         <h3>Damage</h3>
         <ul>
-          <li>Určete mobilní hráče na sběr/navádění venom orbů do Severova kuželu.</li>
-          <li>Interruptujte a prioritně zabíjejte Spiritcackle (Heroic+).</li>
+          <li>2–3 určení sběrači nosí orby na značky, tank je pak zničí Severem.</li>
+          <li>Na Heroic běží vyhrazená interrupt rotace na Wail of Terror — interruptujte spíš dřív než pozdě.</li>
           <li>Ve Fázi 3 cleavujte oba bossy vyrovnaně.</li>
         </ul>
       </div>
@@ -447,14 +466,14 @@
         <thead><tr><th>Obtížnost</th><th>Co se mění</th></tr></thead>
         <tbody>
           <tr><td>Normal</td><td>Základní kit napříč všemi třemi fázemi.</td></tr>
-          <tr><td>Heroic</td><td>Guillotine vyžaduje dva oddělené 5-hráčové soak kruhy zároveň, Unnerving Fixation manifestace znovu nasadí mind control, pokud dojdou k cíli.</td></tr>
+          <tr><td>Heroic</td><td>Guillotine soakeři se nesmí opakovat dvakrát po sobě (nutná rotace), přibývá interrupt-add Wail of Terror ve Fázi 2 a Guillotine se vrací i ve Fázi 3. Unnerving Fixation manifestace znovu nasadí mind control, pokud dojdou k cíli.</td></tr>
           <tr><td>Mythic</td><td>Guillotined se stává trvalým debuffem. Přidává Virulent Cyst (mutovaný orb spawnující další venom každých 6 s) a Virulent Mutation orby (kontinuální Nature damage; kdo je sebere, poškodí okolí a spustí explozi), Tainted Blood (+200 % utrpěného damage z následného Volatile Venom), Spirit Shield chránící adds v intermisi (naruší jen Gloombomb), Axegrindery nikdy nedespawnou, Unnerving Fixation manifestace vidí jen postižení hráči, Malevolent Resonance poškozuje při kontaktu s duchem.</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Icy Veins potvrzuje strukturu 4 bloků (Zul'jan, Malacrass, intermise, spojená fáze); Warcraft Wiki mluví o "třech stádiích" a slučuje intermisi do fáze — jde jen o odlišné pojmenování stejné struktury. Spirit Shield a Malevolent Resonance jsou dle Icy Veins potvrzeně Mythic-exclusive. Název "Twinfang Toxin" (debuff z Fangs of the Coiled Altar) se nepodařilo dohledat v Icy Veins ani Method.gg — ověřte prosím přímo na Wowheadu.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Podrobný popis Fáze 1–3, intermezza a pre-pull rozdělení rolí vychází z komunitního video guide na Normal/Heroic a nahrazuje dřívější vágnější verzi (např. Guillotine mechanika — je to soak půlkou raidu s rotací na Heroic, ne dva oddělené 5-hráčové kruhy, jak se psalo dřív). Autor videa sám upozorňuje, že v době nahrávání neexistovaly žádné veřejné Heroic PTR kill logy, takže i tahle verze se s vydáním raidu ještě může trochu lišit. Spirit Shield a Malevolent Resonance zůstávají Mythic-exclusive dle Icy Veins. Název "Twinfang Toxin" se nepodařilo dohledat v Icy Veins ani Method.gg — ověřte prosím přímo na Wowheadu.
     </div>
   </section>
 
@@ -478,14 +497,14 @@
 
       <div class="quiz-q">
         <div class="quiz-q-num">Otázka 2</div>
-        <div class="quiz-q-title">Co se stane, když v kruhu Guillotine nestojí alespoň 5 hráčů?</div>
+        <div class="quiz-q-title">Kdo soakuje Guillotine a co musí udělat na Heroic navíc?</div>
         <div class="opt-list">
-          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Nic, mechanika se ignoruje</span></label>
-          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Mechanika není splněna — je nutné se přeskupit tak, aby v kruhu stálo dost hráčů</span></label>
-          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Zul'jan se okamžitě uzdraví</span></label>
-          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Spustí se Fáze 3</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Jen tank sólo, žádná změna na Heroic</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Půlka raidu, a na Heroic se stejní hráči nesmí soaknout dvakrát po sobě</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Nikdo, mechanika se dá ignorovat</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Celý raid najednou</span></label>
         </div>
-        <div class="quiz-explain">Správně: B — v kruhu musí stát a soaknout minimálně 5 hráčů (debuff "Guillotined"), jinak mechanika neproběhne správně.</div>
+        <div class="quiz-explain">Správně: B — na Heroic je proto potřeba rotace soakerů mezi jednotlivými Guillotine casty.</div>
       </div>
 
       <div class="quiz-q">
@@ -516,7 +535,7 @@
         <div class="quiz-q-num">Otázka 5</div>
         <div class="quiz-q-title">Co se stane ve Fázi 3, pokud jeden boss zůstane žít příliš dlouho po smrti druhého?</div>
         <div class="opt-list">
-          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Nic, oba mají oddělené HP poolы</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Nic, oba mají oddělené a nezávislé HP</span></label>
           <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">B</span><span class="opt-text">Přeživší dostane +500 % rychlost útoku a damage — prakticky wipe</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">C</span><span class="opt-text">Přeživší automaticky zemře taky</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">D</span><span class="opt-text">Spustí se bonusová intermise</span></label>
@@ -528,7 +547,7 @@
         <div class="quiz-q-num">Otázka 6</div>
         <div class="quiz-q-title">Co přidává Mythic obtížnost navíc?</div>
         <div class="opt-list">
-          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Dva oddělené soak kruhy pro Guillotine</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">A</span><span class="opt-text">Rotaci soakerů pro Guillotine</span></label>
           <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">B</span><span class="opt-text">Virulent Cyst — mutovaný orb spawnující venom každých 6 s</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">C</span><span class="opt-text">Základní verze Venomfang DoT</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q6"><span class="opt-letter">D</span><span class="opt-text">Axegrinder hazard</span></label>

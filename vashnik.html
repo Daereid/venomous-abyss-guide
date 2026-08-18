@@ -270,13 +270,13 @@
   <section id="prehled">
     <div class="eyebrow">Přehled encounteru</div>
     <h2 class="section-title">Alchymista v Chamber of Virulence</h2>
-    <p class="section-lede">Vashnik the Malignant destiluje jed Ula'tek do zbraní a čerpá sílu ze tří magických fontán — Krve, Stínu a Ohně — rozmístěných po komnatě. Zároveň spawnuje venom-adds, které musí padnout dřív, než dorazí ke středové Malignant Cavity.</p>
+    <p class="section-lede">Vashnik the Malignant destiluje jed Ula'tek do zbraní kolem centrálního bazénku, obklopeného třemi fontánami — Krve (vzadu uprostřed), Stínu (vpravo) a Ohně (vlevo). Fight je jednofázový: bosse vodíte mezi dvojicemi fontán, zatímco jejich adds musí padnout dřív, než dorazí ke středové Malignant Cavity.</p>
 
     <div class="callout danger">
       <div class="mark">§1</div>
       <div>
-        <p><b>Imbibe a rotace fontán.</b> Zhruba každých 90 sekund (při 100 Energy) se Vashnik napije ze dvou nejbližších fontán — získá +100 % damage daného typu jedu a +50 % max HP pro adds toho typu (stackuje, trvá 1,5 min) a navíc trvalý stack <i>Toxic Vapor</i> (soft enrage — s každým dalším napitím se fight zrychluje). Tank musí bosse vodit tak, aby žádná fontána nebyla použita víc než dvakrát v řadě (např. Krev+Stín → Stín+Oheň → Oheň+Krev).</p>
-        <p class="fine">Timing Imbibe (90 s / 100 Energy) i pořadí rotace fontán teď potvrzují nezávisle Icy Veins i Method.gg. Směr tankovací rotace (Icy Veins uvádí „proti směru hodinových ručiček") zatím potvrzuje jen jeden zdroj.</p>
+        <p><b>Imbibe a rotace fontán.</b> Zhruba každých 90 sekund (při 100 Energy) se Vashnik napije ze dvou nejbližších fontán — získá +100 % damage daného typu jedu a +50 % max HP pro adds toho typu (stackuje, trvá 1,5 min) a navíc trvalý stack <i>Toxic Vapor</i> (soft enrage). Protože jsou fontány jen tři a berou se vždy dvě najednou, jedna fontána se nevyhnutelně opakuje dvakrát po sobě a její adds dostanou extra HP — cíl je zvolit trasu tak, aby se dvakrát nezopakoval zrovna <b>Oheň</b> (nejnebezpečnější na zdvojení). Doporučená trasa: začít na Oheň+Stín, pak rotovat proti směru hodinových ručiček (např. Oheň+Stín → Krev+Stín → ...).</p>
+        <p class="fine">Timing Imbibe (90 s / 100 Energy) i mechanika zdvojené fontány jsou teď potvrzené nezávisle Icy Veins, Method.gg i komunitním video guidem.</p>
       </div>
     </div>
   </section>
@@ -310,6 +310,10 @@
             <div class="ability-name">Malignant Burst <span class="ability-tag">Wipe check</span></div>
             <div class="ability-desc">Raid-wide damage + DoT, pokud add dorazí k Malignant Cavity. Víc než jeden příchod = fakticky wipe.</div>
           </div>
+          <div class="ability">
+            <div class="ability-name">Malignant Catalyst <span class="ability-tag">Heroic+ · ~45s</span></div>
+            <div class="ability-desc">Zhruba každých 45 sekund vystřelí orba nad Cavity Catalytic Bile — zásah hráče dá těžký Nature damage, žádný zásah pošle damage na celý raid. Vyžaduje vyhrazené interceptory a healer si na to nachystej cooldown.</div>
+          </div>
         </div>
       </div>
 
@@ -326,7 +330,7 @@
           </div>
           <div class="ability">
             <div class="ability-name">Burning Venoms <span class="ability-tag">Top priority</span></div>
-            <div class="ability-desc">Z Fountain of Flame. Konstantní raid damage, dokud žijí. Smrt spustí Caustic Surge (raid damage) — nezabíjejte dva najednou (na Heroic nebezpečné stacky DoT).</div>
+            <div class="ability-desc">Dva adds z Fountain of Flame. Konstantní raid damage, dokud žijí. Smrt spustí Caustic Surge (raid damage) — zabíjejte je jednoho po druhém, zabití dvou najednou zdvojí ránu (na Heroic i stack DoT). Healer by měl dostat avízo těsně před smrtí adda, ať raid doléčí předem.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Clotting Venom</div>
@@ -392,8 +396,7 @@
         <div class="role-icon">Tank</div>
         <h3>Tankování</h3>
         <ul>
-          <li>Držte bosse mezi fontánami, které chcete empowerovat jako další.</li>
-          <li>Rotujte fontány tak, aby žádná nebyla použita víc než 2× v řadě.</li>
+          <li>Táhněte bosse trasou, kde se dvakrát po sobě nezopakuje Oheň (začátek Oheň+Stín, pak proti směru hodinových ručiček).</li>
           <li>Swapujte hned na 1. stack Dripping Fangs, defenzivy při překrytí s infekcí.</li>
         </ul>
       </div>
@@ -401,9 +404,10 @@
         <div class="role-icon">Healer</div>
         <h3>Healing</h3>
         <ul>
-          <li>Připravte cooldowny na Malignant Burst.</li>
+          <li>Připravte cooldowny na Malignant Burst a na Malignant Catalyst (~45s, Heroic+).</li>
           <li>Exploding Infection lze dispelovat pro bezpečnější/rychlejší explozi.</li>
           <li>Siphoning/Stygian Infection řešte soakem/absorb-removal, ne čistým healingem.</li>
+          <li>Doléčte raid těsně předtím, než padne Burning Venom add.</li>
         </ul>
       </div>
       <div class="role-card">
@@ -412,7 +416,8 @@
         <ul>
           <li>Držte add priority: Burning Venoms → Clotting Venom → Shrouded Venoms.</li>
           <li>Nikdy CC Clotting Venom, rozestupte se na smrt Shrouded Venoms.</li>
-          <li>Pomozte stacknout/cleavnout Burning Venoms bez zabití dvou najednou.</li>
+          <li>Burning Venoms zabíjejte jednoho po druhém, ne oba najednou — zvažte grip/banish na stagger.</li>
+          <li>Typické rozdělení: silné AoE classy na Stín, zbytek na Oheň (nebo naopak).</li>
         </ul>
       </div>
     </div>
@@ -433,7 +438,7 @@
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Timing Imbibe (90 s / 100 Energy), pořadí rotace fontán a Dripping Fangs (+100 % physical damage taken, 32 s) jsou teď potvrzené shodně Icy Veins i Method.gg. Směr tankovací rotace („proti směru hodinových ručiček") a to, zda je Malignant Catalyst opravdu jen Heroic+ (ne i Normal), potvrzuje zatím jen jeden zdroj — před pullem doporučujeme zkontrolovat aktuální verzi guide.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Timing Imbibe (90 s / 100 Energy) a Dripping Fangs (+100 % physical damage taken, 32 s) potvrzují shodně Icy Veins i Method.gg. Layout fontán (Krev vzadu, Stín vpravo, Oheň vlevo), doporučená trasa (Oheň+Stín → proti směru hodinových ručiček) a ~45s timer Malignant Catalyst vychází z komunitního video guide. To, zda je Malignant Catalyst opravdu jen Heroic+ (ne i Normal), potvrzuje zatím jen jeden zdroj — před pullem doporučujeme zkontrolovat aktuální verzi guide.
     </div>
   </section>
 
@@ -457,12 +462,12 @@
 
       <div class="quiz-q">
         <div class="quiz-q-num">Otázka 2</div>
-        <div class="quiz-q-title">Kterého adda je potřeba zabíjet s nejvyšší prioritou?</div>
+        <div class="quiz-q-title">Kterého přisluhujícího od fontán musíte zabít nejdřív, protože sám o sobě tiká na celý raid, dokud žije?</div>
         <div class="opt-list">
-          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Burning Venoms</span></label>
-          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Clotting Venom</span></label>
-          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Shrouded Venoms</span></label>
-          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Všichni stejně</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">A</span><span class="opt-text">Toho z Fountain of Flame (Burning Venoms)</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">B</span><span class="opt-text">Toho z Fountain of Blood (Clotting Venom) — rozdělí se při smrti, není spěch</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">C</span><span class="opt-text">Toho z Fountain of Shadow (Shrouded Venoms) — nejnižší priorita</span></label>
+          <label class="opt"><input class="opt-input" type="radio" name="q2"><span class="opt-letter">D</span><span class="opt-text">Všechny stejnou prioritou</span></label>
         </div>
         <div class="quiz-explain">Správně: A — Burning Venoms dávají konstantní raid damage, dokud žijí.</div>
       </div>

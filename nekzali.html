@@ -268,7 +268,7 @@
     <div class="callout danger">
       <div class="mark">§1</div>
       <div>
-        <p><b>Well je energy/DoT motor.</b> Každý duch/add, který dosáhne Well, ho nakrmí — Nek'zali získá +5 Energy a raid dostane Shadow damage + stackující DoT (Soulcoil Rite). Pokud Nek'zali dosáhne 100 Energy, přichází <i>Uncoiled Rage</i>: +500 % damage, +150 % rychlost útoku/pohybu, immunity na taunt — tvrdý wipe. Celý fight je tak závod: udržet adds mimo Well a sundat bosse dřív, než se energie naplní.</p>
+        <p><b>Well je energy/DoT motor.</b> Cokoliv, co se dotkne Well — add i hráč — spustí <i>Soulcoil Rite</i>: raid-wide damage, a Nek'zali za to navíc dostane +5 Energy. Na Heroic k tomu přibývá stackující <i>Ritual Burn</i>, díky kterému bolí každý další zásah víc. Pokud Nek'zali dosáhne 100 Energy, přichází <i>Uncoiled Rage</i>: +500 % damage, +150 % rychlost útoku/pohybu, immunity na taunt — tvrdý wipe. Celý fight je tak závod: udržet adds i hráče mimo Well a sundat bosse dřív, než se energie naplní.</p>
       </div>
     </div>
   </section>
@@ -292,7 +292,7 @@
           </div>
           <div class="ability">
             <div class="ability-name">Essence Rend <span class="ability-tag">Trap</span></div>
-            <div class="ability-desc">Zachytí několik hráčů na 5 sekund a po uvolnění jim dá 15s DoT. Pokud efekt vyprší (nebo je dispelnut) příliš brzy, zanechá po sobě trvalou louži Latent Cultist. Počkejte, až postižení hráči dosáhnou okraje arény, než dispelujete.</div>
+            <div class="ability-desc">Zachytí několik hráčů na 5 sekund a po uvolnění jim dá 15s DoT. Postižení by měli doběhnout ke stěně arény — tam je pak buď dispelujte, nebo ho nechte vyprchat samo (vyprchání zanechá louži Latent Cultist, tak ať je aspoň mimo raid).</div>
           </div>
           <div class="ability">
             <div class="ability-name">Latent Cultist <span class="ability-tag">Ground zone</span></div>
@@ -301,6 +301,14 @@
           <div class="ability">
             <div class="ability-name">Anguished Echoes</div>
             <div class="ability-desc">Náhodné uhýbatelné kruhy bombardující arénu, spouští je Soulcoil Ignition.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Residual Toll <span class="ability-tag">Intermise</span></div>
+            <div class="ability-desc">DoT + snížený přijatý healing na hráče v intermisi. Healer si ho musí hlídat zvlášť, léčení skrz něj je pomalejší.</div>
+          </div>
+          <div class="ability">
+            <div class="ability-name">Invoke <span class="ability-tag">Fáze 2</span></div>
+            <div class="ability-desc">Základní verze (od Normal): raid-wide Soulcoil Rite damage a náhodně přemístí ground pooly po aréně. Na Mythic je navíc upgradováno na interrupt s 3s silence při zásahu (viz Mythic sekce níže).</div>
           </div>
         </div>
       </div>
@@ -314,15 +322,15 @@
         <div class="ability-list">
           <div class="ability">
             <div class="ability-name">Restless Amani <span class="ability-tag">Priority</span></div>
-            <div class="ability-desc">Chráněni magic-absorb štítem Gravebound Advance (25 % HP) — ranged by ho měl rozbít dřív, než dorazí k Well. Na Heroic zanechávají po smrti Vessel of Awakening mrtvolu a aplikují Corpse Blight.</div>
+            <div class="ability-desc">Pomalu pochodují k Well, chránění magic-absorb štítem Gravebound Advance (25 % HP). Postup: nejdřív rozbijte štíty (ranged), pak je sesypejte k sobě grip/slow/stun kombem a teprve potom je dorazte AoE. Na Heroic zanechávají po smrti Vessel of Awakening mrtvolu a aplikují Corpse Blight.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Possession Barrage <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Vystřelí 4 duchy na aktuálního tanka — damage roste s uraženou vzdáleností, tank by měl být ~30+ yardů od bosse. Duchové po dopadu spawnou další Restless Amani. Na Heroic navíc aplikuje Hollowing Strikes.</div>
+            <div class="ability-desc">Vystřelí 4 duchy na aktuálního tanka, který musí odběhnout, než vystřelí — damage roste s uraženou vzdáleností, tank by měl skončit ~30+ yardů od bosse. Duchové po dopadu spawnou další Restless Amani. Na Heroic navíc aplikuje Hollowing Strikes.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Hollowing Strikes <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Každý melee zásah stackuje debuff snižující přijaté healing/absorby o 5 % za stack a dává shadow damage. Swapujte kolem 5–6 stacků (~25–30 % redukce).</div>
+            <div class="ability-desc">Každý melee zásah stackuje debuff snižující přijaté healing/absorby o 5 % za stack a dává shadow damage. Taunt-swapujte, jakmile debuff odezní (přirozeně kolem 5–6 stacků), a při zásahu Possession Barrage použijte defenzivu.</div>
           </div>
         </div>
       </div>
@@ -349,8 +357,8 @@
             <div class="ability-desc">Debuff po návratu z Immortal Coil — brání dalšímu vstupu do Well po dobu 1 minuty.</div>
           </div>
           <div class="ability">
-            <div class="ability-name">Invoke (Mythic)</div>
-            <div class="ability-desc">Upgradováno na interrupt s 3s silence při zásahu.</div>
+            <div class="ability-name">Invoke <span class="ability-tag">Mythic upgrade</span></div>
+            <div class="ability-desc">Stejný Invoke jako ve Fázi 2, ale navíc funguje jako interrupt s 3s silence při zásahu.</div>
           </div>
         </div>
       </div>
@@ -365,21 +373,21 @@
         <div class="tl-time">Fáze 1</div>
         <div class="tl-body">
           <h4>Initiation (100–50 % HP)</h4>
-          <p>Add control a vyhýbání se Well. Zabíjejte Raised Amani dřív, než dorazí k sarkofágům, kontrolujte Latent Cultists.</p>
+          <p>Add control a vyhýbání se Well. Rozbíjejte štíty Restless Amani a dorážejte je skupinově dřív, než dojdou k Well, řešte Essence Rend a Possession Barrage.</p>
         </div>
       </div>
       <div class="tl-step">
         <div class="tl-time">50 % HP</div>
         <div class="tl-body">
           <h4>Intermise — Ritual of Awakening</h4>
-          <p>Boss se stáhne. Zabijte Echoes of Jawae (Soul Transfer — jeden po druhém, cleavujte adds), soakněte Hungering Pyre (tank předem stůj na hromadě mrtvol), přerušte tethery. Na Mythic navíc Immortal Coil odbočka.</p>
+          <p>Boss se stáhne a kanáluje u Well. Zabijte dva Echoes of Jawae jednoho po druhém. Na Hungering Pyre soakne půlka raidu, druhá půlka dostane červené kruhy — na Heroic je položte na mrtvoly Amani, ať se neprobudí zpátky. Sledujte Residual Toll DoT. Na Mythic navíc Immortal Coil odbočka.</p>
         </div>
       </div>
       <div class="tl-step">
         <div class="tl-time">Fáze 2</div>
         <div class="tl-body">
           <h4>Uncoiling</h4>
-          <p>Energy se vynuluje, stejné mechaniky jako P1, ale debuffy už nevyprchávají — čistý damage race proti 100 Energy enrage timeru. Ideální místo na Bloodlust/Heroism.</p>
+          <p>Energy se vynuluje, stejné mechaniky jako P1 plus Invoke navíc (raid-wide Soulcoil Rite + přemístění poolů). Debuffy už nevyprchávají — čistý damage race proti 100 Energy enrage timeru. Podle damage checku zvažte Bloodlust radši sem než na pull.</p>
         </div>
       </div>
     </div>
@@ -395,7 +403,7 @@
         <ul>
           <li>Positioning bosse mimo raid, Possession Barrage směřujte do prázdna.</li>
           <li>Swapujte kolem 5–6 stacků Hollowed.</li>
-          <li>V intermisi předem stůjte na hromadě mrtvol pro Hungering Pyre.</li>
+          <li>V intermisi soakujte Hungering Pyre s půlkou raidu.</li>
           <li>V P2 očekávejte taunt immunity.</li>
         </ul>
       </div>
@@ -405,7 +413,7 @@
         <ul>
           <li>Šetřete cooldowny na Soulcoil Ignition a vysoké stacky.</li>
           <li>Doplňte hráče hned po odeznění Essence Rend absorbu.</li>
-          <li>Sledujte Corpse Blight burst po smrti Raised Amani.</li>
+          <li>Sledujte Corpse Blight burst po smrti Restless Amani (Heroic+) a hlídejte Residual Toll v intermisi.</li>
           <li>Na Mythic léčte přes Soul Exhaustion po návratu z Immortal Coil.</li>
         </ul>
       </div>
@@ -414,7 +422,7 @@
         <h3>Damage</h3>
         <ul>
           <li>Zabíjejte Latent Cultists blokující pohyb.</li>
-          <li>Přepínejte na Raised Amani dřív, než dorazí k sarkofágům.</li>
+          <li>Rozbíjejte štíty Restless Amani jako první, pak je AoE dorazte, dřív než dojdou k Well.</li>
           <li>V intermisi pálíte Echoes of Jawae, ne bosse.</li>
           <li>Nestůjte v zónách Essence Rend / Anguished Echoes.</li>
         </ul>
@@ -437,7 +445,7 @@
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Čísla na této stránce jsou nyní křížově ověřená mezi Icy Veins a Method.gg. Neověřeno zůstává: přesné jméno debuffu "Soulcoiled" (ze staršího ExpCarry zdroje, Icy Veins/Method.gg ho výslovně nezmiňují pod tímto jménem) a jestli Corpse Blight burst platí i na Normal, nebo je čistě Heroic+ (Icy Veins ho uvádí jen u Heroic). Před pullem doporučujeme zkontrolovat aktuální verzi guide.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Čísla na této stránce jsou křížově ověřená mezi Icy Veins a Method.gg. Popis Hungering Pyre (půlka soakuje/půlka řeší kruhy na mrtvolách), CC choreografie u Restless Amani (štít → seskupit → AoE) a to, že Invoke je základní mechanika Fáze 2 (ne jen Mythic), vychází z komunitního video guide. Neověřeno zůstává, jestli Corpse Blight burst platí i na Normal, nebo je čistě Heroic+ (Icy Veins ho uvádí jen u Heroic). Před pullem doporučujeme zkontrolovat aktuální verzi guide.
     </div>
   </section>
 
@@ -473,10 +481,10 @@
 
       <div class="quiz-q">
         <div class="quiz-q-num">Otázka 3</div>
-        <div class="quiz-q-title">Co je potřeba udělat s Raised Amani co nejdřív?</div>
+        <div class="quiz-q-title">Jak se řeší adds mířící k Well (Restless Amani)?</div>
         <div class="opt-list">
           <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">A</span><span class="opt-text">Ignorovat je, jsou neškodní</span></label>
-          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">B</span><span class="opt-text">Zabít je dřív, než dorazí k sarkofágům (ranged rozbije jejich štít)</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">B</span><span class="opt-text">Nejdřív jim rozbít štít, pak je sesypat k sobě a dorazit AoE, než dojdou k Well</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">C</span><span class="opt-text">Nechat je dojít k Well pro bonus damage</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q3"><span class="opt-letter">D</span><span class="opt-text">CC je na celý fight</span></label>
         </div>
@@ -492,14 +500,14 @@
           <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">C</span><span class="opt-text">Raid opustí arénu</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">D</span><span class="opt-text">Nic, boss je neviditelný</span></label>
         </div>
-        <div class="quiz-explain">Správně: B — zabijte Echoes jednoho po druhém a soakněte Hungering Pyre na předem připravené pozici.</div>
+        <div class="quiz-explain">Správně: B — zabijte Echoes jednoho po druhém; na Hungering Pyre soakne půlka raidu, druhá půlka řeší červené kruhy (na Heroic je položte na mrtvoly Amani).</div>
       </div>
 
       <div class="quiz-q">
         <div class="quiz-q-num">Otázka 5</div>
         <div class="quiz-q-title">Co se liší ve Fázi 2 (Uncoiling) oproti Fázi 1?</div>
         <div class="opt-list">
-          <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Stejné mechaniky, ale debuffy už nevyprchávají — čistý damage race</span></label>
+          <label class="opt" data-correct="true"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">A</span><span class="opt-text">Stejné mechaniky, ale debuffy už nevyprchávají — čistý damage race</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">B</span><span class="opt-text">Boss ztrácí všechny schopnosti</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">C</span><span class="opt-text">Raid se automaticky teleportuje pryč</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q5"><span class="opt-letter">D</span><span class="opt-text">Energy se už nikdy nenaplní</span></label>
