@@ -218,6 +218,50 @@
   .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
   .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
   .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+
+  .planner { margin-top: 22px; }
+  .planner-radio { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+  .planner-viewport { position: relative; width: 100%; aspect-ratio: 1115 / 627; overflow: hidden; border: 1px solid var(--line-strong); background: #000; container-type: size; }
+  .planner-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; visibility: hidden; pointer-events: none; }
+  .planner-arrows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .planner-obj-text, .planner-obj-image, .planner-obj-circle { position: absolute; }
+  .planner-obj-text { background: rgba(0,0,0,0.82); color: #fff; font-family: Arial, Helvetica, sans-serif; line-height: 1.25; padding: 0.4cqh 0.7cqh; white-space: normal; }
+  .planner-obj-image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .planner-obj-circle { border-radius: 50%; border: 2px solid rgba(255,255,255,0.85); box-sizing: border-box; }
+  .planner-prev, .planner-next { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; text-decoration: none; font-family: Arial, sans-serif; }
+  .planner-prev:hover, .planner-next:hover { background: rgba(0,0,0,0.82); }
+  .planner-prev { left: 8px; }
+  .planner-next { right: 8px; }
+  .planner-count { position: absolute; bottom: 8px; right: 10px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; padding: 2px 7px; font-family: Arial, sans-serif; }
+  .planner-captions { min-height: 1.6em; margin-top: 10px; }
+  .planner-caption { display: none; font-size: 0.85rem; color: var(--ink-soft); }
+  .planner-nav-row { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+  .planner-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--bg-raised); cursor: pointer; }
+  .planner-viewport-coiledaltar .planner-slide { background-image: url('assets/coiledaltar-planner/background_coiledaltar.png'); }
+  #pn-coiledaltar-1:checked ~ .planner-viewport-coiledaltar .planner-slide[data-n="1"],
+  #pn-coiledaltar-2:checked ~ .planner-viewport-coiledaltar .planner-slide[data-n="2"],
+  #pn-coiledaltar-3:checked ~ .planner-viewport-coiledaltar .planner-slide[data-n="3"],
+  #pn-coiledaltar-4:checked ~ .planner-viewport-coiledaltar .planner-slide[data-n="4"],
+  #pn-coiledaltar-5:checked ~ .planner-viewport-coiledaltar .planner-slide[data-n="5"],
+  #pn-coiledaltar-6:checked ~ .planner-viewport-coiledaltar .planner-slide[data-n="6"],
+  #pn-coiledaltar-7:checked ~ .planner-viewport-coiledaltar .planner-slide[data-n="7"],
+  #pn-coiledaltar-8:checked ~ .planner-viewport-coiledaltar .planner-slide[data-n="8"] { opacity: 1; visibility: visible; z-index: 2; pointer-events: auto; }
+  #pn-coiledaltar-1:checked ~ .planner-captions-coiledaltar .planner-caption[data-n="1"],
+  #pn-coiledaltar-2:checked ~ .planner-captions-coiledaltar .planner-caption[data-n="2"],
+  #pn-coiledaltar-3:checked ~ .planner-captions-coiledaltar .planner-caption[data-n="3"],
+  #pn-coiledaltar-4:checked ~ .planner-captions-coiledaltar .planner-caption[data-n="4"],
+  #pn-coiledaltar-5:checked ~ .planner-captions-coiledaltar .planner-caption[data-n="5"],
+  #pn-coiledaltar-6:checked ~ .planner-captions-coiledaltar .planner-caption[data-n="6"],
+  #pn-coiledaltar-7:checked ~ .planner-captions-coiledaltar .planner-caption[data-n="7"],
+  #pn-coiledaltar-8:checked ~ .planner-captions-coiledaltar .planner-caption[data-n="8"] { display: block; }
+  #pn-coiledaltar-1:checked ~ .planner-nav-row-coiledaltar label[for="pn-coiledaltar-1"],
+  #pn-coiledaltar-2:checked ~ .planner-nav-row-coiledaltar label[for="pn-coiledaltar-2"],
+  #pn-coiledaltar-3:checked ~ .planner-nav-row-coiledaltar label[for="pn-coiledaltar-3"],
+  #pn-coiledaltar-4:checked ~ .planner-nav-row-coiledaltar label[for="pn-coiledaltar-4"],
+  #pn-coiledaltar-5:checked ~ .planner-nav-row-coiledaltar label[for="pn-coiledaltar-5"],
+  #pn-coiledaltar-6:checked ~ .planner-nav-row-coiledaltar label[for="pn-coiledaltar-6"],
+  #pn-coiledaltar-7:checked ~ .planner-nav-row-coiledaltar label[for="pn-coiledaltar-7"],
+  #pn-coiledaltar-8:checked ~ .planner-nav-row-coiledaltar label[for="pn-coiledaltar-8"] { background: var(--venom); border-color: var(--venom); }
 </style>
 </head>
 <body>
@@ -254,6 +298,7 @@
   <div class="row">
     <a href="#prehled">Přehled</a>
     <a href="#schopnosti">Schopnosti</a>
+    <a href="#mapa">Mapa arény</a>
     <a href="#faze">Časová osa</a>
     <a href="#role">Role</a>
     <a href="#obtiznosti">Obtížnosti</a>
@@ -380,6 +425,39 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section id="mapa">
+    <div class="eyebrow">Positioning</div>
+    <h2 class="section-title">Mapa arény</h2>
+    <p class="section-lede">Vlastní návrh mapy. Pro tohoto bosse jsem nenašel ani reálné pozadí arény na raidstrats.gg, takže podklad je procedurálně vygenerovaný abstraktní motiv (ne herní screenshot) — ikony schopností/rolí jsou reálné. Rozestavění a poznámky jsem sestavil sám podle mechanik popsaných výše — berte to jako vizuální pomůcku, ne jako ověřenou guildovní strategii.</p>
+
+<div class="planner">
+<input type="radio" name="planner-nav-coiledaltar" id="pn-coiledaltar-1" class="planner-radio" checked>
+<input type="radio" name="planner-nav-coiledaltar" id="pn-coiledaltar-2" class="planner-radio">
+<input type="radio" name="planner-nav-coiledaltar" id="pn-coiledaltar-3" class="planner-radio">
+<input type="radio" name="planner-nav-coiledaltar" id="pn-coiledaltar-4" class="planner-radio">
+<input type="radio" name="planner-nav-coiledaltar" id="pn-coiledaltar-5" class="planner-radio">
+<input type="radio" name="planner-nav-coiledaltar" id="pn-coiledaltar-6" class="planner-radio">
+<input type="radio" name="planner-nav-coiledaltar" id="pn-coiledaltar-7" class="planner-radio">
+<input type="radio" name="planner-nav-coiledaltar" id="pn-coiledaltar-8" class="planner-radio">
+<div class="planner-viewport planner-viewport-coiledaltar">
+<div class="planner-slide" data-n="1"><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Pre-pull: world markery na obou koncích<br>(stackování duchů), 2-3 sběrači orbů,<br>Heroic: interrupt tým + půlka na Guillotine</div><div class="planner-obj-image" style="left:25.00%; top:45.00%; width:3.12%; height:5.56%;"><img src="assets/planner-common/cross.png" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:75.00%; top:45.00%; width:3.12%; height:5.56%;"><img src="assets/planner-common/cross.png" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:40.00%; top:60.00%; width:3.12%; height:5.56%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:45.00%; top:60.00%; width:3.12%; height:5.56%;"><img src="assets/planner-common/rdps.svg" alt="" loading="lazy"></div><label for="pn-coiledaltar-8" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-coiledaltar-2" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">1 / 8</div></div><div class="planner-slide" data-n="2"><svg class="planner-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation"><defs><marker id="parrow-coiledaltar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0,0 6,3 0,6" fill="#ffffff" /></marker></defs><line x1="43.00" y1="44.00" x2="25.00" y2="45.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-coiledaltar)" /></svg><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Fáze 1 — Zul&#x27;jan: Coalesced Venom orby<br>sbírejte a noste na značku, Sever<br>(tank frontal) je zničí</div><div class="planner-obj-image" style="left:45.00%; top:40.00%; width:6.25%; height:11.11%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_creature_poison_06.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:30.00%; top:55.00%; width:3.75%; height:6.67%;"><img src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_bloodstone_02.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:60.00%; top:30.00%; width:3.75%; height:6.67%;"><img src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_bloodstone_02.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:43.00%; top:42.00%; width:3.75%; height:6.67%;"><img src="assets/planner-common/tank.svg" alt="" loading="lazy"></div><label for="pn-coiledaltar-1" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-coiledaltar-3" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">2 / 8</div></div><div class="planner-slide" data-n="3"><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Guillotine: označený jde na okraj,<br>půlka raidu soakne. Heroic: nesmí<br>soaknout stejní hráči dvakrát po sobě</div><div class="planner-obj-circle" style="left:70.00%; top:50.00%; width:13.75%; height:24.44%; background:rgba(255, 0, 0, 0.2);"></div><div class="planner-obj-image" style="left:65.00%; top:45.00%; width:3.44%; height:6.11%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:70.00%; top:48.00%; width:3.44%; height:6.11%;"><img src="assets/planner-common/rdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:75.00%; top:45.00%; width:3.44%; height:6.11%;"><img src="assets/planner-common/healer.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:68.00%; top:55.00%; width:3.44%; height:6.11%;"><img src="assets/planner-common/tank.svg" alt="" loading="lazy"></div><label for="pn-coiledaltar-2" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-coiledaltar-4" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">3 / 8</div></div><div class="planner-slide" data-n="4"><svg class="planner-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation"><defs><marker id="parrow-coiledaltar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0,0 6,3 0,6" fill="#ffffff" /></marker></defs><line x1="28.00" y1="55.00" x2="15.00" y2="55.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-coiledaltar)" /></svg><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Fáze 2 — Malacrass: Dreadmarch<br>mind-controluje hráče ke kraji,<br>ostatní musí rozbít štít včas</div><div class="planner-obj-image" style="left:45.00%; top:40.00%; width:6.25%; height:11.11%;"><img src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_possession.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:25.00%; top:55.00%; width:3.44%; height:6.11%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:10.00%; top:65.00%; font-size:3.20cqh;">K okraji — zachránit<br>rozbitím štítu</div><label for="pn-coiledaltar-3" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-coiledaltar-5" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">4 / 8</div></div><div class="planner-slide" data-n="5"><svg class="planner-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation"><defs><marker id="parrow-coiledaltar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0,0 6,3 0,6" fill="#ffffff" /></marker></defs><line x1="37.00" y1="42.00" x2="60.00" y2="51.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-coiledaltar)" /><line x1="47.00" y1="47.00" x2="60.00" y2="51.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-coiledaltar)" /></svg><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Unnerving Fixation: duchové postupují,<br>pokud se na ně nedíváte —<br>doveďte je na značku</div><div class="planner-obj-image" style="left:35.00%; top:40.00%; width:5.00%; height:8.89%;"><img src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_soulleech_3.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:45.00%; top:45.00%; width:5.00%; height:8.89%;"><img src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_soulleech_3.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:60.00%; top:50.00%; width:3.12%; height:5.56%;"><img src="assets/planner-common/cross.png" alt="" loading="lazy"></div><label for="pn-coiledaltar-4" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-coiledaltar-6" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">5 / 8</div></div><div class="planner-slide" data-n="6"><svg class="planner-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation"><defs><marker id="parrow-coiledaltar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0,0 6,3 0,6" fill="#ffffff" /></marker></defs><line x1="60.00" y1="42.00" x2="43.00" y2="46.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-coiledaltar)" /></svg><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Intermezzo: Zul&#x27;jan křísen 35s (+100%<br>dmg taken). Zachytávejte fragmenty<br>mířící k němu — bolí, ale je to nutné</div><div class="planner-obj-image" style="left:40.00%; top:45.00%; width:5.62%; height:10.00%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_creature_poison_06.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:60.00%; top:40.00%; width:3.75%; height:6.67%;"><img src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_bone_skull_02.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:50.00%; top:44.00%; width:3.44%; height:6.11%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><label for="pn-coiledaltar-5" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-coiledaltar-7" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">6 / 8</div></div><div class="planner-slide" data-n="7"><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Fáze 3 — Coiled Union: sjednocený<br>frontal ničí orby i duchy najednou,<br>oba musí být nastackované spolu</div><div class="planner-obj-image" style="left:35.00%; top:40.00%; width:5.62%; height:10.00%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_creature_poison_06.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:60.00%; top:40.00%; width:5.62%; height:10.00%;"><img src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_possession.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:47.00%; top:55.00%; width:3.75%; height:6.67%;"><img src="assets/planner-common/tank.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:45.00%; top:60.00%; width:3.12%; height:5.56%;"><img src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_bloodstone_02.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:52.00%; top:60.00%; width:3.12%; height:5.56%;"><img src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_bone_skull_02.jpg" alt="" loading="lazy"></div><label for="pn-coiledaltar-6" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-coiledaltar-8" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">7 / 8</div></div><div class="planner-slide" data-n="8"><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Udržujte HP obou bossů vyrovnané —<br>jeden mrtvý moc dřív = enrage přeživšího<br>(+500% rychlost a damage)</div><div class="planner-obj-image" style="left:35.00%; top:45.00%; width:5.62%; height:10.00%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_creature_poison_06.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:60.00%; top:45.00%; width:5.62%; height:10.00%;"><img src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_possession.jpg" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:35.00%; top:65.00%; font-size:3.20cqh;">HP ~vyrovnané</div><label for="pn-coiledaltar-7" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-coiledaltar-1" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">8 / 8</div></div>
+</div>
+<div class="planner-captions planner-captions-coiledaltar">
+<p class="planner-caption" data-n="1">Pre-pull: world markery, sběrači orbů, Heroic interrupt tým a Guillotine split.</p><p class="planner-caption" data-n="2">Fáze 1 — Zul&#x27;jan: sbírat Coalesced Venom orby, Sever je ničí na značce.</p><p class="planner-caption" data-n="3">Guillotine — půlka raidu soakuje na okraji, Heroic bez opakování soakerů.</p><p class="planner-caption" data-n="4">Fáze 2 — Malacrass: Dreadmarch, rozbít štít dřív, než hráč spadne z okraje.</p><p class="planner-caption" data-n="5">Unnerving Fixation — duchové postupují, pokud se na ně nedíváte.</p><p class="planner-caption" data-n="6">Intermezzo — Zul&#x27;jan křísen 35s, zachytávejte fragmenty (bolí, ale nutné).</p><p class="planner-caption" data-n="7">Fáze 3 — Coiled Union: sjednocený frontal ničí orby i duchy najednou.</p><p class="planner-caption" data-n="8">Udržujte HP obou bossů vyrovnané, jinak enrage přeživšího.</p>
+</div>
+<div class="planner-nav-row planner-nav-row-coiledaltar">
+<label for="pn-coiledaltar-1" class="planner-dot" aria-label="Scéna 1"></label>
+<label for="pn-coiledaltar-2" class="planner-dot" aria-label="Scéna 2"></label>
+<label for="pn-coiledaltar-3" class="planner-dot" aria-label="Scéna 3"></label>
+<label for="pn-coiledaltar-4" class="planner-dot" aria-label="Scéna 4"></label>
+<label for="pn-coiledaltar-5" class="planner-dot" aria-label="Scéna 5"></label>
+<label for="pn-coiledaltar-6" class="planner-dot" aria-label="Scéna 6"></label>
+<label for="pn-coiledaltar-7" class="planner-dot" aria-label="Scéna 7"></label>
+<label for="pn-coiledaltar-8" class="planner-dot" aria-label="Scéna 8"></label>
+</div>
+</div>
   </section>
 
   <section id="faze">

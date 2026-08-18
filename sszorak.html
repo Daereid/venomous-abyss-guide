@@ -225,6 +225,47 @@
   .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
   .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
   .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+
+  .planner { margin-top: 22px; }
+  .planner-radio { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+  .planner-viewport { position: relative; width: 100%; aspect-ratio: 1115 / 627; overflow: hidden; border: 1px solid var(--line-strong); background: #000; container-type: size; }
+  .planner-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; visibility: hidden; pointer-events: none; }
+  .planner-arrows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .planner-obj-text, .planner-obj-image, .planner-obj-circle { position: absolute; }
+  .planner-obj-text { background: rgba(0,0,0,0.82); color: #fff; font-family: Arial, Helvetica, sans-serif; line-height: 1.25; padding: 0.4cqh 0.7cqh; white-space: normal; }
+  .planner-obj-image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .planner-obj-circle { border-radius: 50%; border: 2px solid rgba(255,255,255,0.85); box-sizing: border-box; }
+  .planner-prev, .planner-next { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; text-decoration: none; font-family: Arial, sans-serif; }
+  .planner-prev:hover, .planner-next:hover { background: rgba(0,0,0,0.82); }
+  .planner-prev { left: 8px; }
+  .planner-next { right: 8px; }
+  .planner-count { position: absolute; bottom: 8px; right: 10px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; padding: 2px 7px; font-family: Arial, sans-serif; }
+  .planner-captions { min-height: 1.6em; margin-top: 10px; }
+  .planner-caption { display: none; font-size: 0.85rem; color: var(--ink-soft); }
+  .planner-nav-row { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+  .planner-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--bg-raised); cursor: pointer; }
+  .planner-viewport-sszorak .planner-slide { background-image: url('assets/sszorak-planner/background_sszorak.png'); }
+  #pn-sszorak-1:checked ~ .planner-viewport-sszorak .planner-slide[data-n="1"],
+  #pn-sszorak-2:checked ~ .planner-viewport-sszorak .planner-slide[data-n="2"],
+  #pn-sszorak-3:checked ~ .planner-viewport-sszorak .planner-slide[data-n="3"],
+  #pn-sszorak-4:checked ~ .planner-viewport-sszorak .planner-slide[data-n="4"],
+  #pn-sszorak-5:checked ~ .planner-viewport-sszorak .planner-slide[data-n="5"],
+  #pn-sszorak-6:checked ~ .planner-viewport-sszorak .planner-slide[data-n="6"],
+  #pn-sszorak-7:checked ~ .planner-viewport-sszorak .planner-slide[data-n="7"] { opacity: 1; visibility: visible; z-index: 2; pointer-events: auto; }
+  #pn-sszorak-1:checked ~ .planner-captions-sszorak .planner-caption[data-n="1"],
+  #pn-sszorak-2:checked ~ .planner-captions-sszorak .planner-caption[data-n="2"],
+  #pn-sszorak-3:checked ~ .planner-captions-sszorak .planner-caption[data-n="3"],
+  #pn-sszorak-4:checked ~ .planner-captions-sszorak .planner-caption[data-n="4"],
+  #pn-sszorak-5:checked ~ .planner-captions-sszorak .planner-caption[data-n="5"],
+  #pn-sszorak-6:checked ~ .planner-captions-sszorak .planner-caption[data-n="6"],
+  #pn-sszorak-7:checked ~ .planner-captions-sszorak .planner-caption[data-n="7"] { display: block; }
+  #pn-sszorak-1:checked ~ .planner-nav-row-sszorak label[for="pn-sszorak-1"],
+  #pn-sszorak-2:checked ~ .planner-nav-row-sszorak label[for="pn-sszorak-2"],
+  #pn-sszorak-3:checked ~ .planner-nav-row-sszorak label[for="pn-sszorak-3"],
+  #pn-sszorak-4:checked ~ .planner-nav-row-sszorak label[for="pn-sszorak-4"],
+  #pn-sszorak-5:checked ~ .planner-nav-row-sszorak label[for="pn-sszorak-5"],
+  #pn-sszorak-6:checked ~ .planner-nav-row-sszorak label[for="pn-sszorak-6"],
+  #pn-sszorak-7:checked ~ .planner-nav-row-sszorak label[for="pn-sszorak-7"] { background: var(--venom); border-color: var(--venom); }
 </style>
 </head>
 <body>
@@ -261,6 +302,7 @@
   <div class="row">
     <a href="#prehled">Přehled</a>
     <a href="#schopnosti">Schopnosti</a>
+    <a href="#mapa">Mapa arény</a>
     <a href="#faze">Časová osa</a>
     <a href="#role">Role</a>
     <a href="#obtiznosti">Obtížnosti</a>
@@ -396,6 +438,37 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section id="mapa">
+    <div class="eyebrow">Positioning</div>
+    <h2 class="section-title">Mapa arény</h2>
+    <p class="section-lede">Vlastní návrh mapy (ne kopie existujícího plánu — pro tohoto bosse jsem žádný veřejný raidstrats.gg plán nenašel). Pozadí arény a ikony schopností/rolí jsou reálné assety z <a href="https://raidstrats.gg" target="_blank" rel="noopener">raidstrats.gg</a>, ale rozestavění a poznámky jsem sestavil sám podle mechanik popsaných výše — berte to jako vizuální pomůcku, ne jako ověřenou guildovní strategii.</p>
+
+<div class="planner">
+<input type="radio" name="planner-nav-sszorak" id="pn-sszorak-1" class="planner-radio" checked>
+<input type="radio" name="planner-nav-sszorak" id="pn-sszorak-2" class="planner-radio">
+<input type="radio" name="planner-nav-sszorak" id="pn-sszorak-3" class="planner-radio">
+<input type="radio" name="planner-nav-sszorak" id="pn-sszorak-4" class="planner-radio">
+<input type="radio" name="planner-nav-sszorak" id="pn-sszorak-5" class="planner-radio">
+<input type="radio" name="planner-nav-sszorak" id="pn-sszorak-6" class="planner-radio">
+<input type="radio" name="planner-nav-sszorak" id="pn-sszorak-7" class="planner-radio">
+<div class="planner-viewport planner-viewport-sszorak">
+<div class="planner-slide" data-n="1"><div class="planner-obj-text" style="left:1.50%; top:8.00%; font-size:3.20cqh;">Sszorak — Altar of Six Winds<br>Jednofázový fight, boss stojí v hlavní fázi na místě.<br>Kolem plošiny 4 vichrové clustery (S/V/J/Z).</div><div class="planner-obj-image" style="left:46.00%; top:8.00%; width:1.80%; height:3.19%;"><img src="assets/planner-common/diamond.png" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:8.00%; top:46.00%; width:1.80%; height:3.19%;"><img src="assets/planner-common/diamond.png" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:84.00%; top:46.00%; width:1.80%; height:3.19%;"><img src="assets/planner-common/diamond.png" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:46.00%; top:84.00%; width:1.80%; height:3.19%;"><img src="assets/planner-common/diamond.png" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:44.00%; top:40.00%; width:3.12%; height:5.56%;"><img src="assets/planner-common/tank.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:46.00%; top:32.00%; width:4.69%; height:8.33%;"><img src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_head_dragon_black.jpg" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:60.00%; top:40.00%; font-size:3.20cqh;">Tank drží bosse na místě,<br>ostatní se rozestoupí kolem</div><label for="pn-sszorak-7" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-sszorak-2" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">1 / 7</div></div><div class="planner-slide" data-n="2"><div class="planner-obj-text" style="left:1.50%; top:8.00%; font-size:3.20cqh;">Apex Predator combo (náhodné pořadí):<br>Ravage, Mutilate, Tempest</div><div class="planner-obj-image" style="left:44.00%; top:30.00%; width:4.30%; height:7.64%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_warrior_bloodbath.jpg" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:58.00%; top:28.00%; font-size:3.20cqh;">Ravage — natočit mimo raid,<br>swap tanka po 1. zásahu</div><div class="planner-obj-image" style="left:30.00%; top:55.00%; width:3.91%; height:6.94%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_rogue_venomouswounds.jpg" alt="" loading="lazy"></div><div class="planner-obj-circle" style="left:28.00%; top:53.00%; width:6.25%; height:11.11%; background:rgba(0, 255, 152, 0.2);"></div><div class="planner-obj-text" style="left:44.00%; top:58.00%; font-size:3.20cqh;">Mutilate — soak 5+ hráčů,<br>jinak smrtící damage</div><div class="planner-obj-image" style="left:65.00%; top:60.00%; width:3.52%; height:6.25%;"><img src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_cyclone.jpg" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:78.00%; top:60.00%; font-size:3.20cqh;">Tempest — jen uhnout</div><label for="pn-sszorak-1" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-sszorak-3" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">2 / 7</div></div><div class="planner-slide" data-n="3"><div class="planner-obj-text" style="left:1.50%; top:8.00%; font-size:3.20cqh;">Corroding Venom — stackující tank debuff<br>+3% physical dmg taken za stack</div><div class="planner-obj-image" style="left:44.00%; top:40.00%; width:3.12%; height:5.56%;"><img src="assets/planner-common/tank.svg" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:56.00%; top:40.00%; font-size:3.20cqh;">Swap kolem 6. stacku</div><div class="planner-obj-image" style="left:42.00%; top:55.00%; width:3.52%; height:6.25%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_creature_poison_02.jpg" alt="" loading="lazy"></div><label for="pn-sszorak-2" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-sszorak-4" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">3 / 7</div></div><div class="planner-slide" data-n="4"><svg class="planner-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation"><defs><marker id="parrow-sszorak" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0,0 6,3 0,6" fill="#ffffff" /></marker></defs><line x1="48.00" y1="45.00" x2="46.00" y2="8.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-sszorak)" /><line x1="48.00" y1="45.00" x2="82.00" y2="44.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-sszorak)" /></svg><div class="planner-obj-text" style="left:1.50%; top:8.00%; font-size:3.20cqh;">Venomous Surge: 2 hráči odběhnou<br>k markeru naproti vichrovému clusteru<br>a položí Viscous Cyst</div><div class="planner-obj-image" style="left:45.00%; top:42.00%; width:2.73%; height:4.86%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:47.00%; top:44.00%; width:2.73%; height:4.86%;"><img src="assets/planner-common/rdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:46.00%; top:8.00%; width:1.80%; height:3.19%;"><img src="assets/planner-common/diamond.png" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:84.00%; top:46.00%; width:1.80%; height:3.19%;"><img src="assets/planner-common/diamond.png" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:20.00%; top:20.00%; font-size:3.20cqh;">4 louže položené celkem,<br>na intermezzo stačí 3</div><label for="pn-sszorak-3" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-sszorak-5" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">4 / 7</div></div><div class="planner-slide" data-n="5"><svg class="planner-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation"><defs><marker id="parrow-sszorak" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0,0 6,3 0,6" fill="#ffffff" /></marker></defs><line x1="38.00" y1="47.00" x2="58.00" y2="47.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-sszorak)" /><line x1="62.00" y1="47.00" x2="42.00" y2="47.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-sszorak)" /></svg><div class="planner-obj-text" style="left:1.50%; top:8.00%; font-size:3.20cqh;">Raging Crosswinds: spárujte se<br>s hráčem s opačným směrem větru</div><div class="planner-obj-image" style="left:35.00%; top:45.00%; width:2.73%; height:4.86%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:60.00%; top:45.00%; width:2.73%; height:4.86%;"><img src="assets/planner-common/rdps.svg" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:35.00%; top:60.00%; font-size:3.20cqh;">Srážka = vítr se zruší,<br>oba spadnou zpět na plošinu</div><label for="pn-sszorak-4" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-sszorak-6" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">5 / 7</div></div><div class="planner-slide" data-n="6"><svg class="planner-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation"><defs><marker id="parrow-sszorak" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0,0 6,3 0,6" fill="#ffffff" /></marker></defs><line x1="46.00" y1="20.00" x2="25.00" y2="46.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-sszorak)" /><line x1="25.00" y1="55.00" x2="46.00" y2="75.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-sszorak)" /><line x1="46.00" y1="75.00" x2="84.00" y2="55.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-sszorak)" /></svg><div class="planner-obj-text" style="left:1.50%; top:8.00%; font-size:3.20cqh;">Howling Maelstrom (~2 min): boss se přesune<br>doprostřed, 3 vichry postrkují raid<br>řetězově přes položené louže</div><div class="planner-obj-image" style="left:46.00%; top:40.00%; width:4.69%; height:8.33%;"><img src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_head_dragon_black.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:46.00%; top:8.00%; width:1.56%; height:2.78%;"><img src="assets/planner-common/diamond.png" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:8.00%; top:46.00%; width:1.56%; height:2.78%;"><img src="assets/planner-common/diamond.png" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:84.00%; top:46.00%; width:1.56%; height:2.78%;"><img src="assets/planner-common/diamond.png" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:60.00%; top:15.00%; font-size:3.20cqh;">Dig In: +30% dmg taken<br>na 25s — burst okno</div><label for="pn-sszorak-5" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-sszorak-7" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">6 / 7</div></div><div class="planner-slide" data-n="7"><div class="planner-obj-text" style="left:1.50%; top:8.00%; font-size:3.20cqh;">Mythic: Serpent&#x27;s Fury — nabíjí rage,<br>při 100 je nutné 14+ hráčů<br>do 8 yardů od označeného</div><div class="planner-obj-image" style="left:40.00%; top:40.00%; width:3.91%; height:6.94%;"><img src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_shadowfury.jpg" alt="" loading="lazy"></div><div class="planner-obj-circle" style="left:35.00%; top:35.00%; width:8.59%; height:15.28%; background:rgba(255, 0, 0, 0.2);"></div><div class="planner-obj-image" style="left:42.00%; top:42.00%; width:2.34%; height:4.17%;"><img src="assets/planner-common/tank.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:48.00%; top:42.00%; width:2.34%; height:4.17%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:42.00%; top:48.00%; width:2.34%; height:4.17%;"><img src="assets/planner-common/rdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:48.00%; top:48.00%; width:2.34%; height:4.17%;"><img src="assets/planner-common/healer.svg" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:62.00%; top:45.00%; font-size:3.20cqh;">Virulence spread:<br>rozestupte se po zásahu</div><label for="pn-sszorak-6" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-sszorak-1" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">7 / 7</div></div>
+</div>
+<div class="planner-captions planner-captions-sszorak">
+<p class="planner-caption" data-n="1">Přehled: boss stojí na místě, 4 vichrové clustery po obvodu plošiny.</p><p class="planner-caption" data-n="2">Apex Predator combo — Ravage (bait), Mutilate (soak 5+), Tempest (dodge).</p><p class="planner-caption" data-n="3">Corroding Venom — tank swap kolem 6. stacku.</p><p class="planner-caption" data-n="4">Venomous Surge — dva hráči kladou Viscous Cyst k markerům naproti tunelům.</p><p class="planner-caption" data-n="5">Raging Crosswinds — spárujte se s opačným směrem větru.</p><p class="planner-caption" data-n="6">Howling Maelstrom — řetězové postrkování přes louže, Dig In okno na burst.</p><p class="planner-caption" data-n="7">Mythic: Serpent&#x27;s Fury stack + Virulence spread.</p>
+</div>
+<div class="planner-nav-row planner-nav-row-sszorak">
+<label for="pn-sszorak-1" class="planner-dot" aria-label="Scéna 1"></label>
+<label for="pn-sszorak-2" class="planner-dot" aria-label="Scéna 2"></label>
+<label for="pn-sszorak-3" class="planner-dot" aria-label="Scéna 3"></label>
+<label for="pn-sszorak-4" class="planner-dot" aria-label="Scéna 4"></label>
+<label for="pn-sszorak-5" class="planner-dot" aria-label="Scéna 5"></label>
+<label for="pn-sszorak-6" class="planner-dot" aria-label="Scéna 6"></label>
+<label for="pn-sszorak-7" class="planner-dot" aria-label="Scéna 7"></label>
+</div>
+</div>
   </section>
 
   <section id="faze">

@@ -231,6 +231,50 @@
   .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
   .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
   .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+
+  .planner { margin-top: 22px; }
+  .planner-radio { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+  .planner-viewport { position: relative; width: 100%; aspect-ratio: 1115 / 627; overflow: hidden; border: 1px solid var(--line-strong); background: #000; container-type: size; }
+  .planner-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; visibility: hidden; pointer-events: none; }
+  .planner-arrows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .planner-obj-text, .planner-obj-image, .planner-obj-circle { position: absolute; }
+  .planner-obj-text { background: rgba(0,0,0,0.82); color: #fff; font-family: Arial, Helvetica, sans-serif; line-height: 1.25; padding: 0.4cqh 0.7cqh; white-space: normal; }
+  .planner-obj-image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .planner-obj-circle { border-radius: 50%; border: 2px solid rgba(255,255,255,0.85); box-sizing: border-box; }
+  .planner-prev, .planner-next { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; text-decoration: none; font-family: Arial, sans-serif; }
+  .planner-prev:hover, .planner-next:hover { background: rgba(0,0,0,0.82); }
+  .planner-prev { left: 8px; }
+  .planner-next { right: 8px; }
+  .planner-count { position: absolute; bottom: 8px; right: 10px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; padding: 2px 7px; font-family: Arial, sans-serif; }
+  .planner-captions { min-height: 1.6em; margin-top: 10px; }
+  .planner-caption { display: none; font-size: 0.85rem; color: var(--ink-soft); }
+  .planner-nav-row { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+  .planner-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--bg-raised); cursor: pointer; }
+  .planner-viewport-ulatek .planner-slide { background-image: url('assets/ulatek-planner/background_ulatek.png'); }
+  #pn-ulatek-1:checked ~ .planner-viewport-ulatek .planner-slide[data-n="1"],
+  #pn-ulatek-2:checked ~ .planner-viewport-ulatek .planner-slide[data-n="2"],
+  #pn-ulatek-3:checked ~ .planner-viewport-ulatek .planner-slide[data-n="3"],
+  #pn-ulatek-4:checked ~ .planner-viewport-ulatek .planner-slide[data-n="4"],
+  #pn-ulatek-5:checked ~ .planner-viewport-ulatek .planner-slide[data-n="5"],
+  #pn-ulatek-6:checked ~ .planner-viewport-ulatek .planner-slide[data-n="6"],
+  #pn-ulatek-7:checked ~ .planner-viewport-ulatek .planner-slide[data-n="7"],
+  #pn-ulatek-8:checked ~ .planner-viewport-ulatek .planner-slide[data-n="8"] { opacity: 1; visibility: visible; z-index: 2; pointer-events: auto; }
+  #pn-ulatek-1:checked ~ .planner-captions-ulatek .planner-caption[data-n="1"],
+  #pn-ulatek-2:checked ~ .planner-captions-ulatek .planner-caption[data-n="2"],
+  #pn-ulatek-3:checked ~ .planner-captions-ulatek .planner-caption[data-n="3"],
+  #pn-ulatek-4:checked ~ .planner-captions-ulatek .planner-caption[data-n="4"],
+  #pn-ulatek-5:checked ~ .planner-captions-ulatek .planner-caption[data-n="5"],
+  #pn-ulatek-6:checked ~ .planner-captions-ulatek .planner-caption[data-n="6"],
+  #pn-ulatek-7:checked ~ .planner-captions-ulatek .planner-caption[data-n="7"],
+  #pn-ulatek-8:checked ~ .planner-captions-ulatek .planner-caption[data-n="8"] { display: block; }
+  #pn-ulatek-1:checked ~ .planner-nav-row-ulatek label[for="pn-ulatek-1"],
+  #pn-ulatek-2:checked ~ .planner-nav-row-ulatek label[for="pn-ulatek-2"],
+  #pn-ulatek-3:checked ~ .planner-nav-row-ulatek label[for="pn-ulatek-3"],
+  #pn-ulatek-4:checked ~ .planner-nav-row-ulatek label[for="pn-ulatek-4"],
+  #pn-ulatek-5:checked ~ .planner-nav-row-ulatek label[for="pn-ulatek-5"],
+  #pn-ulatek-6:checked ~ .planner-nav-row-ulatek label[for="pn-ulatek-6"],
+  #pn-ulatek-7:checked ~ .planner-nav-row-ulatek label[for="pn-ulatek-7"],
+  #pn-ulatek-8:checked ~ .planner-nav-row-ulatek label[for="pn-ulatek-8"] { background: var(--venom); border-color: var(--venom); }
 </style>
 </head>
 <body>
@@ -267,6 +311,7 @@
   <div class="row">
     <a href="#prehled">Přehled</a>
     <a href="#schopnosti">Schopnosti</a>
+    <a href="#mapa">Mapa arény</a>
     <a href="#faze">Časová osa</a>
     <a href="#role">Role</a>
     <a href="#obtiznosti">Obtížnosti</a>
@@ -407,6 +452,39 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section id="mapa">
+    <div class="eyebrow">Positioning</div>
+    <h2 class="section-title">Mapa arény</h2>
+    <p class="section-lede">Vlastní návrh mapy (ne kopie existujícího plánu — pro tohoto bosse jsem žádný veřejný raidstrats.gg plán nenašel). Pozadí arény a ikony schopností/rolí jsou reálné assety z <a href="https://raidstrats.gg" target="_blank" rel="noopener">raidstrats.gg</a>, ale rozestavění a poznámky jsem sestavil sám podle mechanik popsaných výše — berte to jako vizuální pomůcku, ne jako ověřenou guildovní strategii.</p>
+
+<div class="planner">
+<input type="radio" name="planner-nav-ulatek" id="pn-ulatek-1" class="planner-radio" checked>
+<input type="radio" name="planner-nav-ulatek" id="pn-ulatek-2" class="planner-radio">
+<input type="radio" name="planner-nav-ulatek" id="pn-ulatek-3" class="planner-radio">
+<input type="radio" name="planner-nav-ulatek" id="pn-ulatek-4" class="planner-radio">
+<input type="radio" name="planner-nav-ulatek" id="pn-ulatek-5" class="planner-radio">
+<input type="radio" name="planner-nav-ulatek" id="pn-ulatek-6" class="planner-radio">
+<input type="radio" name="planner-nav-ulatek" id="pn-ulatek-7" class="planner-radio">
+<input type="radio" name="planner-nav-ulatek" id="pn-ulatek-8" class="planner-radio">
+<div class="planner-viewport planner-viewport-ulatek">
+<div class="planner-slide" data-n="1"><svg class="planner-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation"><defs><marker id="parrow-ulatek" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0,0 6,3 0,6" fill="#ffffff" /></marker></defs><line x1="46.00" y1="42.00" x2="46.00" y2="65.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-ulatek)" /></svg><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Ula&#x27;Tek — finální boss, tank NIKDY<br>neztrácí melee kontakt (Mother&#x27;s Wrath<br>potrestá raid knockbackem)</div><div class="planner-obj-image" style="left:44.00%; top:45.00%; width:3.12%; height:6.25%;"><img src="assets/planner-common/tank.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:47.00%; top:40.00%; width:4.69%; height:9.38%;"><img src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathscream.jpg" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:60.00%; top:60.00%; font-size:3.20cqh;">Knockback — vrátit se hned zpět</div><label for="pn-ulatek-8" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-ulatek-2" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">1 / 8</div></div><div class="planner-slide" data-n="2"><svg class="planner-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation"><defs><marker id="parrow-ulatek" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0,0 6,3 0,6" fill="#ffffff" /></marker></defs><line x1="28.00" y1="48.00" x2="70.00" y2="48.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-ulatek)" /></svg><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Stádium 1 — Caustic Waves: putující vlny,<br>okamžitě rozklíčí vejce v cestě</div><div class="planner-obj-image" style="left:30.00%; top:45.00%; width:3.52%; height:7.04%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_creature_poison_02.jpg" alt="" loading="lazy"></div><div class="planner-obj-circle" style="left:60.00%; top:44.00%; width:2.73%; height:5.47%; background:rgba(255, 0, 0, 0.2);"></div><div class="planner-obj-circle" style="left:72.00%; top:60.00%; width:2.73%; height:5.47%; background:rgba(255, 0, 0, 0.2);"></div><div class="planner-obj-text" style="left:60.00%; top:70.00%; font-size:3.20cqh;">Vejce — positioning vln je klíčový</div><label for="pn-ulatek-1" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-ulatek-3" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">2 / 8</div></div><div class="planner-slide" data-n="3"><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Call of the Serpent: potomci padají shora,<br>odejít z dopadové zóny</div><div class="planner-obj-circle" style="left:35.00%; top:30.00%; width:5.47%; height:10.95%; background:rgba(255, 0, 0, 0.2);"></div><div class="planner-obj-circle" style="left:55.00%; top:50.00%; width:5.47%; height:10.95%; background:rgba(255, 0, 0, 0.2);"></div><div class="planner-obj-circle" style="left:70.00%; top:25.00%; width:5.47%; height:10.95%; background:rgba(255, 0, 0, 0.2);"></div><div class="planner-obj-image" style="left:20.00%; top:60.00%; width:2.34%; height:4.69%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:25.00%; top:65.00%; width:2.34%; height:4.69%;"><img src="assets/planner-common/rdps.svg" alt="" loading="lazy"></div><label for="pn-ulatek-2" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-ulatek-4" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">3 / 8</div></div><div class="planner-slide" data-n="4"><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Stádium 2 — Doomscale Eggs a Wardens.<br>Weakened Doomscale: Desperate Thrash<br>frontal, natočit mimo raid</div><div class="planner-obj-image" style="left:30.00%; top:40.00%; width:3.12%; height:6.25%;"><img src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_bloodstone_02.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:36.00%; top:45.00%; width:3.12%; height:6.25%;"><img src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_bloodstone_02.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:55.00%; top:40.00%; width:3.91%; height:7.82%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_racial_avatar.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:70.00%; top:55.00%; width:3.91%; height:7.82%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_creature_cursed_02.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:73.00%; top:58.00%; width:2.34%; height:4.69%;"><img src="assets/planner-common/tank.svg" alt="" loading="lazy"></div><label for="pn-ulatek-3" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-ulatek-5" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">4 / 8</div></div><div class="planner-slide" data-n="5"><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">The Shattering (intermezzo):<br>Spectral Coils soak rotace,<br>Necrotic Vapors roste v čase</div><div class="planner-obj-image" style="left:40.00%; top:45.00%; width:2.34%; height:4.69%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:44.00%; top:45.00%; width:2.34%; height:4.69%;"><img src="assets/planner-common/rdps.svg" alt="" loading="lazy"></div><div class="planner-obj-circle" style="left:38.00%; top:42.00%; width:5.47%; height:10.95%; background:rgba(0, 255, 152, 0.2);"></div><div class="planner-obj-text" style="left:55.00%; top:45.00%; font-size:3.20cqh;">Rotujte skupinu<br>po každém soaku</div><label for="pn-ulatek-4" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-ulatek-6" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">5 / 8</div></div><div class="planner-slide" data-n="6"><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Stádium 3 — Circling Prey ničí sekce<br>plošiny, damage + knockback u okraje</div><div class="planner-obj-image" style="left:44.00%; top:40.00%; width:4.30%; height:8.60%;"><img src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_cyclone.jpg" alt="" loading="lazy"></div><div class="planner-obj-circle" style="left:60.00%; top:60.00%; width:7.81%; height:15.64%; background:rgba(255, 0, 0, 0.2);"></div><div class="planner-obj-text" style="left:62.00%; top:75.00%; font-size:3.20cqh;">Zničená sekce — nestát tu</div><label for="pn-ulatek-5" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-ulatek-7" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">6 / 8</div></div><div class="planner-slide" data-n="7"><svg class="planner-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation"><defs><marker id="parrow-ulatek" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><polygon points="0,0 6,3 0,6" fill="#ffffff" /></marker></defs><line x1="40.00" y1="48.00" x2="54.00" y2="48.00" stroke="#ffffff" stroke-width="0.5" marker-end="url(#parrow-ulatek)" /></svg><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Serpent&#x27;s Bite: nositel předá jinému<br>hráči, ten dostane Volatile Purge<br>(5s odložená exploze, 7yd)</div><div class="planner-obj-image" style="left:35.00%; top:45.00%; width:3.52%; height:7.04%;"><img src="https://wow.zamimg.com/images/wow/icons/large/ability_rogue_venomouswounds.jpg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:55.00%; top:45.00%; width:2.34%; height:4.69%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><div class="planner-obj-circle" style="left:53.00%; top:42.00%; width:6.25%; height:12.51%; background:rgba(255, 0, 0, 0.2);"></div><div class="planner-obj-text" style="left:20.00%; top:65.00%; font-size:3.20cqh;">Po předání odejít od raidu</div><label for="pn-ulatek-6" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-ulatek-8" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">7 / 8</div></div><div class="planner-slide" data-n="8"><div class="planner-obj-text" style="left:1.50%; top:6.00%; font-size:3.20cqh;">Mythic — Noxious Shell: nositelé vajec<br>do 3 yardů od sebe = okamžité vylíhnutí.<br>Pevné egg lanes</div><div class="planner-obj-image" style="left:25.00%; top:50.00%; width:2.34%; height:4.69%;"><img src="assets/planner-common/mdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:45.00%; top:50.00%; width:2.34%; height:4.69%;"><img src="assets/planner-common/rdps.svg" alt="" loading="lazy"></div><div class="planner-obj-image" style="left:65.00%; top:50.00%; width:2.34%; height:4.69%;"><img src="assets/planner-common/healer.svg" alt="" loading="lazy"></div><div class="planner-obj-text" style="left:25.00%; top:65.00%; font-size:3.20cqh;">lane 1</div><div class="planner-obj-text" style="left:45.00%; top:65.00%; font-size:3.20cqh;">lane 2</div><div class="planner-obj-text" style="left:65.00%; top:65.00%; font-size:3.20cqh;">lane 3</div><label for="pn-ulatek-7" class="planner-prev" aria-label="Předchozí scéna">‹</label><label for="pn-ulatek-1" class="planner-next" aria-label="Další scéna">›</label><div class="planner-count">8 / 8</div></div>
+</div>
+<div class="planner-captions planner-captions-ulatek">
+<p class="planner-caption" data-n="1">Přehled: tank nikdy neztrácí melee kontakt, jinak Mother&#x27;s Wrath knockback.</p><p class="planner-caption" data-n="2">Stádium 1 — Caustic Waves rozklíčí vejce v cestě, positioning je klíčový.</p><p class="planner-caption" data-n="3">Call of the Serpent — potomci padají shora, odejít z dopadové zóny.</p><p class="planner-caption" data-n="4">Stádium 2 — Doomscale Eggs/Wardens, Desperate Thrash natočit mimo raid.</p><p class="planner-caption" data-n="5">The Shattering — Spectral Coils soak rotace mezi skupinami.</p><p class="planner-caption" data-n="6">Stádium 3 — Circling Prey ničí sekce plošiny, nestát u okraje.</p><p class="planner-caption" data-n="7">Serpent&#x27;s Bite — po předání odejít od raidu kvůli Volatile Purge.</p><p class="planner-caption" data-n="8">Mythic — Noxious Shell, pevné egg lanes, nositelé vajec od sebe.</p>
+</div>
+<div class="planner-nav-row planner-nav-row-ulatek">
+<label for="pn-ulatek-1" class="planner-dot" aria-label="Scéna 1"></label>
+<label for="pn-ulatek-2" class="planner-dot" aria-label="Scéna 2"></label>
+<label for="pn-ulatek-3" class="planner-dot" aria-label="Scéna 3"></label>
+<label for="pn-ulatek-4" class="planner-dot" aria-label="Scéna 4"></label>
+<label for="pn-ulatek-5" class="planner-dot" aria-label="Scéna 5"></label>
+<label for="pn-ulatek-6" class="planner-dot" aria-label="Scéna 6"></label>
+<label for="pn-ulatek-7" class="planner-dot" aria-label="Scéna 7"></label>
+<label for="pn-ulatek-8" class="planner-dot" aria-label="Scéna 8"></label>
+</div>
+</div>
   </section>
 
   <section id="faze">
