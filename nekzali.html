@@ -214,6 +214,13 @@
   .raid-pill { flex: none; font-size: 0.7rem; letter-spacing: 0.02em; padding: 4px 9px; border: 1px solid var(--line-strong); color: var(--ink-soft); text-decoration: none; white-space: nowrap; background: var(--bg-raised); }
   .raid-pill:hover { border-color: var(--ink-faint); color: var(--ink); }
   .raid-pill.active { border-color: var(--venom); background: var(--venom-bg); color: var(--venom); font-weight: 600; }
+
+  .arena-map { margin-top: 22px; border: 1px solid var(--line-strong); background: var(--bg-raised); padding: 18px; }
+  .arena-map + .arena-map { margin-top: 18px; }
+  .arena-map svg { display: block; width: 100%; height: auto; color: var(--ink-faint); }
+  .arena-map .lbl { font-size: 13px; fill: var(--ink); font-family: "Avenir Next", "Segoe UI", sans-serif; }
+  .arena-map .lbl-soft { font-size: 11px; fill: var(--ink-soft); font-family: "Avenir Next", "Segoe UI", sans-serif; }
+  .arena-map figcaption { margin-top: 10px; font-size: 0.85rem; color: var(--ink-soft); }
 </style>
 </head>
 <body>
@@ -250,6 +257,7 @@
   <div class="row">
     <a href="#prehled">Přehled</a>
     <a href="#schopnosti">Schopnosti</a>
+    <a href="#mapa">Mapa arény</a>
     <a href="#faze">Časová osa</a>
     <a href="#role">Role</a>
     <a href="#obtiznosti">Obtížnosti</a>
@@ -363,6 +371,109 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section id="mapa">
+    <div class="eyebrow">Positioning</div>
+    <h2 class="section-title">Mapa arény</h2>
+    <p class="section-lede">Schématické (ne 1:1 herní) rozložení pozic — pro přesné souřadnice použijte in-game markery, tohle je rychlá vizuální pomůcka k textu výše.</p>
+
+    <figure class="arena-map">
+      <svg viewBox="0 0 800 560" role="img" aria-label="Hlavní fáze: tank drží Nek'zali daleko od Soulcoil Well, raid stackuje na opačné straně a Restless Amani pochodují ke studni ze čtyř spawn bodů po obvodu.">
+        <defs>
+          <marker id="arrow-m1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <polygon points="0,0 8,4 0,8" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <circle cx="400" cy="280" r="240" fill="none" stroke="currentColor" stroke-width="2" />
+        <circle cx="400" cy="280" r="95" fill="none" stroke="var(--danger)" stroke-width="1.5" stroke-dasharray="6 6" />
+
+        <circle cx="400" cy="280" r="32" fill="var(--danger)" opacity="0.85" />
+        <text x="400" y="285" text-anchor="middle" class="lbl" fill="white" font-weight="700">Well</text>
+
+        <polygon points="400,96 416,112 400,128 384,112" fill="var(--accent-a)" />
+        <circle cx="432" cy="112" r="11" fill="none" stroke="var(--ink)" stroke-width="1.5" />
+        <text x="432" y="116" text-anchor="middle" class="lbl-soft" font-weight="700">T</text>
+        <text x="400" y="70" text-anchor="middle" class="lbl">Nek'zali + tank</text>
+
+        <line x1="400" y1="96" x2="400" y2="42" stroke="var(--ink-faint)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrow-m1)" />
+        <text x="400" y="30" text-anchor="middle" class="lbl-soft">Possession Barrage: tank uteče, dopadne ~30+ yd</text>
+
+        <g fill="var(--venom)">
+          <circle cx="380" cy="470" r="7" /><circle cx="400" cy="478" r="7" /><circle cx="420" cy="470" r="7" />
+          <circle cx="390" cy="486" r="7" /><circle cx="410" cy="486" r="7" />
+        </g>
+        <text x="400" y="508" text-anchor="middle" class="lbl">Raid stack</text>
+
+        <rect x="596" y="136" width="16" height="16" fill="var(--accent-b)" />
+        <line x1="596" y1="152" x2="470" y2="245" stroke="var(--ink-faint)" stroke-width="1.5" marker-end="url(#arrow-m1)" />
+
+        <rect x="596" y="404" width="16" height="16" fill="var(--accent-b)" />
+        <line x1="600" y1="404" x2="470" y2="315" stroke="var(--ink-faint)" stroke-width="1.5" marker-end="url(#arrow-m1)" />
+
+        <rect x="188" y="404" width="16" height="16" fill="var(--accent-b)" />
+        <line x1="196" y1="404" x2="330" y2="315" stroke="var(--ink-faint)" stroke-width="1.5" marker-end="url(#arrow-m1)" />
+
+        <rect x="188" y="136" width="16" height="16" fill="var(--accent-b)" />
+        <line x1="196" y1="152" x2="330" y2="245" stroke="var(--ink-faint)" stroke-width="1.5" marker-end="url(#arrow-m1)" />
+
+        <text x="640" y="128" class="lbl-soft">Restless Amani</text>
+        <text x="640" y="142" class="lbl-soft">(šipka = pochod k Well)</text>
+
+        <g transform="translate(20,478)">
+          <rect x="0" y="0" width="12" height="12" fill="var(--accent-b)" /><text x="18" y="10" class="lbl-soft">add spawn</text>
+          <polygon points="6,28 14,36 6,44 -2,36" fill="var(--accent-a)" /><text x="18" y="40" class="lbl-soft">boss</text>
+          <circle cx="6" cy="60" r="6" fill="var(--venom)" /><text x="18" y="64" class="lbl-soft">raid/hráč</text>
+        </g>
+      </svg>
+      <figcaption>Hlavní fáze: čtyři Restless Amani spawn body pochodují ke studni, tank drží bosse a runback pryč od raidu, raid stackuje na opačné straně arény.</figcaption>
+    </figure>
+
+    <figure class="arena-map">
+      <svg viewBox="0 0 800 460" role="img" aria-label="Intermise: boss kanáluje u studny, dva Echoes of Jawae spawnou na opačných stranách a zabíjí se jeden po druhém, zatímco raid se dělí na soak skupinu a skupinu s kruhy na mrtvolách.">
+        <defs>
+          <marker id="arrow-m2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <polygon points="0,0 8,4 0,8" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <circle cx="400" cy="230" r="210" fill="none" stroke="currentColor" stroke-width="2" />
+
+        <path d="M 216,215 Q 400,150 584,215" fill="none" stroke="var(--ink-faint)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrow-m2)" />
+        <text x="400" y="155" text-anchor="middle" class="lbl-soft">pořadí zabíjení</text>
+
+        <circle cx="400" cy="230" r="26" fill="var(--accent-a)" />
+        <text x="400" y="235" text-anchor="middle" class="lbl" fill="white" font-weight="700">Nek'zali</text>
+        <text x="400" y="270" text-anchor="middle" class="lbl-soft">kanáluje u Well</text>
+
+        <circle cx="200" cy="230" r="16" fill="var(--danger)" />
+        <text x="200" y="195" text-anchor="middle" class="lbl">Echo #1</text>
+        <text x="200" y="265" text-anchor="middle" class="lbl-soft">zabít první</text>
+
+        <circle cx="600" cy="230" r="16" fill="var(--danger)" opacity="0.45" />
+        <text x="600" y="195" text-anchor="middle" class="lbl">Echo #2</text>
+        <text x="600" y="265" text-anchor="middle" class="lbl-soft">pak tohle</text>
+
+        <g fill="var(--venom)">
+          <circle cx="250" cy="312" r="7" /><circle cx="270" cy="312" r="7" /><circle cx="250" cy="328" r="7" /><circle cx="270" cy="328" r="7" />
+        </g>
+        <text x="260" y="352" text-anchor="middle" class="lbl-soft">soak skupina</text>
+
+        <g stroke="var(--danger)" stroke-width="1.5" stroke-dasharray="4 3" fill="none">
+          <circle cx="540" cy="320" r="26" />
+        </g>
+        <g fill="var(--ink-faint)">
+          <circle cx="530" cy="314" r="6" /><circle cx="550" cy="314" r="6" /><circle cx="530" cy="328" r="6" /><circle cx="550" cy="328" r="6" />
+        </g>
+        <g stroke="var(--ink-faint)" stroke-width="2">
+          <line x1="536" y1="316" x2="544" y2="324" /><line x1="544" y1="316" x2="536" y2="324" />
+        </g>
+        <text x="540" y="358" text-anchor="middle" class="lbl-soft">zbytek: kruh na mrtvolu</text>
+        <text x="540" y="372" text-anchor="middle" class="lbl-soft">Amani (Heroic)</text>
+      </svg>
+      <figcaption>Intermise: zabijte Echoes of Jawae jednoho po druhém — půlka raidu soakuje Hungering Pyre, druhá dostane kruhy, které na Heroic patří na mrtvoly Amani.</figcaption>
+    </figure>
   </section>
 
   <section id="faze">
