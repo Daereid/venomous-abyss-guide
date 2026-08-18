@@ -330,11 +330,11 @@
         <div class="ability-list">
           <div class="ability">
             <div class="ability-name">Restless Amani <span class="ability-tag">Priority</span></div>
-            <div class="ability-desc">Pomalu pochodují k Well, chránění magic-absorb štítem Gravebound Advance (25 % HP). Postup: nejdřív rozbijte štíty (ranged), pak je sesypejte k sobě grip/slow/stun kombem a teprve potom je dorazte AoE. Na Heroic zanechávají po smrti Vessel of Awakening mrtvolu a aplikují Corpse Blight.</div>
+            <div class="ability-desc">Pomalu pochodují k Well, chránění magic-absorb štítem Gravebound Advance (25 % HP), který uděluje i taunt immunitu. Postup: nejdřív štít zničte damagem nebo ho purgněte, pak je sesypejte k sobě grip/slow/stun kombem a teprve potom je dorazte AoE na hromadě. Na Heroic zanechávají po smrti Vessel of Awakening mrtvolu a aplikují Corpse Blight.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Possession Barrage <span class="ability-tag">Tank</span></div>
-            <div class="ability-desc">Vystřelí 4 duchy na aktuálního tanka, který musí odběhnout, než vystřelí — damage roste s uraženou vzdáleností, tank by měl skončit ~30+ yardů od bosse. Duchové po dopadu spawnou další Restless Amani. Na Heroic navíc aplikuje Hollowing Strikes.</div>
+            <div class="ability-desc">Vystřelí 4 duchy na aktuálního tanka, který musí odběhnout, než vystřelí — <b>čím delší trasu duchové urazí, tím menší damage dají</b>, takže tank by měl skončit co nejdál (~30+ yardů od bosse). Nikdo jiný nesmí stát mezi bossem a tankem, jinak jim zkříží cestu. Duchové po dopadu spawnou další Restless Amani. Na Heroic navíc aplikuje Hollowing Strikes.</div>
           </div>
           <div class="ability">
             <div class="ability-name">Hollowing Strikes <span class="ability-tag">Tank</span></div>
@@ -458,7 +458,7 @@
         <g fill="var(--venom)">
           <circle cx="250" cy="312" r="7" /><circle cx="270" cy="312" r="7" /><circle cx="250" cy="328" r="7" /><circle cx="270" cy="328" r="7" />
         </g>
-        <text x="260" y="352" text-anchor="middle" class="lbl-soft">soak skupina</text>
+        <text x="260" y="352" text-anchor="middle" class="lbl-soft">velký soak (spálí hromadu)</text>
 
         <g stroke="var(--danger)" stroke-width="1.5" stroke-dasharray="4 3" fill="none">
           <circle cx="540" cy="320" r="26" />
@@ -469,10 +469,10 @@
         <g stroke="var(--ink-faint)" stroke-width="2">
           <line x1="536" y1="316" x2="544" y2="324" /><line x1="544" y1="316" x2="536" y2="324" />
         </g>
-        <text x="540" y="358" text-anchor="middle" class="lbl-soft">zbytek: kruh na mrtvolu</text>
-        <text x="540" y="372" text-anchor="middle" class="lbl-soft">Amani (Heroic)</text>
+        <text x="540" y="358" text-anchor="middle" class="lbl-soft">zbytek: malý soak spálí</text>
+        <text x="540" y="372" text-anchor="middle" class="lbl-soft">mrtvoly mimo hromadu</text>
       </svg>
-      <figcaption>Intermise: zabijte Echoes of Jawae jednoho po druhém — půlka raidu soakuje Hungering Pyre, druhá dostane kruhy, které na Heroic patří na mrtvoly Amani.</figcaption>
+      <figcaption>Intermise: zabijte Echoes of Jawae jednoho po druhém — velký soak spálí mrtvoly na hromadě, malý soak (zbytek raidu) spálí ty mimo ni.</figcaption>
     </figure>
   </section>
 
@@ -491,7 +491,7 @@
         <div class="tl-time">50 % HP</div>
         <div class="tl-body">
           <h4>Intermise — Ritual of Awakening</h4>
-          <p>Boss se stáhne a kanáluje u Well. Zabijte dva Echoes of Jawae jednoho po druhém. Na Hungering Pyre soakne půlka raidu, druhá půlka dostane červené kruhy — na Heroic je položte na mrtvoly Amani, ať se neprobudí zpátky. Sledujte Residual Toll DoT. Na Mythic navíc Immortal Coil odbočka.</p>
+          <p>Boss se stáhne a kanáluje u Well. Zabijte dva Echoes of Jawae jednoho po druhém — velký soak od zabitého adda spálí mrtvoly Amani nastackované na hromadě, kdo v něm nebyl, dostane malý soak na spálení zbylých mrtvol mimo hromadu (na Heroic je nutné takhle spálit všechny, ať se neprobudí zpátky). Sledujte Residual Toll DoT. Na Mythic navíc Immortal Coil odbočka.</p>
         </div>
       </div>
       <div class="tl-step">
@@ -556,7 +556,7 @@
     </div>
 
     <div class="disclaimer">
-      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Čísla na této stránce jsou křížově ověřená mezi Icy Veins a Method.gg. Popis Hungering Pyre (půlka soakuje/půlka řeší kruhy na mrtvolách), CC choreografie u Restless Amani (štít → seskupit → AoE) a to, že Invoke je základní mechanika Fáze 2 (ne jen Mythic), vychází z komunitního video guide. Neověřeno zůstává, jestli Corpse Blight burst platí i na Normal, nebo je čistě Heroic+ (Icy Veins ho uvádí jen u Heroic). Před pullem doporučujeme zkontrolovat aktuální verzi guide.
+      Raid The Venomous Abyss byl odemčen 18.–19. srpna 2026 spolu s Midnight Season 2 — jde o velmi čerstvý obsah. Čísla na této stránce jsou křížově ověřená mezi Icy Veins a Method.gg. Popis CC choreografie u Restless Amani a to, že Invoke je základní mechanika Fáze 2 (ne jen Mythic), vychází z komunitního video guide. Positioning Possession Barrage (delší trasa = menší damage) a přesný průběh Hungering Pyre (velký/malý soak) vychází z reálného raid plánu guildy na raidstrats.gg. Neověřeno zůstává, jestli Corpse Blight burst platí i na Normal, nebo je čistě Heroic+ (Icy Veins ho uvádí jen u Heroic). Před pullem doporučujeme zkontrolovat aktuální verzi guide.
     </div>
   </section>
 
@@ -611,7 +611,7 @@
           <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">C</span><span class="opt-text">Raid opustí arénu</span></label>
           <label class="opt"><input class="opt-input" type="radio" name="q4"><span class="opt-letter">D</span><span class="opt-text">Nic, boss je neviditelný</span></label>
         </div>
-        <div class="quiz-explain">Správně: B — zabijte Echoes jednoho po druhém; na Hungering Pyre soakne půlka raidu, druhá půlka řeší červené kruhy (na Heroic je položte na mrtvoly Amani).</div>
+        <div class="quiz-explain">Správně: B — zabijte Echoes jednoho po druhém; velký soak spálí mrtvoly na hromadě, malý soak spálí ty mimo ni.</div>
       </div>
 
       <div class="quiz-q">
